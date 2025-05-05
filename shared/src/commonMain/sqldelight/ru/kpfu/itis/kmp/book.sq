@@ -1,0 +1,10 @@
+CREATE TABLE book (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+insert:
+INSERT OR REPLACE INTO book VALUES (?, ?);
+
+getAll:
+SELECT * FROM book;
