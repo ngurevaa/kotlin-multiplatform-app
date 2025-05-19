@@ -6,9 +6,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import exampleapp.composeapp.generated.resources.Res
-import exampleapp.composeapp.generated.resources.WixMadeforText_Medium
-import exampleapp.composeapp.generated.resources.WixMadeforText_SemiBold
+import exampleapp.composeapp.generated.resources.wix_made_for_text_medium
 import exampleapp.composeapp.generated.resources.wix_made_for_text_regular
+import exampleapp.composeapp.generated.resources.wix_made_for_text_semi_bold
 import org.jetbrains.compose.resources.Font
 
 @Composable
@@ -18,11 +18,11 @@ fun getTypography(): Typography {
     )
 
     val medium = FontFamily(
-        Font(Res.font.WixMadeforText_Medium, FontWeight.Normal, FontStyle.Normal)
+        Font(Res.font.wix_made_for_text_medium, FontWeight.Normal, FontStyle.Normal)
     )
 
     val semiBold = FontFamily(
-        Font(Res.font.WixMadeforText_SemiBold, FontWeight.Normal, FontStyle.Normal)
+        Font(Res.font.wix_made_for_text_semi_bold, FontWeight.Normal, FontStyle.Normal)
     )
 
     val baseline = Typography()
