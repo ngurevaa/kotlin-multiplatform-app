@@ -1,0 +1,76 @@
+package ru.kpfu.itis.kmp.core.designsystem.color
+
+object Colors {
+    val primaryLight = 0xFF7A580C
+    val onPrimaryLight = 0xFFFFFFFF
+    val primaryContainerLight = 0xFFFFDEA7
+    val onPrimaryContainerLight = 0xFF5E4200
+    val secondaryLight = 0xFF6D5C3F
+    val onSecondaryLight = 0xFFFFFFFF
+    val secondaryContainerLight = 0xFFF7DFBB
+    val onSecondaryContainerLight = 0xFF54452A
+    val tertiaryLight = 0xFF4D6544
+    val onTertiaryLight = 0xFFFFFFFF
+    val tertiaryContainerLight = 0xFFCEEBC1
+    val onTertiaryContainerLight = 0xFF354D2E
+    val errorLight = 0xFFBA1A1A
+    val onErrorLight = 0xFFFFFFFF
+    val errorContainerLight = 0xFFFFDAD6
+    val onErrorContainerLight = 0xFF93000A
+    val backgroundLight = 0xFFFFF8F3
+    val onBackgroundLight = 0xFF201B13
+    val surfaceLight = 0xFFFFF8F3
+    val onSurfaceLight = 0xFF201B13
+    val surfaceVariantLight = 0xFFEEE1CF
+    val onSurfaceVariantLight = 0xFF4E4639
+    val outlineLight = 0xFF807667
+    val outlineVariantLight = 0xFFD1C5B4
+    val scrimLight = 0xFF000000
+    val inverseSurfaceLight = 0xFF353027
+    val inverseOnSurfaceLight = 0xFFFAEFE2
+    val inversePrimaryLight = 0xFFEDC06C
+    val surfaceDimLight = 0xFFE3D8CC
+    val surfaceBrightLight = 0xFFFFF8F3
+    val surfaceContainerLowestLight = 0xFFFFFFFF
+    val surfaceContainerLowLight = 0xFFFDF2E5
+    val surfaceContainerLight = 0xFFF7ECDF
+    val surfaceContainerHighLight = 0xFFF1E7D9
+    val surfaceContainerHighestLight = 0xFFECE1D4
+
+    val primaryDark = 0xFFEDC06C
+    val onPrimaryDark = 0xFF412D00
+    val primaryContainerDark = 0xFF5E4200
+    val onPrimaryContainerDark = 0xFFFFDEA7
+    val secondaryDark = 0xFFDAC4A0
+    val onSecondaryDark = 0xFF3C2E15
+    val secondaryContainerDark = 0xFF54452A
+    val onSecondaryContainerDark = 0xFFF7DFBB
+    val tertiaryDark = 0xFFB3CEA6
+    val onTertiaryDark = 0xFF203619
+    val tertiaryContainerDark = 0xFF354D2E
+    val onTertiaryContainerDark = 0xFFCEEBC1
+    val errorDark = 0xFFFFB4AB
+    val onErrorDark = 0xFF690005
+    val errorContainerDark = 0xFF93000A
+    val onErrorContainerDark = 0xFFFFDAD6
+    val backgroundDark = 0xFF17130B
+    val onBackgroundDark = 0xFFECE1D4
+    val surfaceDark = 0xFF17130B
+    val onSurfaceDark = 0xFFECE1D4
+    val surfaceVariantDark = 0xFF4E4639
+    val onSurfaceVariantDark = 0xFFD1C5B4
+    val outlineDark = 0xFF9A8F80
+    val outlineVariantDark = 0xFF4E4639
+    val scrimDark = 0xFF000000
+    val inverseSurfaceDark = 0xFFECE1D4
+    val inverseOnSurfaceDark = 0xFF353027
+    val inversePrimaryDark = 0xFF7A580C
+    val surfaceDimDark = 0xFF17130B
+    val surfaceBrightDark = 0xFF3E382F
+    val surfaceContainerLowestDark = 0xFF120E07
+    val surfaceContainerLowDark = 0xFF201B13
+    val surfaceContainerDark = 0xFF241F17
+    val surfaceContainerHighDark = 0xFF2F2921
+    val surfaceContainerHighestDark = 0xFF3A342B
+}
+
