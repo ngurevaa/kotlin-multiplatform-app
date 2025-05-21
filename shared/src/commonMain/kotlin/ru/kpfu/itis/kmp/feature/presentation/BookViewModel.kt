@@ -1,6 +1,8 @@
 package ru.kpfu.itis.kmp.feature.presentation
 
+import CommonStateFlow
 import androidx.lifecycle.viewModelScope
+import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,4 +32,5 @@ class BookViewModel : BaseViewModel<BookViewState, BookAction, BookEvent>(
                 }
         }
     }
+    fun getViewStates(): CommonStateFlow<BookViewState> = viewStates.asCommonStateFlow()
 }
