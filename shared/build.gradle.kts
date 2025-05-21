@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeCompiler)
 }
@@ -23,12 +24,35 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "Shared"
+            baseName = "CommonKmp"
             isStatic = true
         }
     }
-    
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
+
     jvm()
+
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "16.0"
+        podfile = project.file("../iosApp/Podfile")
+//        framework {
+//            baseName = "CommonKmp"
+//            transitiveExport = true
+//            isStatic = true
+            /*
+            * export
+            * случае экспорта модуля, для него генерятся нормальные obj-c хэдеры и со стороны айоса доступны все декларации,
+            * которые в нём объявлены. Без экспорта доступны только транзитивные штуки
+            * (например, если класс используется в shared или других экспортируемых модулях),
+            * имена будут с префиксом названия модуля, что-то типа FeatureNameSomeClassName
+            * */
+//        }
+    }
     
     sourceSets {
         commonMain.dependencies {
