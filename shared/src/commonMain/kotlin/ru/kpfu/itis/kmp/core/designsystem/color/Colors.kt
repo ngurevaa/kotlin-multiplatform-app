@@ -1,7 +1,7 @@
 package ru.kpfu.itis.kmp.core.designsystem.color
 
 object Colors {
-    val primaryLight = 0xFF7A580C
+    val primaryLight = 0xFF755C48
     val onPrimaryLight = 0xFFFFFFFF
     val primaryContainerLight = 0xFFFFDEA7
     val onPrimaryContainerLight = 0xFF5E4200
@@ -35,7 +35,7 @@ object Colors {
     val surfaceContainerLowLight = 0xFFFDF2E5
     val surfaceContainerLight = 0xFFF7ECDF
     val surfaceContainerHighLight = 0xFFF1E7D9
-    val surfaceContainerHighestLight = 0xFFECE1D4
+    val surfaceContainerHighestLight = 0xFFE3E3E3
 
     val primaryDark = 0xFFEDC06C
     val onPrimaryDark = 0xFF412D00
