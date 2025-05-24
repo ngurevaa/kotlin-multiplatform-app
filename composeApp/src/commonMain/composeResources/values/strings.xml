@@ -6,4 +6,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="enter_into_your_account">Enter into your account</string>
+    <string name="do_not_have_an_account">Do not have an account?</string>
 </resources>

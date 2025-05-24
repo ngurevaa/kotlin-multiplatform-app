@@ -7,6 +7,7 @@ import org.koin.compose.getKoin
 import org.koin.core.context.KoinContext
 import ru.kpfu.itis.kmp.core.designsystem.theme.AppTheme
 import ru.kpfu.itis.kmp.feature.BookScreen
+import ru.kpfu.itis.kmp.feature.auth.LoginScreen
 import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
 
 fun main() = application {
@@ -16,6 +17,6 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "ExampleApp",
     ) {
-        AppTheme { RegistrationScreen() }
+        AppTheme { LoginScreen() }
     }
 }

@@ -24,15 +24,16 @@ import androidx.compose.ui.unit.dp
 import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.already_have_an_account
 import exampleapp.composeapp.generated.resources.create_your_new_account
-import exampleapp.composeapp.generated.resources.email
+import exampleapp.composeapp.generated.resources.do_not_have_an_account
+import exampleapp.composeapp.generated.resources.enter_into_your_account
 import exampleapp.composeapp.generated.resources.login
-import exampleapp.composeapp.generated.resources.password
+import exampleapp.composeapp.generated.resources.register
+import exampleapp.composeapp.generated.resources.sign_in
 import exampleapp.composeapp.generated.resources.sign_up
 import org.jetbrains.compose.resources.stringResource
-import ru.kpfu.itis.kmp.core.designsystem.component.CustomTextField
 
 @Composable
-fun RegistrationScreen() {
+fun LoginScreen() {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -41,7 +42,7 @@ fun RegistrationScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.weight(1f))
-            SignUpHeader(
+            SignInHeader(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -50,8 +51,8 @@ fun RegistrationScreen() {
             )
             Password(modifier = Modifier.widthIn(max = 600.dp))
             Spacer(modifier = Modifier.weight(1f))
-            SignUpButton(modifier = Modifier.widthIn(max = 600.dp).padding(top = 16.dp))
-            LoginReference(
+            SignInButton(modifier = Modifier.widthIn(max = 600.dp).padding(top = 16.dp))
+            RegistrationReference(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
             )
         }
@@ -59,26 +60,28 @@ fun RegistrationScreen() {
 }
 
 @Composable
-internal fun LoginReference(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.Center
-    ) {
+internal fun SignInHeader(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
         Text(
-            text = stringResource(Res.string.already_have_an_account),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(end = 8.dp)
+            text = stringResource(Res.string.sign_in),
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = stringResource(Res.string.login),
-            style = MaterialTheme.typography.bodyLarge,
-            textDecoration = TextDecoration.Underline,
+            text = stringResource(Res.string.enter_into_your_account),
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
         )
     }
 }
 
 @Composable
-internal fun SignUpButton(modifier: Modifier = Modifier) {
+internal fun SignInButton(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
@@ -89,7 +92,7 @@ internal fun SignUpButton(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(8.dp)
         ) {
             Text(
-                text = stringResource(Res.string.sign_up),
+                text = stringResource(Res.string.sign_in),
                 style = MaterialTheme.typography.titleLarge,
             )
         }
@@ -97,46 +100,20 @@ internal fun SignUpButton(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun SignUpHeader(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
+internal fun RegistrationReference(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Center
+    ) {
         Text(
-            text = stringResource(Res.string.sign_up),
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center
+            text = stringResource(Res.string.do_not_have_an_account),
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(end = 8.dp)
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = stringResource(Res.string.create_your_new_account),
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Center
+            text = stringResource(Res.string.register),
+            style = MaterialTheme.typography.bodyLarge,
+            textDecoration = TextDecoration.Underline,
         )
-    }
-}
-
-@Composable
-internal fun Email(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Text(
-            text = stringResource(Res.string.email),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField("", {})
-    }
-}
-
-@Composable
-internal fun Password(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Text(
-            text = stringResource(Res.string.password),
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField("", {})
     }
 }
