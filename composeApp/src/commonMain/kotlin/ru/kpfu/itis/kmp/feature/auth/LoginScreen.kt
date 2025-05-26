@@ -16,24 +16,30 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import exampleapp.composeapp.generated.resources.Res
-import exampleapp.composeapp.generated.resources.already_have_an_account
-import exampleapp.composeapp.generated.resources.create_your_new_account
 import exampleapp.composeapp.generated.resources.do_not_have_an_account
 import exampleapp.composeapp.generated.resources.enter_into_your_account
-import exampleapp.composeapp.generated.resources.login
 import exampleapp.composeapp.generated.resources.register
 import exampleapp.composeapp.generated.resources.sign_in
-import exampleapp.composeapp.generated.resources.sign_up
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginEvent
+import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    viewModel: LoginViewModel = koinViewModel<LoginViewModel>()
+) {
+    val state by viewModel.getViewStates().collectAsState()
+    val obtainEvent = viewModel::obtainEvent
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -47,11 +53,20 @@ fun LoginScreen() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Email(
+                email = state.email,
+                updateEmail = { obtainEvent(LoginEvent.UpdateEmail(it)) },
                 modifier = Modifier.widthIn(max = 600.dp).padding(bottom = 48.dp)
             )
-            Password(modifier = Modifier.widthIn(max = 600.dp))
+            Password(
+                password = state.password,
+                updatePassword = { obtainEvent(LoginEvent.UpdatePassword(it)) },
+                modifier = Modifier.widthIn(max = 600.dp)
+            )
             Spacer(modifier = Modifier.weight(1f))
-            SignInButton(modifier = Modifier.widthIn(max = 600.dp).padding(top = 16.dp))
+            SignInButton(
+                signIn = { obtainEvent(LoginEvent.SignIn) },
+                modifier = Modifier.widthIn(max = 600.dp).padding(top = 16.dp)
+            )
             RegistrationReference(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
             )
@@ -81,13 +96,16 @@ internal fun SignInHeader(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun SignInButton(modifier: Modifier = Modifier) {
+internal fun SignInButton(
+    modifier: Modifier = Modifier,
+    signIn: () -> Unit
+) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = {},
+            onClick = { signIn },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         ) {
