@@ -1,17 +1,19 @@
 package ru.kpfu.itis.kmp.feature.auth.presentation.registration
 
 import CommonStateFlow
+import androidx.lifecycle.viewModelScope
 import asCommonStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
-import ru.kpfu.itis.kmp.feature.domain.usecase.SaveBookUseCase
+import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignUpUseCase
 import kotlin.getValue
 
 class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationAction, RegistrationEvent>(
     initState = RegistrationViewState()
 ), KoinComponent {
-//    private val signUpUseCase: SignUpUseCase by inject()
+    private val signUpUseCase: SignUpUseCase by inject()
 
     override fun obtainEvent(event: RegistrationEvent) {
         when (event) {
@@ -22,7 +24,17 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
     }
 
     private fun signUp() {
-        // call firebase sign up use case
+        viewModelScope.launch {
+            runCatching {
+                signUpUseCase(viewState.email, viewState.password)
+            }
+            .onSuccess {
+                // action navigate to home screen
+            }
+            .onFailure {
+                // action show message
+            }
+        }
     }
 
     private fun updateEmail(email: String) {

@@ -1,14 +1,19 @@
 package ru.kpfu.itis.kmp.feature.auth.presentation.login
 
 import CommonStateFlow
+import androidx.lifecycle.viewModelScope
 import asCommonStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.firebase.AuthService
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
+import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignInUseCase
 
 class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
     initState = LoginViewState()
 ), KoinComponent {
-//    private val signInUseCase: SignInUseCase by inject()
+    private val signInUseCase: SignInUseCase by inject()
 
     override fun obtainEvent(event: LoginEvent) {
         when (event) {
@@ -19,7 +24,17 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
     }
 
     private fun signIn() {
-        // call firebase sign in use case
+        viewModelScope.launch {
+            runCatching {
+                signInUseCase(viewState.email, viewState.password)
+            }
+            .onSuccess {
+                // action - navigate to home
+            }
+            .onFailure {
+                // action - show message
+            }
+        }
     }
 
     private fun updateEmail(email: String) {

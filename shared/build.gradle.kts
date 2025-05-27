@@ -97,6 +97,9 @@ kotlin {
             implementation(libs.timber)
 
             implementation(libs.koin.compose.vm)
+
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.auth)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.ios)
