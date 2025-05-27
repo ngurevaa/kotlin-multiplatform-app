@@ -1,4 +1,4 @@
-package ru.kpfu.itis.kmp.core.firebase
+package ru.kpfu.itis.kmp.core.firebase.remote
 
 import kotlinx.serialization.Serializable
 

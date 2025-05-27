@@ -10,6 +10,7 @@ import io.ktor.http.contentType
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.firebase.remote.SignInResponse
+import ru.kpfu.itis.kmp.core.firebase.remote.SignUpRequest
 import ru.kpfu.itis.kmp.core.firebase.remote.SignUpResponse
 import java.io.File
 import java.util.prefs.Preferences
@@ -39,7 +40,6 @@ actual class AuthService : KoinComponent {
             setBody(SignUpRequest(email, password, true))
         }
         val token = response.body<SignInResponse>().idToken
-        println(token)
         saveToken(token)
     }
 
