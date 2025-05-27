@@ -105,7 +105,7 @@ internal fun SignInButton(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { signIn },
+            onClick = { signIn() },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         ) {

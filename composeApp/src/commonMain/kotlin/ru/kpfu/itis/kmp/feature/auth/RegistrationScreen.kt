@@ -98,15 +98,15 @@ internal fun LoginReference(modifier: Modifier = Modifier) {
 
 @Composable
 internal fun SignUpButton(
+    signUp: () -> Unit,
     modifier: Modifier = Modifier,
-    signUp: () -> Unit
 ) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { signUp },
+            onClick = { signUp() },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         ) {
