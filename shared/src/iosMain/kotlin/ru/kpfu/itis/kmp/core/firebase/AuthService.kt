@@ -13,4 +13,6 @@ actual class AuthService {
     actual suspend fun signInWithEmail(email: String, password: String) {
 
     }
+
+    actual fun isUserLoggedIn() = false
 }

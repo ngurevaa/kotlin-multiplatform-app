@@ -14,4 +14,6 @@ actual class AuthService {
     actual suspend fun signInWithEmail(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).await()
     }
+
+    actual fun isUserLoggedIn() = auth.currentUser != null
 }
