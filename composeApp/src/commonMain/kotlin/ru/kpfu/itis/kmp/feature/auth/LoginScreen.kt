@@ -35,7 +35,8 @@ import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = koinViewModel<LoginViewModel>()
+    viewModel: LoginViewModel = koinViewModel<LoginViewModel>(),
+    navigateToRegistration: () -> Unit
 ) {
     val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
