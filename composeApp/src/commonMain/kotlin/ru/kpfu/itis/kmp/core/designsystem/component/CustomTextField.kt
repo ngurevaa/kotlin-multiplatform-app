@@ -21,7 +21,8 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    trailingIcon: @Composable () -> Unit = {},
 ) {
     BasicTextField(
         value = value,
@@ -40,6 +41,7 @@ fun CustomTextField(
                 Box(Modifier.weight(1f)) {
                     innerTextField()
                 }
+                trailingIcon()
             }
         },
         keyboardOptions = keyboardOptions,

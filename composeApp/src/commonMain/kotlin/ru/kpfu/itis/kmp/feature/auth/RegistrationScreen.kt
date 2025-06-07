@@ -1,6 +1,5 @@
 package ru.kpfu.itis.kmp.feature.auth
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,8 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -40,6 +50,8 @@ import ru.kpfu.itis.kmp.core.ui.noRippleClickable
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewModel
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 
 @Composable
 fun RegistrationScreen(
@@ -89,7 +101,7 @@ fun RegistrationScreen(
             )
             LoginReference(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-                click = { obtainEvent(RegistrationEvent.ClickLoginReference) }
+                onClick = { obtainEvent(RegistrationEvent.ClickLoginReference) }
             )
         }
     }
@@ -98,7 +110,7 @@ fun RegistrationScreen(
 @Composable
 internal fun LoginReference(
     modifier: Modifier = Modifier,
-    click: () -> Unit,
+    onClick: () -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -113,7 +125,7 @@ internal fun LoginReference(
             text = stringResource(Res.string.login),
             style = MaterialTheme.typography.bodyLarge,
             textDecoration = TextDecoration.Underline,
-            modifier = Modifier.noRippleClickable { click() }
+            modifier = Modifier.noRippleClickable { onClick() }
         )
     }
 }
@@ -183,12 +195,33 @@ internal fun Password(
     password: String,
     updatePassword: (String) -> Unit
 ) {
+    var isPasswordVisible by remember { mutableStateOf(false) }
+
     Column(modifier = modifier) {
         Text(
             text = stringResource(Res.string.password),
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(password, updatePassword)
+        CustomTextField(
+            value = password,
+            onValueChange = updatePassword,
+            visualTransformation = if (isPasswordVisible) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            ),
+            trailingIcon = {
+                Icon(
+                    imageVector = if (isPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                    contentDescription = null,
+                    modifier = Modifier.noRippleClickable { isPasswordVisible = !isPasswordVisible }
+                )
+            }
+        )
     }
 }

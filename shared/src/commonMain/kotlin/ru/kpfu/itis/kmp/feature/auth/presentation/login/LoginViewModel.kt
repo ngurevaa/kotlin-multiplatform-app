@@ -20,7 +20,12 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
             is LoginEvent.SignIn -> signIn()
             is LoginEvent.UpdateEmail -> updateEmail(event.email)
             is LoginEvent.UpdatePassword -> updatePassword(event.password)
+            LoginEvent.ClickRegistrationReference -> clickRegistrationReference()
         }
+    }
+
+    private fun clickRegistrationReference() {
+        sendAction(LoginAction.NavigateToRegistration)
     }
 
     private fun signIn() {
