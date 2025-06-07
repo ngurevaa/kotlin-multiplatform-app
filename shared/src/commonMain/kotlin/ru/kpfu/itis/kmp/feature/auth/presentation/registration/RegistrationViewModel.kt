@@ -20,7 +20,12 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
             is RegistrationEvent.SignUp -> signUp()
             is RegistrationEvent.UpdateEmail -> updateEmail(event.email)
             is RegistrationEvent.UpdatePassword -> updatePassword(event.password)
+            is RegistrationEvent.ClickLoginReference -> clickLoginReference()
         }
+    }
+
+    private fun clickLoginReference() {
+        sendAction(RegistrationAction.NavigateToLogin)
     }
 
     private fun signUp() {

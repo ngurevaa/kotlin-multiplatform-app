@@ -37,13 +37,16 @@ kotlin {
             implementation(compose.material)
             implementation(compose.material3)
             implementation(compose.ui)
+            implementation(compose.uiUtil)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.vm)
+            implementation(libs.compose.navigation)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

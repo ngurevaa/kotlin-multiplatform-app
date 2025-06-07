@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -28,17 +29,35 @@ import exampleapp.composeapp.generated.resources.do_not_have_an_account
 import exampleapp.composeapp.generated.resources.enter_into_your_account
 import exampleapp.composeapp.generated.resources.register
 import exampleapp.composeapp.generated.resources.sign_in
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import ru.kpfu.itis.kmp.core.ui.noRippleClickable
+import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
+import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationAction
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = koinViewModel<LoginViewModel>()
+    viewModel: LoginViewModel = koinViewModel<LoginViewModel>(),
+    navigateToRegistration: () -> Unit
 ) {
     val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
+
+    LaunchedEffect(Unit) {
+        viewModel.actions.collectLatest { action ->
+            when (action) {
+                is LoginAction.NavigateToRegistration -> {
+                    navigateToRegistration()
+                }
+                is LoginAction.ShowError -> {
+
+                }
+            }
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -68,7 +87,8 @@ fun LoginScreen(
                 modifier = Modifier.widthIn(max = 600.dp).padding(top = 16.dp)
             )
             RegistrationReference(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
+                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                onClick = { obtainEvent(LoginEvent.ClickRegistrationReference) }
             )
         }
     }
@@ -118,7 +138,10 @@ internal fun SignInButton(
 }
 
 @Composable
-internal fun RegistrationReference(modifier: Modifier = Modifier) {
+internal fun RegistrationReference(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Center
@@ -132,6 +155,7 @@ internal fun RegistrationReference(modifier: Modifier = Modifier) {
             text = stringResource(Res.string.register),
             style = MaterialTheme.typography.bodyLarge,
             textDecoration = TextDecoration.Underline,
+            modifier = Modifier.noRippleClickable { onClick() }
         )
     }
 }
