@@ -106,7 +106,7 @@ kotlin {
             implementation(libs.sqldelight.native.driver)
         }
         jvmMain.dependencies {
-
+            implementation(libs.kotlinx.coroutines.desktop)
             implementation(libs.ktor.client.desktop)
             implementation(libs.sqldelight.sqlite.driver)
 

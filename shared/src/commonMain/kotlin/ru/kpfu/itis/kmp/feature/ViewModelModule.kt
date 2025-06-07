@@ -2,6 +2,7 @@ package ru.kpfu.itis.kmp.feature
 
 import org.koin.dsl.module
 import org.koin.core.module.dsl.viewModel
+import ru.kpfu.itis.kmp.core.viewmodel.MainViewModelDispatcher
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewModel
 
