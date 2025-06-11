@@ -3,7 +3,7 @@ package ru.kpfu.itis.kmp.core.navigation
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 
-class NavController(
+actual class NavController(
     private val startDestination: Route,
     private var backStackScreens: MutableSet<Route> = mutableSetOf()
 ) {

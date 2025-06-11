@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
-fun rememberNavController(
-    startDestination: Route,
-    backStackScreens: MutableSet<Route> = mutableSetOf()
-): MutableState<NavController> = rememberSaveable {
-    mutableStateOf(NavController(startDestination, backStackScreens))
+actual fun rememberNavController(
+    startDestination: Route
+): NavController = rememberSaveable {
+    val backStackScreens: MutableSet<Route> = mutableSetOf()
+    NavController(startDestination, backStackScreens)
 }
