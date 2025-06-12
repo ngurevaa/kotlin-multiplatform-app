@@ -40,7 +40,7 @@ fun HomeScreen() {
             HelloHeader(modifier = Modifier.widthIn(max = 600.dp).padding(24.dp))
             Genres(
                 pagerState = pagerState,
-                modifier = Modifier.widthIn(max = 600.dp)
+                modifier = Modifier.padding(start = 24.dp).widthIn(max = 600.dp)
             )
             HorizontalPager(
                 state = pagerState

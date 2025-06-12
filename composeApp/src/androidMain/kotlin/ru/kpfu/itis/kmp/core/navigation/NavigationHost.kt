@@ -14,7 +14,7 @@ actual fun NavigationHost(
 ) {
     NavHost(
         startDestination = startDestination,
-        navController = navController
+        navController = navController.navHostController
     ) {
         composable<Route.Registration> {
             RegistrationScreen(

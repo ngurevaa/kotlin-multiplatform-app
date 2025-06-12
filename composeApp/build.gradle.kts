@@ -41,15 +41,16 @@ kotlin {
             implementation(compose.uiUtil)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.vm)
             implementation(libs.compose.navigation)
+            implementation("androidx.compose.material:material-icons-extended:1.6.0")
         }
         desktopMain.dependencies {
+            implementation("org.jetbrains.compose.material3:material3-desktop:1.6.0")
             implementation(compose.desktop.currentOs)
         }
     }

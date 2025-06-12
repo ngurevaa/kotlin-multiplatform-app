@@ -16,8 +16,6 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "BookApp",
     ) {
-        AppTheme {
-            HomeScreen()
-        }
+        App()
     }
 }
