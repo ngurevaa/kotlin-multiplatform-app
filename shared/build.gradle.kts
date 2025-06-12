@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeCompiler)
+
 }
 
 kotlin {
@@ -17,7 +18,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -40,6 +41,22 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "16.0"
         podfile = project.file("../iosApp/Podfile")
+
+        pod("FirebaseAuth") {
+            version = "~> 10.0"
+        }
+//        pod("Firebase/Core") {
+//            version = "10.16.0"
+//        }
+//        pod("Firebase/Firestore") {
+//            version = "10.16.0"
+//        }
+//        pod("Firebase/Analytics") {
+//            version = "10.16.0"
+//        }
+//        pod("Firebase/Crashlytics") {
+//            version = "~> 10.16.0"
+//        }
 //        framework {
 //            baseName = "CommonKmp"
 //            transitiveExport = true

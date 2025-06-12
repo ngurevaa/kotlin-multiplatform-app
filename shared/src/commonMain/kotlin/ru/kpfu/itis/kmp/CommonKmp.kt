@@ -16,7 +16,6 @@ fun initKoin(
         appDeclaration()
 
         modules(
-            platformModule(),
             networkModule,
             databaseModule,
             driverModule,
