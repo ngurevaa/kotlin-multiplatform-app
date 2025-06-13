@@ -19,7 +19,7 @@ object Colors {
     val onErrorContainerLight = 0xFF93000A
     val backgroundLight = 0xFFFDFDFD
     val onBackgroundLight = 0xFF201B13
-    val surfaceLight = 0xFFF5F5F5
+    val surfaceLight = 0xFFFDFDFD
     val onSurfaceLight = 0xFF201B13
     val surfaceVariantLight = 0xFFEEE1CF
     val onSurfaceVariantLight = 0xFF4E4639

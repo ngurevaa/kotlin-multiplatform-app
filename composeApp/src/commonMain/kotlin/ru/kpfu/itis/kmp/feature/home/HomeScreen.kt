@@ -18,16 +18,30 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import exampleapp.composeapp.generated.resources.Res
+import exampleapp.composeapp.generated.resources.hello
+import exampleapp.composeapp.generated.resources.what_do_you_want_to_read_today
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
+import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
+) {
+    val state by viewModel.getViewStates().collectAsState()
+    val obtainEvent = viewModel::obtainEvent
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -40,6 +54,7 @@ fun HomeScreen() {
             HelloHeader(modifier = Modifier.widthIn(max = 600.dp).padding(24.dp))
             Genres(
                 pagerState = pagerState,
+                genres = state.genres,
                 modifier = Modifier.padding(start = 24.dp).widthIn(max = 600.dp)
             )
             HorizontalPager(
@@ -55,12 +70,12 @@ fun HomeScreen() {
 fun HelloHeader(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
-            text = "Hello!",
+            text = stringResource(Res.string.hello),
             style = MaterialTheme.typography.headlineSmall,
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "What do you want to read today?",
+            text = stringResource(Res.string.what_do_you_want_to_read_today),
             style = MaterialTheme.typography.headlineMedium,
         )
     }
@@ -70,6 +85,7 @@ fun HelloHeader(modifier: Modifier = Modifier) {
 @Composable
 fun Genres(
     pagerState: PagerState,
+    genres: List<Genre> = listOf(),
     modifier: Modifier = Modifier
 ) {
     val tabs = listOf("Fiction", "Science", "Psychology", "Romance", "Horror", "Fantasy", "History")
@@ -81,11 +97,11 @@ fun Genres(
         divider = {},
         modifier = modifier
     ) {
-        tabs.forEachIndexed { index, title ->
+        genres.forEachIndexed { index, genre ->
             Tab(
                 selected = pagerState.currentPage == index,
                 onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
-                text = { Text(title, color = if (pagerState.currentPage == index) Color.Unspecified else MaterialTheme.colorScheme.secondary) }
+                text = { Text(genre.name, color = if (pagerState.currentPage == index) Color.Unspecified else MaterialTheme.colorScheme.secondary) }
             )
         }
     }
