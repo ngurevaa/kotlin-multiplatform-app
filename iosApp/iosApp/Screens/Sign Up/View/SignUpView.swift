@@ -39,10 +39,14 @@ struct SignUpView: View {
                         .foregroundColor(.black)
 
                     TextField("", text: $viewModel.email)
+                        .foregroundColor(.black)
                         .padding()
                         .frame(height: 38)
-                        .background(AppColor.Light.dataTextfield)
+                        .background(Color.dataTextfieldColor)
                         .cornerRadius(10)
+                        .onChange(of: viewModel.email) { newEmail in
+                            viewModel.doUpdateEmailEvent()
+                        }
                 }
 
                 // Password
@@ -65,10 +69,14 @@ struct SignUpView: View {
                                 .foregroundColor(.black)
                         }
                     }
+                    .foregroundColor(.black)
                     .padding()
                     .frame(height: 38)
-                    .background(AppColor.Light.dataTextfield)
+                    .background(Color.dataTextfieldColor)
                     .cornerRadius(10)
+                    .onChange(of: viewModel.password) { newPassword in
+                        viewModel.doUpdatePasswordEvent()
+                    }
                 }
 
             }
@@ -77,7 +85,7 @@ struct SignUpView: View {
 
             VStack(spacing: 12) {
                 Button(action: {
-                    viewModel.doSignUp()
+                    viewModel.doSignUpEvent()
                 }) {
                     Text("Sign Up")
                         .font(AppFont.medium(size: 20))
@@ -85,7 +93,7 @@ struct SignUpView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .frame(height: 38)
-                        .background(AppColor.Light.primary)
+                        .background(Color(hex: Colors.shared.primaryLight))
                         .cornerRadius(10)
                 }
 
@@ -103,17 +111,11 @@ struct SignUpView: View {
                 }
                 .foregroundColor(.black)
             }
-            .padding(.bottom, 16)
+            .padding(.bottom, 20)
         }
         .padding()
-        .background(AppColor.Light.background)
+        .background(Color(hex: Colors.shared.backgroundLight))
         .ignoresSafeArea(edges: .bottom)
-//        .alert(isPresented: $viewModel.showEmailAlert) {
-//            Alert(title: Text("Invalid email"), message: Text(viewModel.emailAlertMessage), dismissButton: .default(Text("Submit")))
-//        }
-//        .alert(isPresented: $viewModel.showPasswordAlert) {
-//            Alert(title: Text("Invalid password"), message: Text(viewModel.passwordAlertMessage), dismissButton: .default(Text("Submit")))
-//        }
     }
 }
 

@@ -16,10 +16,8 @@ struct iOSApp: App {
         }
     }
     private func initShared() {
-
         CommonKmpKt.doInitKoin { app in
             print("app: \(app)")
-
         }
 
     }

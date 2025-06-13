@@ -18,11 +18,9 @@
 		281A163C2DFB252400CE70F5 /* wix_made_for_text_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 281A16392DFB252400CE70F5 /* wix_made_for_text_medium.ttf */; };
 		281A163D2DFB252400CE70F5 /* wix_made_for_text_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 281A163A2DFB252400CE70F5 /* wix_made_for_text_regular.ttf */; };
 		281A163E2DFB252400CE70F5 /* wix_made_for_text_semi_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 281A163B2DFB252400CE70F5 /* wix_made_for_text_semi_bold.ttf */; };
-		281A16422DFB2A6600CE70F5 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16412DFB2A6600CE70F5 /* AppColor.swift */; };
 		281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16432DFB2AC500CE70F5 /* Color+.swift */; };
 		281A16462DFB2BC600CE70F5 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16452DFB2BC600CE70F5 /* AppTheme.swift */; };
 		281A16492DFB2DCF00CE70F5 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16482DFB2DCF00CE70F5 /* AppFont.swift */; };
-		281A16522DFB36BE00CE70F5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16512DFB36BE00CE70F5 /* Validator.swift */; };
 		281A16542DFB4F2200CE70F5 /* AppHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281A16532DFB4F2200CE70F5 /* AppHomeView.swift */; };
 		28E2A6BE2DDCC87F00D17E84 /* FlowPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */; };
 		7555FF83242A565900829871 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* SignInView.swift */; };
@@ -42,11 +40,9 @@
 		281A16392DFB252400CE70F5 /* wix_made_for_text_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = wix_made_for_text_medium.ttf; sourceTree = "<group>"; };
 		281A163A2DFB252400CE70F5 /* wix_made_for_text_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = wix_made_for_text_regular.ttf; sourceTree = "<group>"; };
 		281A163B2DFB252400CE70F5 /* wix_made_for_text_semi_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = wix_made_for_text_semi_bold.ttf; sourceTree = "<group>"; };
-		281A16412DFB2A6600CE70F5 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		281A16432DFB2AC500CE70F5 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		281A16452DFB2BC600CE70F5 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		281A16482DFB2DCF00CE70F5 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
-		281A16512DFB36BE00CE70F5 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		281A16532DFB4F2200CE70F5 /* AppHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHomeView.swift; sourceTree = "<group>"; };
 		28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowPublisher.swift; sourceTree = "<group>"; };
 		495CD30E0D0C57F4D693418F /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +85,6 @@
 		280B78D42DF9BC2600CF8CB7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				281A164A2DFB2EBE00CE70F5 /* Start */,
 				280B78DA2DF9BC5D00CF8CB7 /* Sign In */,
 				280B78D92DF9BC4800CF8CB7 /* Sign Up */,
 			);
@@ -108,7 +103,6 @@
 			children = (
 				280B78B22DF99FE800CF8CB7 /* IOSFirebaseCrashlyticsBindings.swift */,
 				28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */,
-				281A16512DFB36BE00CE70F5 /* Validator.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -194,7 +188,6 @@
 		281A16402DFB2A0000CE70F5 /* Color Config */ = {
 			isa = PBXGroup;
 			children = (
-				281A16412DFB2A6600CE70F5 /* AppColor.swift */,
 				281A16452DFB2BC600CE70F5 /* AppTheme.swift */,
 			);
 			path = "Color Config";
@@ -206,29 +199,6 @@
 				281A16482DFB2DCF00CE70F5 /* AppFont.swift */,
 			);
 			path = "Font Config";
-			sourceTree = "<group>";
-		};
-		281A164A2DFB2EBE00CE70F5 /* Start */ = {
-			isa = PBXGroup;
-			children = (
-				281A164B2DFB2EC300CE70F5 /* View */,
-				281A164C2DFB2EC600CE70F5 /* View Model */,
-			);
-			path = Start;
-			sourceTree = "<group>";
-		};
-		281A164B2DFB2EC300CE70F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		281A164C2DFB2EC600CE70F5 /* View Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Model";
 			sourceTree = "<group>";
 		};
 		42799AB246E5F90AF97AA0EF /* Frameworks */ = {
@@ -437,11 +407,9 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */,
 				281A16492DFB2DCF00CE70F5 /* AppFont.swift in Sources */,
-				281A16522DFB36BE00CE70F5 /* Validator.swift in Sources */,
 				281A16462DFB2BC600CE70F5 /* AppTheme.swift in Sources */,
 				7555FF83242A565900829871 /* SignInView.swift in Sources */,
 				280B78E02DF9BE7700CF8CB7 /* SignInViewModel.swift in Sources */,
-				281A16422DFB2A6600CE70F5 /* AppColor.swift in Sources */,
 				281A16542DFB4F2200CE70F5 /* AppHomeView.swift in Sources */,
 				280B78B32DF99FE800CF8CB7 /* IOSFirebaseCrashlyticsBindings.swift in Sources */,
 				280B78E42DF9D07900CF8CB7 /* SignUpView.swift in Sources */,

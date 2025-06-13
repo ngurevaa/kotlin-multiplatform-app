@@ -14,59 +14,60 @@ import Combine
 class SignInViewModel: ObservableObject {
     var loginCommonViewModel: LoginViewModel
 
-    var commonFlow: CommonStateFlow<LoginViewState>
+    var commonStateFlow: CommonStateFlow<LoginViewState>
+    var commonActionFlow: CommonFlow<LoginAction>
 
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var loginStates: LoginViewState
+    @Published var loginStates: LoginViewState?
+    @Published var loginActions: LoginAction?
 
     @Published var email = ""
     @Published var password = ""
 
     @Published var showLoginAlertSuccess = false
 
-    @Published var showEmailAlert = false
-    @Published var emailAlertMessage = "Please enter a valid email (e.g., example@mail.com)."
-
-    @Published var showPasswordAlert = false
-    @Published var passwordAlertMessage = "Password must be at least 8 characters long and include: 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character (e.g., !@#$%)"
-
     @Published var isSecure = true
 
 
     init(loginCommonViewModel: LoginViewModel) {
         self.loginCommonViewModel = loginCommonViewModel
-        self.loginStates = loginCommonViewModel.viewStates.value as! LoginViewState
-        commonFlow = loginCommonViewModel.getViewStates()
+
+        commonStateFlow = loginCommonViewModel.getViewStates()
+        commonActionFlow = loginCommonViewModel.getActions()
 
         publishLoginStateFlow()
+        publishLoginActionFlow()
     }
-
+//    пока для просмотра состояний
     func publishLoginStateFlow() {
-        commonStatePublisherFlow(commonFlow)
+        commonStatePublisherFlow(commonStateFlow)
             .sink { [weak self] newState in
                 self?.loginStates = newState
                 print("Новое состояние: \(newState)")
             }
             .store(in: &cancellables)
     }
+    func publishLoginActionFlow() {
+        commonPublisherFlow(commonActionFlow)
+            .sink { [weak self] newAction in
+                self?.loginActions = newAction
+                print("Новое action: \(newAction)")
+            }
+            .store(in: &cancellables)
+    }
 
-    func doSignIn() {
-        if !Validator.isValidEmail(for: email) {
-            showEmailAlert = true
-            return
-        }
-        if !Validator.isValidPassword(for: password) {
-            showPasswordAlert = true
-            return
-        }
-
+    func doUpdateEmailEvent() {
         let emailEvent = LoginEvent.UpdateEmail(email: email)
         loginCommonViewModel.obtainEvent(event: emailEvent)
+    }
 
+    func doUpdatePasswordEvent() {
         let passwordEvent = LoginEvent.UpdatePassword(password: password)
         loginCommonViewModel.obtainEvent(event: passwordEvent)
+    }
 
+    func doSignInEvent() {
         let signInEvent = LoginEvent.SignIn()
         loginCommonViewModel.obtainEvent(event: signInEvent)
     }
