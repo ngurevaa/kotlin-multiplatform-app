@@ -38,6 +38,8 @@ val networkModule = module {
     }
 }
 
+private const val BASE_URL = "www.googleapis.com/books/v1/volumes"
+
 private fun buildHttpClient(
     engine: HttpClientEngineFactory<HttpClientEngineConfig>,
     json: Json,
@@ -54,10 +56,10 @@ private fun buildHttpClient(
         requestTimeoutMillis = 10000
         socketTimeoutMillis = 10000
     }
-//    install(ApiKeyPlugin)
+    install(ApiKeyPlugin)
     defaultRequest {
         url {
-            this.host = "ktor.io/docs/"
+            this.host = BASE_URL
             this.protocol = URLProtocol.HTTPS
         }
     }

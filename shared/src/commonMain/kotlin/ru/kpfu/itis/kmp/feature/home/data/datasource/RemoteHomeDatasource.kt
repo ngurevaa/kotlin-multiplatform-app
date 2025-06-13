@@ -1,0 +1,31 @@
+package ru.kpfu.itis.kmp.feature.home.data.datasource
+
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import ru.kpfu.itis.kmp.feature.home.data.datasource.remote.BookApiResponse
+import ru.kpfu.itis.kmp.feature.home.domain.model.Book
+import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
+
+class RemoteHomeDatasource(
+    private val httpClient: HttpClient
+) {
+    suspend fun getBooksByGenre(genre: Genre): List<Book> {
+        val response = httpClient.get {
+            parameter("q", "subject:${genre.name}")
+            parameter("orderBy", "relevance")
+            parameter("maxResults", "5")
+        }.body<BookApiResponse>()
+
+        val books = mutableListOf<Book>()
+        for (book in response.items) {
+            books += Book(
+                name = book.volumeInfo?.title ?: "",
+                author = book.volumeInfo?.authors?.joinToString(", ") ?: "",
+                image = book.volumeInfo?.imageLinks?.thumbnail ?: ""
+            )
+        }
+        return books
+    }
+}

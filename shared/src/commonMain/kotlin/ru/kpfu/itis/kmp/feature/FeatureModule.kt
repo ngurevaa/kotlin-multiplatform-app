@@ -1,12 +1,13 @@
 package ru.kpfu.itis.kmp.feature
 
-import androidx.lifecycle.viewmodel.viewModelFactory
 import org.koin.dsl.module
 import ru.kpfu.itis.kmp.feature.auth.data.authModule
+import ru.kpfu.itis.kmp.feature.home.data.homeModule
 
 val featureModule = module {
     includes(
+        viewModelModule,
         authModule,
-        viewModelModule
+        homeModule
     )
 }
