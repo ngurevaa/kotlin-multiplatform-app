@@ -5,13 +5,13 @@ import androidx.compose.runtime.getValue
 import ru.kpfu.itis.kmp.feature.auth.LoginScreen
 import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
 import ru.kpfu.itis.kmp.core.navigation.rememberNavController
+import ru.kpfu.itis.kmp.feature.home.HomeScreen
 
 @Composable
 actual fun NavigationHost(
-    startDestination: Route
+    startDestination: Route,
+    navController: NavController
 ) {
-    val navController by rememberNavController(startDestination = startDestination)
-
     NavHost(navController) {
         composable(Route.Registration) {
             RegistrationScreen(navigateToLogin = {
@@ -23,6 +23,10 @@ actual fun NavigationHost(
             LoginScreen(navigateToRegistration = {
                 navController.navigate(Route.Registration)
             })
+        }
+
+        composable(Route.Home) {
+            HomeScreen()
         }
 
     }.build()

@@ -36,15 +36,13 @@ import ru.kpfu.itis.kmp.core.ui.noRippleClickable
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
-import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationAction
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel<LoginViewModel>(),
     navigateToRegistration: () -> Unit
 ) {
-    val state by viewModel.getViewStates().collectAsState()
-    val obtainEvent = viewModel::obtainEvent
+    LoginScreenContent(viewModel)
 
     LaunchedEffect(Unit) {
         viewModel.actions.collectLatest { action ->
@@ -58,6 +56,12 @@ fun LoginScreen(
             }
         }
     }
+}
+
+@Composable
+internal fun LoginScreenContent(viewModel: LoginViewModel) {
+    val state by viewModel.getViewStates().collectAsState()
+    val obtainEvent = viewModel::obtainEvent
 
     Surface(
         modifier = Modifier.fillMaxSize()

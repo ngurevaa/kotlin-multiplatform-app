@@ -5,7 +5,7 @@ object Colors {
     val onPrimaryLight = 0xFFFFFFFF
     val primaryContainerLight = 0xFFFFDEA7
     val onPrimaryContainerLight = 0xFF5E4200
-    val secondaryLight = 0xFF6D5C3F
+    val secondaryLight = 0xFF9D9D9D
     val onSecondaryLight = 0xFFFFFFFF
     val secondaryContainerLight = 0xFFF7DFBB
     val onSecondaryContainerLight = 0xFF54452A
@@ -17,9 +17,9 @@ object Colors {
     val onErrorLight = 0xFFFFFFFF
     val errorContainerLight = 0xFFFFDAD6
     val onErrorContainerLight = 0xFF93000A
-    val backgroundLight = 0xFFFFF8F3
+    val backgroundLight = 0xFFFDFDFD
     val onBackgroundLight = 0xFF201B13
-    val surfaceLight = 0xFFFFF8F3
+    val surfaceLight = 0xFFFDFDFD
     val onSurfaceLight = 0xFF201B13
     val surfaceVariantLight = 0xFFEEE1CF
     val onSurfaceVariantLight = 0xFF4E4639
@@ -31,9 +31,9 @@ object Colors {
     val inversePrimaryLight = 0xFFEDC06C
     val surfaceDimLight = 0xFFE3D8CC
     val surfaceBrightLight = 0xFFFFF8F3
-    val surfaceContainerLowestLight = 0xFFFFFFFF
+    val surfaceContainerLowestLight = 0xFFFFF8F3
     val surfaceContainerLowLight = 0xFFFDF2E5
-    val surfaceContainerLight = 0xFFF7ECDF
+    val surfaceContainerLight = 0xFFFFFFFF
     val surfaceContainerHighLight = 0xFFF1E7D9
     val surfaceContainerHighestLight = 0xFFE3E3E3
 

@@ -13,9 +13,10 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -50,8 +51,6 @@ import ru.kpfu.itis.kmp.core.ui.noRippleClickable
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewModel
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 
 @Composable
 fun RegistrationScreen(
