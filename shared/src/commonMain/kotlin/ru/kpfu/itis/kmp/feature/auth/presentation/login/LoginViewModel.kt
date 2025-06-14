@@ -1,7 +1,9 @@
 package ru.kpfu.itis.kmp.feature.auth.presentation.login
 
+import CommonFlow
 import CommonStateFlow
 import androidx.lifecycle.viewModelScope
+import asCommonFlow
 import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -37,7 +39,7 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
                 // action - navigate to home
             }
             .onFailure {
-                // action - show message
+                sendAction(LoginAction.ShowError)
             }
         }
     }
@@ -51,4 +53,6 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
     }
 
     fun getViewStates(): CommonStateFlow<LoginViewState> = viewStates.asCommonStateFlow()
+    fun getActions(): CommonFlow<LoginAction> = actions.asCommonFlow()
+
 }
