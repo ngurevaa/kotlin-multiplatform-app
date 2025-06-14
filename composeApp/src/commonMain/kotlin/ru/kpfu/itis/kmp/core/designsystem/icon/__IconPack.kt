@@ -1,9 +1,8 @@
 package ru.kpfu.itis.kmp.core.designsystem.icon
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Bookmark
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Home
-import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Search
+import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.HomeFill
 import kotlin.collections.List as ____KtList
 
 public object IconPack
@@ -15,7 +14,6 @@ public val IconPack.AllIcons: ____KtList<ImageVector>
     if (__AllIcons != null) {
       return __AllIcons!!
     }
-    __AllIcons= listOf(Bookmark,
-        Home, Search)
+    __AllIcons= listOf(Home, HomeFill)
     return __AllIcons!!
   }

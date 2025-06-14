@@ -13,12 +13,11 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
 
 public val IconPack.Home: ImageVector
     get() {
-        if (_home24dpE3e3e3Fill0Wght400Grad0Opsz24 != null) {
-            return _home24dpE3e3e3Fill0Wght400Grad0Opsz24!!
+        if (_home != null) {
+            return _home!!
         }
-        _home24dpE3e3e3Fill0Wght400Grad0Opsz24 = Builder(name =
-                "Home24dpE3e3e3Fill0Wght400Grad0Opsz24", defaultWidth = 24.0.dp, defaultHeight =
-                24.0.dp, viewportWidth = 960.0f, viewportHeight = 960.0f).apply {
+        _home = Builder(name = "Home", defaultWidth = 24.0.dp, defaultHeight = 24.0.dp,
+                viewportWidth = 960.0f, viewportHeight = 960.0f).apply {
             path(fill = SolidColor(Color(0xFFe3e3e3)), stroke = null, strokeLineWidth = 0.0f,
                     strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
                     pathFillType = NonZero) {
@@ -67,7 +66,7 @@ public val IconPack.Home: ImageVector
             }
         }
         .build()
-        return _home24dpE3e3e3Fill0Wght400Grad0Opsz24!!
+        return _home!!
     }
 
-private var _home24dpE3e3e3Fill0Wght400Grad0Opsz24: ImageVector? = null
+private var _home: ImageVector? = null

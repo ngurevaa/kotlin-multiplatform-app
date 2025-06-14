@@ -48,6 +48,8 @@ kotlin {
             implementation(libs.koin.compose.vm)
             implementation(libs.compose.navigation)
             implementation("androidx.compose.material:material-icons-extended:1.6.0")
+            implementation(libs.coilCompose)
+            implementation(libs.coil.network)
         }
         desktopMain.dependencies {
             implementation("org.jetbrains.compose.material3:material3-desktop:1.6.0")

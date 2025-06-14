@@ -5,7 +5,7 @@ object Colors {
     val onPrimaryLight = 0xFFFFFFFF
     val primaryContainerLight = 0xFFFFDEA7
     val onPrimaryContainerLight = 0xFF5E4200
-    val secondaryLight = 0xFFCDCDCD
+    val secondaryLight = 0xFF9D9D9D
     val onSecondaryLight = 0xFFFFFFFF
     val secondaryContainerLight = 0xFFF7DFBB
     val onSecondaryContainerLight = 0xFF54452A

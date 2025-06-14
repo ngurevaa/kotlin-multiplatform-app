@@ -1,32 +1,19 @@
 package ru.kpfu.itis.kmp.core.designsystem.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.Star
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Bookmark
@@ -36,8 +23,8 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.HomeFill
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Search
 import ru.kpfu.itis.kmp.core.navigation.NavController
 import ru.kpfu.itis.kmp.core.navigation.Route
-import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
 import ru.kpfu.itis.kmp.core.navigation.navigate
+import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
