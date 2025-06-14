@@ -18,12 +18,14 @@ actual fun NavigationHost(
     ) {
         composable<Route.Registration> {
             RegistrationScreen(
-                navigateToLogin = { navController.navigate(Route.Login) }
+                navigateToLogin = { navController.navigate(Route.Login) },
+                navigateToHome = { navController.navigate(Route.Home) }
             )
         }
         composable<Route.Login> {
             LoginScreen(
-                navigateToRegistration = { navController.navigate(Route.Registration) }
+                navigateToRegistration = { navController.navigate(Route.Registration) },
+                navigateToHome = { navController.navigate(Route.Home) }
             )
         }
         composable<Route.Home> {

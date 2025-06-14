@@ -8,6 +8,7 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.util.FieldValidator
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignUpUseCase
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
@@ -32,15 +33,24 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
     }
 
     private fun signUp() {
+        if (!FieldValidator.isValidEmail(viewState.email)) {
+            sendAction(RegistrationAction.ShowEmailError)
+            return
+        }
+        if (!FieldValidator.isValidPassword(viewState.password)) {
+            sendAction(RegistrationAction.ShowPasswordError)
+            return
+        }
+
         viewModelScope.launch {
             runCatching {
                 signUpUseCase(viewState.email, viewState.password)
             }
             .onSuccess {
-                // action navigate to home screen
+                sendAction(RegistrationAction.NavigateToHome)
             }
             .onFailure {
-                sendAction(RegistrationAction.ShowError)
+                sendAction(RegistrationAction.ShowRegistrationError)
             }
         }
     }

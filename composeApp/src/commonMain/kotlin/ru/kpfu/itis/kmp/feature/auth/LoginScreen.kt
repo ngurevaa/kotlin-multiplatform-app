@@ -13,12 +13,19 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -27,12 +34,16 @@ import androidx.compose.ui.unit.dp
 import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.do_not_have_an_account
 import exampleapp.composeapp.generated.resources.enter_into_your_account
+import exampleapp.composeapp.generated.resources.login_error
 import exampleapp.composeapp.generated.resources.register
 import exampleapp.composeapp.generated.resources.sign_in
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ru.kpfu.itis.kmp.core.ui.noRippleClickable
+import ru.kpfu.itis.kmp.core.ui.showSnackbar
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
@@ -40,19 +51,25 @@ import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginViewModel
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel<LoginViewModel>(),
-    navigateToRegistration: () -> Unit
+    navigateToRegistration: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
-    LoginScreenContent(viewModel)
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+    ) {
+        LoginScreenContent(viewModel = viewModel)
+    }
+
+    val loginError = stringResource(Res.string.login_error)
     LaunchedEffect(Unit) {
-        viewModel.actions.collectLatest { action ->
+        viewModel.getActions().collectLatest { action ->
             when (action) {
-                is LoginAction.NavigateToRegistration -> {
-                    navigateToRegistration()
-                }
-                is LoginAction.ShowError -> {
-
-                }
+                LoginAction.NavigateToRegistration -> navigateToRegistration()
+                LoginAction.NavigateToHome -> navigateToHome()
+                LoginAction.ShowLoginError -> showSnackbar(snackbarHostState, coroutineScope, loginError)
             }
         }
     }
@@ -99,7 +116,9 @@ internal fun LoginScreenContent(viewModel: LoginViewModel) {
 }
 
 @Composable
-internal fun SignInHeader(modifier: Modifier = Modifier) {
+internal fun SignInHeader(
+    modifier: Modifier = Modifier
+) {
     Column(modifier = modifier) {
         Text(
             text = stringResource(Res.string.sign_in),
