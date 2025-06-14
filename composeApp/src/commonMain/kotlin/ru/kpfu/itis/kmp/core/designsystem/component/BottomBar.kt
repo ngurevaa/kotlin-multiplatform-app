@@ -23,7 +23,6 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.HomeFill
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Search
 import ru.kpfu.itis.kmp.core.navigation.NavController
 import ru.kpfu.itis.kmp.core.navigation.Route
-import ru.kpfu.itis.kmp.core.navigation.navigate
 import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

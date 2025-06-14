@@ -26,26 +26,17 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
                     // action show error
                 }
 
-//            val list = listOf<Book>(
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//                Book("title", "author", "http://books.google.com/books/content?id=bIZiAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"),
-//            )
-//            viewState = viewState.copy(books = mapOf(viewState.genres[0] to list))
-            for (genre in viewState.genres) {
-                runCatching { getBooksByGenreUseCase(genre) }
-                    .onSuccess {
-                        val books = viewState.books.toMutableMap()
-                        books.put(genre, it)
-                        viewState = viewState.copy(books = books)
-                    }
-                    .onFailure {
-                        // action show error about internet connection
-                    }
-            }
+//            for (genre in viewState.genres) {
+//                runCatching { getBooksByGenreUseCase(genre) }
+//                    .onSuccess {
+//                        val books = viewState.books.toMutableMap()
+//                        books.put(genre, it)
+//                        viewState = viewState.copy(books = books)
+//                    }
+//                    .onFailure {
+//                        // action show error about internet connection
+//                    }
+//            }
         }
     }
 

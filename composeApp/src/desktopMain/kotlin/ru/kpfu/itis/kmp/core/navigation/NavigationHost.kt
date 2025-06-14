@@ -1,10 +1,8 @@
 package ru.kpfu.itis.kmp.core.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import ru.kpfu.itis.kmp.feature.auth.LoginScreen
 import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
-import ru.kpfu.itis.kmp.core.navigation.rememberNavController
 import ru.kpfu.itis.kmp.feature.home.HomeScreen
 
 @Composable
@@ -14,15 +12,17 @@ actual fun NavigationHost(
 ) {
     NavHost(navController) {
         composable(Route.Registration) {
-            RegistrationScreen(navigateToLogin = {
-                navController.navigate(Route.Login)
-            })
+            RegistrationScreen(
+                navigateToLogin = { navController.navigate(Route.Login) },
+                navigateToHome = { navController.navigate(Route.Home) }
+            )
         }
 
         composable(Route.Login) {
-            LoginScreen(navigateToRegistration = {
-                navController.navigate(Route.Registration)
-            })
+            LoginScreen(
+                navigateToRegistration = { navController.navigate(Route.Registration) },
+                navigateToHome = { navController.navigate(Route.Home) }
+            )
         }
 
         composable(Route.Home) {
@@ -57,7 +57,7 @@ fun NavHost.NavigationGraphBuilder.composable(
     route: Route,
     content: @Composable () -> Unit
 ) {
-    if (navController.currentScreen.value == route) {
+    if (navController.getCurrentRoute().value == route) {
         content()
     }
 }

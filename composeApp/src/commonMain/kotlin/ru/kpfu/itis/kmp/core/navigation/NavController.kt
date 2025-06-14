@@ -1,5 +1,12 @@
 package ru.kpfu.itis.kmp.core.navigation
 
-expect class NavController
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 
-expect fun NavController.navigate(route: Route)
+expect class NavController {
+    @Composable
+    fun getCurrentRoute(): State<Route>
+
+    fun navigate(route: Route)
+}

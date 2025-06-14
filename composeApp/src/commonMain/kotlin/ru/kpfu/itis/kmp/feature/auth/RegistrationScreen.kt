@@ -18,6 +18,9 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +29,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,14 +44,18 @@ import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.already_have_an_account
 import exampleapp.composeapp.generated.resources.create_your_new_account
 import exampleapp.composeapp.generated.resources.email
+import exampleapp.composeapp.generated.resources.email_error
 import exampleapp.composeapp.generated.resources.login
 import exampleapp.composeapp.generated.resources.password
+import exampleapp.composeapp.generated.resources.password_error
+import exampleapp.composeapp.generated.resources.registration_error
 import exampleapp.composeapp.generated.resources.sign_up
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ru.kpfu.itis.kmp.core.designsystem.component.CustomTextField
 import ru.kpfu.itis.kmp.core.ui.noRippleClickable
+import ru.kpfu.itis.kmp.core.ui.showSnackbar
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationAction
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationEvent
 import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewModel
@@ -55,21 +63,40 @@ import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewM
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationViewModel = koinViewModel<RegistrationViewModel>(),
-    navigateToLogin: () -> Unit
+    navigateToLogin: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
-    val state by viewModel.getViewStates().collectAsState()
-    val obtainEvent = viewModel::obtainEvent
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+    ) {
+        RegistrationScreenContent(viewModel = viewModel)
+    }
+
+    val registrationError = stringResource(Res.string.registration_error)
+    val emailError = stringResource(Res.string.email_error)
+    val passwordError = stringResource(Res.string.password_error)
     LaunchedEffect(Unit) {
-        viewModel.actions.collectLatest { action ->
+        viewModel.getActions().collectLatest { action ->
             when (action) {
-                is RegistrationAction.NavigateToLogin -> navigateToLogin()
-                is RegistrationAction.ShowError -> {
-
-                }
+                RegistrationAction.NavigateToLogin -> navigateToLogin()
+                RegistrationAction.NavigateToHome -> navigateToHome()
+                RegistrationAction.ShowRegistrationError -> showSnackbar(snackbarHostState, coroutineScope, registrationError)
+                RegistrationAction.ShowEmailError -> showSnackbar(snackbarHostState, coroutineScope, emailError)
+                RegistrationAction.ShowPasswordError -> showSnackbar(snackbarHostState, coroutineScope, passwordError)
             }
         }
     }
+}
+
+@Composable
+internal fun RegistrationScreenContent(
+    viewModel: RegistrationViewModel
+) {
+    val state by viewModel.getViewStates().collectAsState()
+    val obtainEvent = viewModel::obtainEvent
 
     Surface(
         modifier = Modifier.fillMaxSize()

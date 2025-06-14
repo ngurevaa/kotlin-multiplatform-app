@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.firebase.AuthService
+import ru.kpfu.itis.kmp.core.util.FieldValidator
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignInUseCase
 
@@ -22,7 +23,7 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
             is LoginEvent.SignIn -> signIn()
             is LoginEvent.UpdateEmail -> updateEmail(event.email)
             is LoginEvent.UpdatePassword -> updatePassword(event.password)
-            LoginEvent.ClickRegistrationReference -> clickRegistrationReference()
+            is LoginEvent.ClickRegistrationReference -> clickRegistrationReference()
         }
     }
 
@@ -36,10 +37,10 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
                 signInUseCase(viewState.email, viewState.password)
             }
             .onSuccess {
-                // action - navigate to home
+                sendAction(LoginAction.NavigateToHome)
             }
             .onFailure {
-                sendAction(LoginAction.ShowError)
+                sendAction(LoginAction.ShowLoginError)
             }
         }
     }
@@ -54,5 +55,4 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
 
     fun getViewStates(): CommonStateFlow<LoginViewState> = viewStates.asCommonStateFlow()
     fun getActions(): CommonFlow<LoginAction> = actions.asCommonFlow()
-
 }

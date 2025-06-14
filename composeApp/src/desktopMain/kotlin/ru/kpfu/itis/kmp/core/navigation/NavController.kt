@@ -1,35 +1,38 @@
 package ru.kpfu.itis.kmp.core.navigation
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 
 actual class NavController(
     internal val startDestination: Route,
     internal var backStackScreens: MutableSet<Route> = mutableSetOf()
 ) {
-    var currentScreen: MutableState<Route> = mutableStateOf(startDestination)
+    private val currentRoute: MutableState<Route> = mutableStateOf(startDestination)
+
+    @Composable
+    actual fun getCurrentRoute(): State<Route> = currentRoute
+
+    actual fun navigate(route: Route) {
+        if (route != currentRoute.value) {
+            if (backStackScreens.contains(currentRoute.value) && currentRoute.value != startDestination) {
+                backStackScreens.remove(currentRoute.value)
+            }
+
+            if (route == startDestination) {
+                backStackScreens = mutableSetOf()
+            } else {
+                backStackScreens.add(currentRoute.value)
+            }
+            currentRoute.value = route
+        }
+    }
 
     fun navigateBack() {
         if (backStackScreens.isNotEmpty()) {
-            currentScreen.value = backStackScreens.last()
-            backStackScreens.remove(currentScreen.value)
+            currentRoute.value = backStackScreens.last()
+            backStackScreens.remove(currentRoute.value)
         }
     }
-}
-
-actual fun NavController.navigate(route: Route) {
-    if (route != currentScreen.value) {
-        if (backStackScreens.contains(currentScreen.value) && currentScreen.value != startDestination) {
-            backStackScreens.remove(currentScreen.value)
-        }
-
-        if (route == startDestination) {
-            backStackScreens = mutableSetOf()
-        } else {
-            backStackScreens.add(currentScreen.value)
-        }
-
-        currentScreen.value = route
-    }
-
 }
