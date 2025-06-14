@@ -1,7 +1,9 @@
 package ru.kpfu.itis.kmp.feature.auth.presentation.login
 
+import CommonFlow
 import CommonStateFlow
 import androidx.lifecycle.viewModelScope
+import asCommonFlow
 import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -20,7 +22,7 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
             is LoginEvent.SignIn -> signIn()
             is LoginEvent.UpdateEmail -> updateEmail(event.email)
             is LoginEvent.UpdatePassword -> updatePassword(event.password)
-            is LoginEvent.ClickRegistrationReference -> clickRegistrationReference()
+            LoginEvent.ClickRegistrationReference -> clickRegistrationReference()
         }
     }
 
@@ -30,13 +32,15 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
 
     private fun signIn() {
         viewModelScope.launch {
-            runCatching { signInUseCase(viewState.email, viewState.password) }
-                .onSuccess {
-                    // action - navigate to home
-                }
-                .onFailure {
-                    // action - show message
-                }
+            runCatching {
+                signInUseCase(viewState.email, viewState.password)
+            }
+            .onSuccess {
+                // action - navigate to home
+            }
+            .onFailure {
+                sendAction(LoginAction.ShowError)
+            }
         }
     }
 
@@ -49,4 +53,6 @@ class LoginViewModel : BaseViewModel<LoginViewState, LoginAction, LoginEvent>(
     }
 
     fun getViewStates(): CommonStateFlow<LoginViewState> = viewStates.asCommonStateFlow()
+    fun getActions(): CommonFlow<LoginAction> = actions.asCommonFlow()
+
 }
