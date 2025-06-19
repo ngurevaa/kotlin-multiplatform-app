@@ -34,7 +34,10 @@ actual fun NavigationHost(
 
         composable<Route.BookDetails> {
             val id = (navController.getCurrentRoute().value as Route.BookDetails).id
-            BookDetailsScreen(id)
+            BookDetailsScreen(
+                id = id,
+                navigateBack = { navController.navigateBack() }
+            )
         }
 
     }.build()

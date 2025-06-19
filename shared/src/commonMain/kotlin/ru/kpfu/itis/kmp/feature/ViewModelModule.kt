@@ -12,5 +12,5 @@ val viewModelModule = module {
     viewModel { RegistrationViewModel() }
     viewModel { LoginViewModel() }
     viewModel { HomeViewModel() }
-    viewModel { (id: String) -> BookDetailsViewModel(id) }
+    viewModel { BookDetailsViewModel() }
 }

@@ -42,6 +42,7 @@ import ru.kpfu.itis.kmp.core.designsystem.component.BookCard
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -106,12 +107,18 @@ internal fun HomeScreenContent(viewModel: HomeViewModel) {
                 modifier = Modifier.widthIn(max = 600.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
-            BooksByGenre(
-                pagerState = pagerState,
-                state = state,
-                clickToBook = { obtainEvent(HomeEvent.ClickToBook(it)) },
-                modifier = Modifier.padding(horizontal = 8.dp)
-            )
+
+            if (state.isLoading) {
+                CircularProgressIndicator()
+            }
+            else {
+                BooksByGenre(
+                    pagerState = pagerState,
+                    state = state,
+                    clickToBook = { obtainEvent(HomeEvent.ClickToBook(it)) },
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
         }
     }
 }

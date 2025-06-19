@@ -36,4 +36,8 @@ actual class NavController(
             launchSingleTop = navOptions.launchSingleTop
         }
     }
+
+    actual fun navigateBack() {
+        navHostController.popBackStack()
+    }
 }

@@ -20,8 +20,6 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import exampleapp.composeapp.generated.resources.Res
-import exampleapp.composeapp.generated.resources.cat_with_book
 import org.jetbrains.compose.resources.painterResource
 import ru.kpfu.itis.kmp.core.ui.LocalImageLoader
 

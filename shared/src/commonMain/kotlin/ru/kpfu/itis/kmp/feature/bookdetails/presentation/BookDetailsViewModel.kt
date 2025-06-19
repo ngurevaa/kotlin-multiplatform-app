@@ -11,29 +11,37 @@ import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.usecase.GetBookDetailsUseCase
 
-class BookDetailsViewModel(
-    id: String
-) : BaseViewModel<BookDetailsViewState, BookDetailsAction, BookDetailsEvent>(
+class BookDetailsViewModel() : BaseViewModel<BookDetailsViewState, BookDetailsAction, BookDetailsEvent>(
     initState = BookDetailsViewState()
 ), KoinComponent {
     private val getBookDetailsUseCase: GetBookDetailsUseCase by inject()
 
-    init {
+    override fun obtainEvent(event: BookDetailsEvent) {
+        when(event) {
+            is BookDetailsEvent.LoadBook -> loadBook(event.id)
+            BookDetailsEvent.ClearBook -> clearBook()
+        }
+    }
+
+    private fun clearBook() {
+        viewState = viewState.copy(isLoading = true)
+    }
+
+    private fun loadBook(id: String) {
         viewModelScope.launch {
-            runCatching { getBookDetailsUseCase(id) }
+            runCatching {
+                getBookDetailsUseCase(id)
+            }
                 .onSuccess { book ->
                     viewState = viewState.copy(
                         name = book.name,
                         author = book.author,
                         image = book.image,
-                        overview = book.overview
+                        overview = book.overview,
+                        isLoading = false
                     )
                 }
         }
-    }
-
-    override fun obtainEvent(event: BookDetailsEvent) {
-
     }
 
     fun getViewStates(): CommonStateFlow<BookDetailsViewState> = viewStates.asCommonStateFlow()

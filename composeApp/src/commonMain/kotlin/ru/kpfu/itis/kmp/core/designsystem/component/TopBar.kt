@@ -15,11 +15,13 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Bookmark
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun TopBar(
+    navigateBack: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {},
         navigationIcon = {
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = { navigateBack() }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                     contentDescription = null

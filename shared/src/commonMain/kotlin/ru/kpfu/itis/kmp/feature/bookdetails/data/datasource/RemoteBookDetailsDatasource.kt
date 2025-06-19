@@ -21,7 +21,7 @@ class RemoteBookDetailsDatasource(
             name = response.volumeInfo?.title ?: "",
             author = response.volumeInfo?.authors?.joinToString(", ") ?: "",
             image = response.volumeInfo?.imageLinks?.thumbnail ?: "",
-            overview = response.volumeInfo?.description ?: ""
+            overview = response.volumeInfo?.description?.replace(Regex("<[^>]*>"), "") ?: ""
         )
     }
 }

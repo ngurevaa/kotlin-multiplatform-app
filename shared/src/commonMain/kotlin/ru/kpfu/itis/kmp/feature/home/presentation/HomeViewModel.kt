@@ -21,6 +21,7 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     private val getBooksByGenreUseCase: GetBooksByGenreUseCase by inject()
 
     init {
+        viewState = viewState.copy(isLoading = true)
         viewModelScope.launch {
             runCatching { getGenresUseCase() }
                 .onSuccess { genres ->
@@ -43,7 +44,7 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
                 .onSuccess {
                     val books = viewState.books.toMutableMap()
                     books.put(viewState.genres[0], it)
-                    viewState = viewState.copy(books = books)
+                    viewState = viewState.copy(books = books, isLoading = false)
                 }
                 .onFailure {
                     sendAction(HomeAction.ShowInternetConnectionError)

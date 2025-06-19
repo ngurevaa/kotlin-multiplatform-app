@@ -13,10 +13,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,40 +33,57 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import ru.kpfu.itis.kmp.core.designsystem.component.TopBar
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
+import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsEvent
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsViewModel
 
 @Composable
 fun BookDetailsScreen(
     id: String,
-    viewModel: BookDetailsViewModel = koinViewModel<BookDetailsViewModel>(
-        parameters = { parametersOf(id) }
-    )
+    viewModel: BookDetailsViewModel = koinViewModel<BookDetailsViewModel>(),
+    navigateBack: () -> Unit
 ) {
+    val obtainEvent = viewModel::obtainEvent
+
+    LaunchedEffect(key1 = id) {
+        obtainEvent(BookDetailsEvent.LoadBook(id))
+    }
+
     Scaffold(
-        topBar = { TopBar() }
+        topBar = { TopBar(
+            navigateBack = {
+                navigateBack()
+                obtainEvent(BookDetailsEvent.ClearBook)
+            }
+        ) }
     ) {
         BookDetailsScreenContent(viewModel)
     }
 }
 
 @Composable
-internal fun BookDetailsScreenContent(viewModel: BookDetailsViewModel) {
+internal fun BookDetailsScreenContent(
+    viewModel: BookDetailsViewModel
+) {
     val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
 
-    Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        BookImage(state.image)
-        Spacer(modifier = Modifier.height(16.dp))
-        BookName(state.name)
-        BookAuthor(state.author)
-        Spacer(modifier = Modifier.height(16.dp))
-        BookOverview(
-            overview = state.overview,
-            modifier = Modifier.fillMaxWidth().padding(24.dp)
-        )
+        if (state.isLoading) {
+            CircularProgressIndicator()
+        }
+        else {
+            BookImage(state.image)
+            Spacer(modifier = Modifier.height(16.dp))
+            BookName(state.name)
+            BookAuthor(state.author)
+            Spacer(modifier = Modifier.height(16.dp))
+            BookOverview(
+                overview = state.overview,
+                modifier = Modifier.fillMaxWidth().padding(24.dp)
+            )
+        }
     }
 }
 

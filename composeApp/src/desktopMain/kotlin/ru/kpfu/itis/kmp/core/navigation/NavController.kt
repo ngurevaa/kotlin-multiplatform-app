@@ -29,7 +29,7 @@ actual class NavController(
         }
     }
 
-    fun navigateBack() {
+    actual fun navigateBack() {
         if (backStackScreens.isNotEmpty()) {
             currentRoute.value = backStackScreens.last()
             backStackScreens.remove(currentRoute.value)

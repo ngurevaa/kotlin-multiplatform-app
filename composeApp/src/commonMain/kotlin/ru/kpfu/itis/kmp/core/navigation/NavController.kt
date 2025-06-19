@@ -9,4 +9,6 @@ expect class NavController {
     fun getCurrentRoute(): State<Route>
 
     fun navigate(route: Route, navOptions: NavOptions = NavOptions())
+
+    fun navigateBack()
 }
