@@ -56,7 +56,6 @@ private fun buildHttpClient(
         requestTimeoutMillis = 10000
         socketTimeoutMillis = 10000
     }
-    install(ApiKeyPlugin)
     defaultRequest {
         url {
             this.host = BASE_URL

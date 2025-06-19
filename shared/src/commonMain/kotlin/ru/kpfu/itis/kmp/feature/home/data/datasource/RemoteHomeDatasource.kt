@@ -16,6 +16,7 @@ class RemoteHomeDatasource(
             parameter("q", "subject:${genre.name}")
             parameter("orderBy", "relevance")
             parameter("maxResults", "5")
+            parameter("key", "AIzaSyBw8i0XVAHNsgIhb-PljmDU_hIJ7J6VFT4")
         }.body<BookApiResponse>()
 
         val books = mutableListOf<Book>()

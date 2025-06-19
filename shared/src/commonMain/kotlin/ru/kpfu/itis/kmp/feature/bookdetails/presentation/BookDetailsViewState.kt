@@ -1,7 +1,8 @@
 package ru.kpfu.itis.kmp.feature.bookdetails.presentation
 
 data class BookDetailsViewState(
-    val title: String = "",
+    val name: String = "",
     val author: String = "",
-    val image: String = ""
+    val image: String = "",
+    val overview: String = ""
 )
