@@ -48,7 +48,7 @@ import exampleapp.composeapp.generated.resources.email_error
 import exampleapp.composeapp.generated.resources.login
 import exampleapp.composeapp.generated.resources.password
 import exampleapp.composeapp.generated.resources.password_error
-import exampleapp.composeapp.generated.resources.registration_error
+import exampleapp.composeapp.generated.resources.internet_connection_error
 import exampleapp.composeapp.generated.resources.sign_up
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
@@ -75,7 +75,7 @@ fun RegistrationScreen(
         RegistrationScreenContent(viewModel = viewModel)
     }
 
-    val registrationError = stringResource(Res.string.registration_error)
+    val internetConnectionError = stringResource(Res.string.internet_connection_error)
     val emailError = stringResource(Res.string.email_error)
     val passwordError = stringResource(Res.string.password_error)
     LaunchedEffect(Unit) {
@@ -83,7 +83,7 @@ fun RegistrationScreen(
             when (action) {
                 RegistrationAction.NavigateToLogin -> navigateToLogin()
                 RegistrationAction.NavigateToHome -> navigateToHome()
-                RegistrationAction.ShowRegistrationError -> showSnackbar(snackbarHostState, coroutineScope, registrationError)
+                RegistrationAction.ShowInternetConnectionError -> showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
                 RegistrationAction.ShowEmailError -> showSnackbar(snackbarHostState, coroutineScope, emailError)
                 RegistrationAction.ShowPasswordError -> showSnackbar(snackbarHostState, coroutineScope, passwordError)
             }

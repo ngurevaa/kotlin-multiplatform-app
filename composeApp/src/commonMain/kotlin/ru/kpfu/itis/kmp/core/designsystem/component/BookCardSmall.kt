@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,21 +15,30 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import exampleapp.composeapp.generated.resources.Res
+import exampleapp.composeapp.generated.resources.cat_read_book
+import org.jetbrains.compose.resources.painterResource
 import ru.kpfu.itis.kmp.core.ui.LocalImageLoader
 import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 
 @Composable
-fun BookCard(book: Book) {
+fun BookCard(
+    book: Book,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier.width(150.dp)
+        modifier = modifier.width(150.dp)
     ) {
-        Card {
+        Card(
+            shape = RoundedCornerShape(20.dp)
+        ) {
             AsyncImage(
                 model = book.image,
                 contentDescription = null,
                 modifier = Modifier.size(width = 150.dp, height = 200.dp),
                 contentScale = ContentScale.FillBounds,
-                imageLoader = LocalImageLoader.current
+                imageLoader = LocalImageLoader.current,
+                placeholder = painterResource(Res.drawable.cat_read_book)
             )
         }
         Spacer(modifier = Modifier.height(12.dp))
@@ -38,7 +48,7 @@ fun BookCard(book: Book) {
         )
         Text(
             text = book.author,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
             color = MaterialTheme.colorScheme.secondary
         )
     }

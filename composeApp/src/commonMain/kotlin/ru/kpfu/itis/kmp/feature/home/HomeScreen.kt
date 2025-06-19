@@ -42,13 +42,51 @@ import ru.kpfu.itis.kmp.core.designsystem.component.BookCard
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import exampleapp.composeapp.generated.resources.internet_connection_error
+import kotlinx.coroutines.flow.collectLatest
+import ru.kpfu.itis.kmp.core.ui.noRippleClickable
+import ru.kpfu.itis.kmp.core.ui.showSnackbar
+import ru.kpfu.itis.kmp.feature.home.presentation.HomeAction
+import ru.kpfu.itis.kmp.feature.home.presentation.HomeEvent
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
+    navigateToBook: (String) -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+    ) {
+        HomeScreenContent(viewModel = viewModel)
+    }
+
+    val internetConnectionError = stringResource(Res.string.internet_connection_error)
+    LaunchedEffect(Unit) {
+        viewModel.getActions().collectLatest { action ->
+            when (action) {
+                is HomeAction.ShowInternetConnectionError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
+                }
+                is HomeAction.NavigateToBook -> {
+                    navigateToBook(action.id)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+internal fun HomeScreenContent(viewModel: HomeViewModel) {
     val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
 
@@ -71,6 +109,7 @@ fun HomeScreen(
             BooksByGenre(
                 pagerState = pagerState,
                 state = state,
+                clickToBook = { obtainEvent(HomeEvent.ClickToBook(it)) },
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
         }
@@ -81,6 +120,7 @@ fun HomeScreen(
 internal fun BooksByGenre(
     pagerState: PagerState,
     state: HomeViewState,
+    clickToBook: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(
@@ -96,9 +136,14 @@ internal fun BooksByGenre(
             ) {
                 val genre = state.genres[page]
                 val books = state.books[genre] ?: listOf()
-                items(books) {
+                items(books) { book ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        BookCard(it)
+                        BookCard(
+                            book = book,
+                            modifier = Modifier.noRippleClickable {
+                                clickToBook(book.id)
+                            }
+                        )
                     }
                 }
             }

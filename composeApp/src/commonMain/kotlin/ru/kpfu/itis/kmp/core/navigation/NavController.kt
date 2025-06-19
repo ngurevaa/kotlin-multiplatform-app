@@ -8,5 +8,5 @@ expect class NavController {
     @Composable
     fun getCurrentRoute(): State<Route>
 
-    fun navigate(route: Route)
+    fun navigate(route: Route, navOptions: NavOptions = NavOptions())
 }

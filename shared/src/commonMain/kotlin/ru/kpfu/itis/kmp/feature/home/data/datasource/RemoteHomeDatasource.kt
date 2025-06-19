@@ -21,6 +21,7 @@ class RemoteHomeDatasource(
         val books = mutableListOf<Book>()
         for (book in response.items) {
             books += Book(
+                id = book.id ?: "",
                 name = book.volumeInfo?.title ?: "",
                 author = book.volumeInfo?.authors?.joinToString(", ") ?: "",
                 image = book.volumeInfo?.imageLinks?.thumbnail ?: ""

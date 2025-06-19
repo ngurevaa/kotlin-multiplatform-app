@@ -30,7 +30,10 @@ actual class NavController(
         }
     }
 
-    actual fun navigate(route: Route) {
-        navHostController.navigate(route)
+    actual fun navigate(route: Route, navOptions: NavOptions) {
+        navHostController.navigate(route) {
+            navOptions.popUpToIndex?.let { id -> popUpTo(id) }
+            launchSingleTop = navOptions.launchSingleTop
+        }
     }
 }

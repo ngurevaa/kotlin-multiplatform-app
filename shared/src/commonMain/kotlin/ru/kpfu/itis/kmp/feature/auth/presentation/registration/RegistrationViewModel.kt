@@ -11,7 +11,6 @@ import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.util.FieldValidator
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignUpUseCase
-import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
 import kotlin.getValue
 
 class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationAction, RegistrationEvent>(
@@ -50,7 +49,7 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
                 sendAction(RegistrationAction.NavigateToHome)
             }
             .onFailure {
-                sendAction(RegistrationAction.ShowRegistrationError)
+                sendAction(RegistrationAction.ShowInternetConnectionError)
             }
         }
     }
