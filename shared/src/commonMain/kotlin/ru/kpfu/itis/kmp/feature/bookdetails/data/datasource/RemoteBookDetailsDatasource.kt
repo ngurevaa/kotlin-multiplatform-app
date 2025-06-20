@@ -3,7 +3,9 @@ package ru.kpfu.itis.kmp.feature.bookdetails.data.datasource
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.http.appendPathSegments
 import io.ktor.http.path
+import ru.kpfu.itis.kmp.core.network.BASE_PATH
 import ru.kpfu.itis.kmp.feature.bookdetails.data.datasource.remote.BookDetailsResponse
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
 

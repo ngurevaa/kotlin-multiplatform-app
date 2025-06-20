@@ -61,7 +61,7 @@ object Colors {
     val onSurfaceVariantDark = 0xFFD1C5B4
     val outlineDark = 0xFF9A8F80
     val outlineVariantDark = 0xFF4E4639
-    val scrimDark = 0xFF000000
+    val scrimDark = 0xFFFFFFFF
     val inverseSurfaceDark = 0xFFECE1D4
     val inverseOnSurfaceDark = 0xFF353027
     val inversePrimaryDark = 0xFF7A580C

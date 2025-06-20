@@ -39,8 +39,8 @@ val networkModule = module {
     }
 }
 
-private const val BASE_HOST = "www.googleapis.com"
-private const val BASE_PATH = "books/v1/volumes"
+const val BASE_HOST = "www.googleapis.com"
+const val BASE_PATH = "books/v1/volumes/"
 
 
 private fun buildHttpClient(

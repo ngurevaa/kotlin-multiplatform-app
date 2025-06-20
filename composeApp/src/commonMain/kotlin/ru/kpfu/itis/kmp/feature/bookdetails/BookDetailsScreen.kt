@@ -1,5 +1,6 @@
 package ru.kpfu.itis.kmp.feature.bookdetails
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -97,7 +98,8 @@ internal fun BookDetailsScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (state.isLoading) {
@@ -142,7 +144,8 @@ internal fun BookName(
     Text(
         text = name,
         style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
-        modifier = modifier
+        modifier = modifier,
+        color = MaterialTheme.colorScheme.scrim
     )
 }
 
@@ -168,6 +171,7 @@ internal fun BookOverview(
         Text(
             text = stringResource(Res.string.overview),
             style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
+            color = MaterialTheme.colorScheme.scrim
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
