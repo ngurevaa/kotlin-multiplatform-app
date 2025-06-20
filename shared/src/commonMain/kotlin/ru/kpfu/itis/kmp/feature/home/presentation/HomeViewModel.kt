@@ -26,17 +26,17 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
                     // action show error
                 }
 
-//            for (genre in viewState.genres) {
-//                runCatching { getBooksByGenreUseCase(genre) }
-//                    .onSuccess {
-//                        val books = viewState.books.toMutableMap()
-//                        books.put(genre, it)
-//                        viewState = viewState.copy(books = books)
-//                    }
-//                    .onFailure {
-//                        // action show error about internet connection
-//                    }
-//            }
+            for (genre in viewState.genres) {
+                runCatching { getBooksByGenreUseCase(genre) }
+                    .onSuccess {
+                        val books = viewState.books.toMutableMap()
+                        books.put(genre, it)
+                        viewState = viewState.copy(books = books)
+                    }
+                    .onFailure {
+                        // action show error about internet connection
+                    }
+            }
         }
     }
 

@@ -15,16 +15,18 @@ class SignUpViewModel: ObservableObject {
     var registrationCommonViewModel: RegistrationViewModel
 
     var commonFlow: CommonStateFlow<RegistrationViewState>
+    var commonActionFlow: CommonFlow<RegistrationAction>
 
     private var cancellables = Set<AnyCancellable>()
 
     @Published var registartionStates: RegistrationViewState?
-
+    @Published var registrationActions: RegistrationAction?
 
     @Published var email = ""
     @Published var password = ""
 
-    @Published var showLoginAlertSuccess = false
+    @Published var showToast: Bool = false
+    var toastMessage: String = ""
 
     @Published var isSecure = true
 
@@ -32,15 +34,25 @@ class SignUpViewModel: ObservableObject {
         self.registrationCommonViewModel = registrationCommonViewModel
 
         commonFlow = registrationCommonViewModel.getViewStates()
+        commonActionFlow = registrationCommonViewModel.getActions()
 
         publishRegistrationStateFlow()
+        publishLoginActionFlow()
     }
 
     func publishRegistrationStateFlow() {
         commonStatePublisherFlow(commonFlow)
             .sink { newState in
                 self.registartionStates = newState
-                print("Новое состояние: \(newState)")
+            }
+            .store(in: &cancellables)
+    }
+    func publishLoginActionFlow() {
+        commonPublisherFlow(commonActionFlow)
+            .sink { [weak self] newAction in
+                self?.registrationActions = newAction
+                self?.doActionOption(action: newAction)
+                print("Новое action: \(newAction)")
             }
             .store(in: &cancellables)
     }
@@ -62,6 +74,43 @@ class SignUpViewModel: ObservableObject {
     
     func openSignInScreen() {
         UserDefaults.standard.set(false, forKey: "isRegistering")
+    }
+
+    func openHomeScreen() {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    }
+
+    func doActionOption(action: RegistrationAction) {
+        if (action.isEqual(RegistrationAction.ShowEmailError())) {
+            toastMessage = AlertMessage.emailIncorrectError
+            showToast = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
+            }
+        }
+
+        if (action.isEqual(RegistrationAction.ShowPasswordError())) {
+            toastMessage = AlertMessage.passwordIncorrectError
+            showToast = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
+            }
+        }
+
+        if (action.isEqual(RegistrationAction.ShowRegistrationError())) {
+            toastMessage = AlertMessage.internetConnectionError
+            showToast = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
+            }
+        }
+        if (action.isEqual(RegistrationAction.NavigateToHome())) {
+            openHomeScreen()
+        }
+
     }
 
     deinit {
