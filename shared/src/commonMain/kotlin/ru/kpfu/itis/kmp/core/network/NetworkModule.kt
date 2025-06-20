@@ -13,6 +13,7 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.URLProtocol
+import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
@@ -38,7 +39,9 @@ val networkModule = module {
     }
 }
 
-private const val BASE_URL = "www.googleapis.com/books/v1/volumes"
+private const val BASE_HOST = "www.googleapis.com"
+private const val BASE_PATH = "books/v1/volumes"
+
 
 private fun buildHttpClient(
     engine: HttpClientEngineFactory<HttpClientEngineConfig>,
@@ -58,7 +61,8 @@ private fun buildHttpClient(
     }
     defaultRequest {
         url {
-            this.host = BASE_URL
+            this.host = BASE_HOST
+            this.path(BASE_PATH)
             this.protocol = URLProtocol.HTTPS
         }
     }

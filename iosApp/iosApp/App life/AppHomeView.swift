@@ -9,10 +9,26 @@
 import SwiftUI
 
 struct AppHomeView: View {
-//    @AppStorage("isLoggedIn") var isLoggedIn = false
-
+//    Произведена авторизация, показать домашний экран приложения
+    @AppStorage("isLoggedIn") var isLoggedIn = false
+//    Пользователь регистрируется, показать экран регистрации
     @AppStorage("isRegistering") var isRegistering = false
 
+//    var body: some View {
+//        if isLoggedIn {
+//            NavigationStack {
+//                HomeTabBarView()
+//            }
+//        } else if isRegistering {
+//            NavigationStack {
+//                SignUpView()
+//            }
+//        } else {
+//            NavigationStack {
+//                SignInView()
+//            }
+//        }
+//    }
     var body: some View {
         if isRegistering {
             NavigationStack {
