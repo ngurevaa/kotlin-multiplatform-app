@@ -8,7 +8,7 @@ import ru.kpfu.itis.kmp.feature.home.data.datasource.remote.BookApiResponse
 import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 
-class RemoteHomeDatasource(
+internal class RemoteHomeDatasource(
     private val httpClient: HttpClient
 ) {
     suspend fun getBooksByGenre(genre: Genre): List<Book> {
@@ -16,11 +16,13 @@ class RemoteHomeDatasource(
             parameter("q", "subject:${genre.name}")
             parameter("orderBy", "relevance")
             parameter("maxResults", "5")
+            parameter("key", "AIzaSyBw8i0XVAHNsgIhb-PljmDU_hIJ7J6VFT4")
         }.body<BookApiResponse>()
 
         val books = mutableListOf<Book>()
         for (book in response.items) {
             books += Book(
+                id = book.id ?: "",
                 name = book.volumeInfo?.title ?: "",
                 author = book.volumeInfo?.authors?.joinToString(", ") ?: "",
                 image = book.volumeInfo?.imageLinks?.thumbnail ?: ""

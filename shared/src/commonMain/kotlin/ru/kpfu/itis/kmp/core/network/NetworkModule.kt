@@ -55,11 +55,10 @@ private fun buildHttpClient(
         json(json)
     }
     install(HttpTimeout) {
-        connectTimeoutMillis = 5000
+        connectTimeoutMillis = 10000
         requestTimeoutMillis = 10000
         socketTimeoutMillis = 10000
     }
-    install(ApiKeyPlugin)
     defaultRequest {
         url {
             this.host = BASE_HOST

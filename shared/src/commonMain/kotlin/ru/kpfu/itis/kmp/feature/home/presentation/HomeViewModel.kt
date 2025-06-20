@@ -1,7 +1,9 @@
 package ru.kpfu.itis.kmp.feature.home.presentation
 
+import CommonFlow
 import CommonStateFlow
 import androidx.lifecycle.viewModelScope
+import asCommonFlow
 import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -17,32 +19,47 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     private val getBooksByGenreUseCase: GetBooksByGenreUseCase by inject()
 
     init {
+        viewState = viewState.copy(isLoading = true)
         viewModelScope.launch {
             runCatching { getGenresUseCase() }
                 .onSuccess { genres ->
                     viewState = viewState.copy(genres = genres)
                 }
-                .onFailure {
-                    // action show error
-                }
 
-            for (genre in viewState.genres) {
-                runCatching { getBooksByGenreUseCase(genre) }
-                    .onSuccess {
-                        val books = viewState.books.toMutableMap()
-                        books.put(genre, it)
-                        viewState = viewState.copy(books = books)
-                    }
-                    .onFailure {
-                        // action show error about internet connection
-                    }
-            }
+//            for (genre in viewState.genres) {
+//                runCatching { getBooksByGenreUseCase(genre) }
+//                    .onSuccess {
+//                        val books = viewState.books.toMutableMap()
+//                        books.put(genre, it)
+//                        viewState = viewState.copy(books = books)
+//                    }
+//                    .onFailure {
+//                        sendAction(HomeAction.ShowInternetConnectionError)
+//                    }
+//            }
+
+            runCatching { getBooksByGenreUseCase(viewState.genres[0]) }
+                .onSuccess {
+                    val books = viewState.books.toMutableMap()
+                    books.put(viewState.genres[0], it)
+                    viewState = viewState.copy(books = books, isLoading = false)
+                }
+                .onFailure {
+                    sendAction(HomeAction.ShowInternetConnectionError)
+                }
         }
     }
 
     override fun obtainEvent(event: HomeEvent) {
+        when(event) {
+            is HomeEvent.ClickToBook -> clickToBook(event.id)
+        }
+    }
 
+    private fun clickToBook(id: String) {
+        sendAction(HomeAction.NavigateToBook(id))
     }
 
     fun getViewStates(): CommonStateFlow<HomeViewState> = viewStates.asCommonStateFlow()
+    fun getActions(): CommonFlow<HomeAction> = actions.asCommonFlow()
 }

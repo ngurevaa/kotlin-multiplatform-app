@@ -14,7 +14,7 @@ actual class NavController(
     @Composable
     actual fun getCurrentRoute(): State<Route> = currentRoute
 
-    actual fun navigate(route: Route) {
+    actual fun navigate(route: Route, navOptions: NavOptions) {
         if (route != currentRoute.value) {
             if (backStackScreens.contains(currentRoute.value) && currentRoute.value != startDestination) {
                 backStackScreens.remove(currentRoute.value)
@@ -29,7 +29,7 @@ actual class NavController(
         }
     }
 
-    fun navigateBack() {
+    actual fun navigateBack() {
         if (backStackScreens.isNotEmpty()) {
             currentRoute.value = backStackScreens.last()
             backStackScreens.remove(currentRoute.value)

@@ -6,7 +6,7 @@ import kotlinx.coroutines.withContext
 import ru.kpfu.itis.kmp.core.firebase.AuthService
 import ru.kpfu.itis.kmp.feature.auth.domain.repository.FirebaseAuthRepository
 
-class FirebaseAuthRepositoryImpl(
+internal class FirebaseAuthRepositoryImpl(
     private val authService: AuthService
 ) : FirebaseAuthRepository {
     override suspend fun signUp(email: String, password: String) {
