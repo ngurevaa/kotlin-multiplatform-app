@@ -53,12 +53,7 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     override fun obtainEvent(event: HomeEvent) {
         when(event) {
             is HomeEvent.ClickToBook -> clickToBook(event.id)
-            is HomeEvent.ChangeAppTheme -> changeAppTheme(event.isDarkMode)
         }
-    }
-
-    private fun changeAppTheme(isDarkMode: Boolean) {
-        viewState = viewState.copy(isDarkTheme = isDarkMode)
     }
 
     private fun clickToBook(id: String) {

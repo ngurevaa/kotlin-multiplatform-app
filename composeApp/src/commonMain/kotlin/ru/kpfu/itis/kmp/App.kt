@@ -5,15 +5,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
 import coil3.request.crossfade
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import ru.kpfu.itis.kmp.core.designsystem.ThemeEvent
+import ru.kpfu.itis.kmp.core.designsystem.ThemeViewModel
 import ru.kpfu.itis.kmp.core.designsystem.component.BottomBar
 import ru.kpfu.itis.kmp.core.designsystem.theme.AppTheme
 import ru.kpfu.itis.kmp.core.firebase.AuthService
@@ -24,8 +28,10 @@ import ru.kpfu.itis.kmp.core.ui.LocalImageLoader
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeEvent
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 
+val LocalThemeViewModel = staticCompositionLocalOf<ThemeViewModel> { error("No ViewModel!") }
+
 @Composable
-fun App(viewModel: HomeViewModel = koinViewModel<HomeViewModel>()) {
+fun App(viewModel: ThemeViewModel = koinViewModel<ThemeViewModel>()) {
     val context = LocalPlatformContext.current
     val imageLoader = remember {
         ImageLoader.Builder(context)
@@ -35,15 +41,16 @@ fun App(viewModel: HomeViewModel = koinViewModel<HomeViewModel>()) {
             .build()
     }
 
-    CompositionLocalProvider(
-        LocalImageLoader provides imageLoader
-    ) {
-        val state by viewModel.getViewStates().collectAsState()
-        val obtainEvent = viewModel::obtainEvent
+    val state by viewModel.getViewStates().collectAsState()
+    val obtainEvent = viewModel::obtainEvent
 
+    CompositionLocalProvider(
+        LocalImageLoader provides imageLoader,
+        LocalThemeViewModel provides viewModel
+    ) {
         val isSystemDarkTheme = isSystemInDarkTheme()
         LaunchedEffect(Unit) {
-            obtainEvent(HomeEvent.ChangeAppTheme(isSystemDarkTheme))
+            obtainEvent(ThemeEvent.ChangeTheme(isSystemDarkTheme))
         }
 
         AppTheme(

@@ -4,10 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -44,6 +42,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import ru.kpfu.itis.kmp.LocalThemeViewModel
+import ru.kpfu.itis.kmp.core.designsystem.ThemeEvent
+import ru.kpfu.itis.kmp.core.designsystem.ThemeViewModel
 import ru.kpfu.itis.kmp.core.designsystem.component.BookCard
 import ru.kpfu.itis.kmp.core.designsystem.component.TopSnackbar
 import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
@@ -63,12 +64,13 @@ fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
     navigateToBook: (String) -> Unit
 ) {
+    val themeViewModel = LocalThemeViewModel.current
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
     Box {
         TopSnackbar(snackbarHostState)
-        HomeScreenContent(viewModel = viewModel)
+        HomeScreenContent(homeViewModel = viewModel, themeViewModel = themeViewModel)
     }
 
     val internetConnectionError = stringResource(Res.string.internet_connection_error)
@@ -87,9 +89,15 @@ fun HomeScreen(
 }
 
 @Composable
-internal fun HomeScreenContent(viewModel: HomeViewModel) {
-    val state by viewModel.getViewStates().collectAsState()
-    val obtainEvent = viewModel::obtainEvent
+internal fun HomeScreenContent(
+    homeViewModel: HomeViewModel,
+    themeViewModel: ThemeViewModel
+) {
+    val homeState by homeViewModel.getViewStates().collectAsState()
+    val homeObtainEvent = homeViewModel::obtainEvent
+
+    val themeState by themeViewModel.getViewStates().collectAsState()
+    val themeObtainEvent = themeViewModel::obtainEvent
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -102,24 +110,24 @@ internal fun HomeScreenContent(viewModel: HomeViewModel) {
         ) {
             HelloHeader(
                 modifier = Modifier.widthIn(max = 600.dp).padding(24.dp),
-                isDarkTheme = state.isDarkTheme,
-                changeAppTheme = { obtainEvent(HomeEvent.ChangeAppTheme(it)) }
+                isDarkTheme = themeState.isDarkTheme,
+                changeAppTheme = { themeObtainEvent(ThemeEvent.ChangeTheme(it)) }
             )
             Genres(
                 pagerState = pagerState,
-                genres = state.genres,
+                genres = homeState.genres,
                 modifier = Modifier.widthIn(max = 600.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (state.isLoading) {
+            if (homeState.isLoading) {
                 CircularProgressIndicator()
             }
             else {
                 BooksByGenre(
                     pagerState = pagerState,
-                    state = state,
-                    clickToBook = { obtainEvent(HomeEvent.ClickToBook(it)) },
+                    state = homeState,
+                    clickToBook = { homeObtainEvent(HomeEvent.ClickToBook(it)) },
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
             }
@@ -168,7 +176,7 @@ internal fun HelloHeader(
     isDarkTheme: Boolean,
     changeAppTheme: (Boolean) -> Unit
 ) {
-    Row(modifier = modifier) {
+    Box(modifier = modifier) {
         Column {
             Text(
                 text = stringResource(Res.string.hello),
@@ -185,7 +193,7 @@ internal fun HelloHeader(
             contentDescription = null,
             modifier = Modifier.noRippleClickable {
                 changeAppTheme(!isDarkTheme)
-            }
+            }.align(Alignment.TopEnd)
         )
     }
 }
