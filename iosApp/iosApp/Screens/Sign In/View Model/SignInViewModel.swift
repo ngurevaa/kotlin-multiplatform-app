@@ -25,9 +25,10 @@ class SignInViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
 
-    @Published var showLoginAlertSuccess = false
-
     @Published var isSecure = true
+
+    @Published var showToast: Bool = false
+    var toastMessage: String = ""
 
 
     init(loginCommonViewModel: LoginViewModel) {
@@ -39,12 +40,11 @@ class SignInViewModel: ObservableObject {
         publishLoginStateFlow()
         publishLoginActionFlow()
     }
-//    пока для просмотра состояний
+
     func publishLoginStateFlow() {
         commonStatePublisherFlow(commonStateFlow)
             .sink { [weak self] newState in
                 self?.loginStates = newState
-                print("Новое состояние: \(newState)")
             }
             .store(in: &cancellables)
     }
@@ -52,6 +52,7 @@ class SignInViewModel: ObservableObject {
         commonPublisherFlow(commonActionFlow)
             .sink { [weak self] newAction in
                 self?.loginActions = newAction
+                self?.doActionOption(action: newAction)
                 print("Новое action: \(newAction)")
             }
             .store(in: &cancellables)
@@ -74,6 +75,24 @@ class SignInViewModel: ObservableObject {
 
     func openSignUpScreen() {
         UserDefaults.standard.set(true, forKey: "isRegistering")
+    }
+
+    func openHomeScreen() {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    }
+
+    func doActionOption(action: LoginAction) {
+        if (action.isEqual(LoginAction.NavigateToHome())) {
+            openHomeScreen()
+        }
+        if (action.isEqual(LoginAction.ShowLoginError())) {
+            toastMessage = AlertMessage.loginInvalidError
+            showToast = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
+            }
+        }
     }
 
     deinit {
