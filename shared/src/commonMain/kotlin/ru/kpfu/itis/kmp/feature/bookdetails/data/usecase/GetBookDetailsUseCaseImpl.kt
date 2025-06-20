@@ -4,7 +4,7 @@ import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.repository.BookDetailsRepository
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.usecase.GetBookDetailsUseCase
 
-class GetBookDetailsUseCaseImpl(
+internal class GetBookDetailsUseCaseImpl(
     private val bookDetailsRepository: BookDetailsRepository
 ) : GetBookDetailsUseCase {
 

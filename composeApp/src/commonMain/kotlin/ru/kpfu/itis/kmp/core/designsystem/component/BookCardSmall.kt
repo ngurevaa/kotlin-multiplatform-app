@@ -29,27 +29,42 @@ fun BookCard(
     Column(
         modifier = modifier.width(150.dp)
     ) {
-        Card(
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            AsyncImage(
-                model = book.image,
-                contentDescription = null,
-                modifier = Modifier.size(width = 150.dp, height = 200.dp),
-                contentScale = ContentScale.FillBounds,
-                imageLoader = LocalImageLoader.current,
-                placeholder = painterResource(Res.drawable.cat_read_book)
-            )
-        }
+        BookImage(book.image)
         Spacer(modifier = Modifier.height(12.dp))
-        Text(
-            text = book.name,
-            style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
-        )
-        Text(
-            text = book.author,
-            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
-            color = MaterialTheme.colorScheme.secondary
+        BookName(book.name)
+        BookAuthor(book.author)
+    }
+}
+
+@Composable
+internal fun BookImage(image: String) {
+    Card(
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        AsyncImage(
+            model = image,
+            contentDescription = null,
+            modifier = Modifier.size(width = 150.dp, height = 200.dp),
+            contentScale = ContentScale.FillBounds,
+            imageLoader = LocalImageLoader.current,
+            placeholder = painterResource(Res.drawable.cat_read_book)
         )
     }
+}
+
+@Composable
+internal fun BookName(name:String) {
+    Text(
+        text = name,
+        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
+    )
+}
+
+@Composable
+internal fun BookAuthor(author: String) {
+    Text(
+        text = author,
+        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
+        color = MaterialTheme.colorScheme.secondary
+    )
 }

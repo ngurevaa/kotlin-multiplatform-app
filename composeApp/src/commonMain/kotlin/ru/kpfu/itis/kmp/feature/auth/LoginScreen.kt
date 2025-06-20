@@ -14,8 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -37,9 +35,7 @@ import exampleapp.composeapp.generated.resources.enter_into_your_account
 import exampleapp.composeapp.generated.resources.login_error
 import exampleapp.composeapp.generated.resources.register
 import exampleapp.composeapp.generated.resources.sign_in
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ru.kpfu.itis.kmp.core.ui.noRippleClickable
@@ -69,7 +65,9 @@ fun LoginScreen(
             when (action) {
                 LoginAction.NavigateToRegistration -> navigateToRegistration()
                 LoginAction.NavigateToHome -> navigateToHome()
-                LoginAction.ShowLoginError -> showSnackbar(snackbarHostState, coroutineScope, loginError)
+                LoginAction.ShowLoginError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, loginError)
+                }
             }
         }
     }

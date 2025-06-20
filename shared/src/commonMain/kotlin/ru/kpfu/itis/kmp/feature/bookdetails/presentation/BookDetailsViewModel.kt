@@ -41,6 +41,9 @@ class BookDetailsViewModel() : BaseViewModel<BookDetailsViewState, BookDetailsAc
                         isLoading = false
                     )
                 }
+                .onFailure {
+                    sendAction(BookDetailsAction.ShowInternetConnectionError)
+                }
         }
     }
 

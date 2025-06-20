@@ -7,7 +7,7 @@ import io.ktor.http.path
 import ru.kpfu.itis.kmp.feature.bookdetails.data.datasource.remote.BookDetailsResponse
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
 
-class RemoteBookDetailsDatasource(
+internal class RemoteBookDetailsDatasource(
     private val httpClient: HttpClient
 ) {
     suspend fun getBookDetails(id: String): Book {

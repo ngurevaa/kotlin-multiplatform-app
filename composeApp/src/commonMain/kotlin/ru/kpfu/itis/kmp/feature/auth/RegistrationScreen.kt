@@ -45,10 +45,10 @@ import exampleapp.composeapp.generated.resources.already_have_an_account
 import exampleapp.composeapp.generated.resources.create_your_new_account
 import exampleapp.composeapp.generated.resources.email
 import exampleapp.composeapp.generated.resources.email_error
+import exampleapp.composeapp.generated.resources.internet_connection_error
 import exampleapp.composeapp.generated.resources.login
 import exampleapp.composeapp.generated.resources.password
 import exampleapp.composeapp.generated.resources.password_error
-import exampleapp.composeapp.generated.resources.internet_connection_error
 import exampleapp.composeapp.generated.resources.sign_up
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.stringResource
@@ -83,9 +83,15 @@ fun RegistrationScreen(
             when (action) {
                 RegistrationAction.NavigateToLogin -> navigateToLogin()
                 RegistrationAction.NavigateToHome -> navigateToHome()
-                RegistrationAction.ShowInternetConnectionError -> showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
-                RegistrationAction.ShowEmailError -> showSnackbar(snackbarHostState, coroutineScope, emailError)
-                RegistrationAction.ShowPasswordError -> showSnackbar(snackbarHostState, coroutineScope, passwordError)
+                RegistrationAction.ShowInternetConnectionError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
+                }
+                RegistrationAction.ShowEmailError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, emailError)
+                }
+                RegistrationAction.ShowPasswordError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, passwordError)
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -15,24 +16,33 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.cat_read_book
+import exampleapp.composeapp.generated.resources.internet_connection_error
+import exampleapp.composeapp.generated.resources.overview
+import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.parametersOf
 import ru.kpfu.itis.kmp.core.designsystem.component.TopBar
-import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
+import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
+import ru.kpfu.itis.kmp.core.ui.showSnackbar
+import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsAction
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsEvent
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsViewModel
 
@@ -48,15 +58,32 @@ fun BookDetailsScreen(
         obtainEvent(BookDetailsEvent.LoadBook(id))
     }
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
-        topBar = { TopBar(
-            navigateBack = {
-                navigateBack()
-                obtainEvent(BookDetailsEvent.ClearBook)
-            }
-        ) }
+        topBar = {
+            TopBar(
+                navigateBack = {
+                    navigateBack()
+                    obtainEvent(BookDetailsEvent.ClearBook)
+                }
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) {
         BookDetailsScreenContent(viewModel)
+    }
+
+    val internetConnectionError = stringResource(Res.string.internet_connection_error)
+    LaunchedEffect(Unit) {
+        viewModel.getActions().collectLatest { action ->
+            when(action) {
+                BookDetailsAction.ShowInternetConnectionError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
+                }
+            }
+        }
     }
 }
 
@@ -67,7 +94,10 @@ internal fun BookDetailsScreenContent(
     val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
 
-    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (state.isLoading) {
@@ -105,7 +135,7 @@ internal fun BookImage(
 }
 
 @Composable
-fun BookName(
+internal fun BookName(
     name: String,
     modifier: Modifier = Modifier
 ) {
@@ -117,7 +147,7 @@ fun BookName(
 }
 
 @Composable
-fun BookAuthor(
+internal fun BookAuthor(
     author: String,
     modifier: Modifier = Modifier
 ) {
@@ -130,13 +160,13 @@ fun BookAuthor(
 }
 
 @Composable
-fun BookOverview(
+internal fun BookOverview(
     overview: String,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Text(
-            text = "Overview",
+            text = stringResource(Res.string.overview),
             style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
         )
         Spacer(modifier = Modifier.height(16.dp))

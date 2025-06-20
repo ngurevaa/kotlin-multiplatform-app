@@ -9,7 +9,7 @@ import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 import ru.kpfu.itis.kmp.feature.home.domain.repository.HomeRepository
 
-class HomeRepositoryImpl(
+internal class HomeRepositoryImpl(
     private val persistenceGenreDatasource: PersistenceHomeDatasource,
     private val remoteHomeDatasource: RemoteHomeDatasource
 ) : HomeRepository {

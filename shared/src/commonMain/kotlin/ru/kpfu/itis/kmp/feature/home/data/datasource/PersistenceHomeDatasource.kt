@@ -2,7 +2,7 @@ package ru.kpfu.itis.kmp.feature.home.data.datasource
 
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 
-class PersistenceHomeDatasource {
+internal class PersistenceHomeDatasource {
     fun getGenres() = listOf<Genre>(
         Genre(1, "Fiction"),
         Genre(2, "Science"),

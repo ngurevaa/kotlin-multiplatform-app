@@ -8,7 +8,7 @@ import ru.kpfu.itis.kmp.feature.home.data.datasource.remote.BookApiResponse
 import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 
-class RemoteHomeDatasource(
+internal class RemoteHomeDatasource(
     private val httpClient: HttpClient
 ) {
     suspend fun getBooksByGenre(genre: Genre): List<Book> {

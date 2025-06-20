@@ -9,8 +9,6 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
-import ru.kpfu.itis.kmp.feature.auth.presentation.login.LoginAction
-import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetBooksByGenreUseCase
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetGenresUseCase
 
@@ -55,7 +53,12 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     override fun obtainEvent(event: HomeEvent) {
         when(event) {
             is HomeEvent.ClickToBook -> clickToBook(event.id)
+            is HomeEvent.ChangeAppTheme -> changeAppTheme(event.isDarkMode)
         }
+    }
+
+    private fun changeAppTheme(isDarkMode: Boolean) {
+        viewState = viewState.copy(isDarkTheme = isDarkMode)
     }
 
     private fun clickToBook(id: String) {

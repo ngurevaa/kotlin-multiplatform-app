@@ -7,7 +7,7 @@ import ru.kpfu.itis.kmp.feature.bookdetails.data.datasource.RemoteBookDetailsDat
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.model.Book
 import ru.kpfu.itis.kmp.feature.bookdetails.domain.repository.BookDetailsRepository
 
-class BookDetailsRepositoryImpl(
+internal class BookDetailsRepositoryImpl(
     private val remoteBookDetailsDatasource: RemoteBookDetailsDatasource
 ) : BookDetailsRepository {
 
