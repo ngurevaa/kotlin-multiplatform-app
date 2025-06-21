@@ -13,10 +13,10 @@ internal class RemoteHomeDatasource(
 ) {
     suspend fun getBooksByGenre(genre: Genre): List<Book> {
         val response = httpClient.get {
-            parameter("q", "subject:${genre.name}")
-            parameter("orderBy", "relevance")
-            parameter("maxResults", "5")
-            parameter("key", "AIzaSyBw8i0XVAHNsgIhb-PljmDU_hIJ7J6VFT4")
+            parameter(PARAM_Q, "subject:${genre.name}")
+            parameter(PARAM_ORDER_BY, "relevance")
+            parameter(PARAM_MAX_RESULTS, "16")
+            parameter(PARAM_KEY, "AIzaSyBw8i0XVAHNsgIhb-PljmDU_hIJ7J6VFT4")
         }.body<BookApiResponse>()
 
         val books = mutableListOf<Book>()
@@ -29,5 +29,12 @@ internal class RemoteHomeDatasource(
             )
         }
         return books
+    }
+
+    companion object {
+        private const val PARAM_Q = "q"
+        private const val PARAM_ORDER_BY = "orderBy"
+        private const val PARAM_MAX_RESULTS = "maxResults"
+        private const val PARAM_KEY = "key"
     }
 }

@@ -17,4 +17,7 @@
     <string name="email_error">Email format is incorrect. It should look like: username@domain.com</string>
     <string name="password_error">The password is incorrect. It must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters.</string>
     <string name="overview">Overview</string>
+    <string name="data_loading_error">Data loading failed. Please try again later.</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="data_saving_error">Data saving failed. Please try again later/</string>
 </resources>

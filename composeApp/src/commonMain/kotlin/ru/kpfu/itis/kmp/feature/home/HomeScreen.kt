@@ -102,7 +102,7 @@ internal fun HomeScreenContent(
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        val pagerState = rememberPagerState(pageCount = {7})
+        val pagerState = rememberPagerState(pageCount = {homeState.genres.size})
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -158,7 +158,9 @@ internal fun BooksByGenre(
                 items(books) { book ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         BookCard(
-                            book = book,
+                            name = book.name,
+                            author = book.author,
+                            image = book.image,
                             modifier = Modifier.noRippleClickable {
                                 clickToBook(book.id)
                             }

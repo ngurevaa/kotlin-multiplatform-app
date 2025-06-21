@@ -19,20 +19,21 @@ import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.cat_read_book
 import org.jetbrains.compose.resources.painterResource
 import ru.kpfu.itis.kmp.core.ui.LocalImageLoader
-import ru.kpfu.itis.kmp.feature.home.domain.model.Book
 
 @Composable
 fun BookCard(
-    book: Book,
+    name: String,
+    author: String,
+    image: String,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.width(150.dp)
     ) {
-        BookImage(book.image)
+        BookImage(image)
         Spacer(modifier = Modifier.height(12.dp))
-        BookName(book.name)
-        BookAuthor(book.author)
+        BookName(name)
+        BookAuthor(author)
     }
 }
 

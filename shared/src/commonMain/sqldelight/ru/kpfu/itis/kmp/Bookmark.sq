@@ -1,0 +1,19 @@
+CREATE TABLE bookmark (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id TEXT NOT NULL,
+    name TEXT NOT NULL,
+    author TEXT NOT NULL,
+    image TEXT NOT NULL
+);
+
+insert:
+INSERT OR REPLACE INTO bookmark VALUES (?, ?, ?, ?, ?);
+
+getAll:
+SELECT * FROM bookmark;
+
+delete:
+DELETE FROM bookmark WHERE book_id = ?;
+
+getByBookId:
+SELECT * FROM bookmark WHERE book_id = ? LIMIT 1;

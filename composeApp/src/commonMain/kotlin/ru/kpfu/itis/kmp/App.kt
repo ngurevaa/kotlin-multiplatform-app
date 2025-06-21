@@ -72,7 +72,7 @@ internal fun Navigation() {
 
     Scaffold(
         bottomBar = {
-            if (currentRoute in listOf(Route.Home)) BottomBar(navController)
+            if (currentRoute in listOf(Route.Home, Route.Bookmarks)) BottomBar(navController)
         }
     ) { innerPadding ->
         NavigationHost(startDestination = startDestination, navController = navController)
