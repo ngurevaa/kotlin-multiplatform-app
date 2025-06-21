@@ -12,11 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Bookmark
+import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.BookmarkFill
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
-    navigateBack: () -> Unit
+fun BookTopBar(
+    navigateBack: () -> Unit,
+    isBookmarked: Boolean,
+    saveBookmark: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {},
@@ -29,9 +32,11 @@ fun TopBar(
             }
         },
         actions = {
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = {
+                if (!isBookmarked) saveBookmark()
+            }) {
                 Icon(
-                    imageVector = IconPack.Bookmark,
+                    imageVector = if (isBookmarked) IconPack.BookmarkFill else IconPack.Bookmark,
                     contentDescription = null,
                     modifier = Modifier.size(30.dp)
                 )

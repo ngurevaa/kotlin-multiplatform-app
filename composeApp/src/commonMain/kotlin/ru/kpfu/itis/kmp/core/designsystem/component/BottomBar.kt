@@ -28,7 +28,7 @@ import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(navController: NavController) {
-    val routes = listOf(Route.Home, Route.Login, Route.Registration)
+    val routes = listOf(Route.Home, Route.Login, Route.Bookmarks)
 
     val selectedIcons = listOf(IconPack.HomeFill, IconPack.Search, IconPack.BookmarkFill)
     val unselectedIcons = listOf(IconPack.Home, IconPack.Search, IconPack.Bookmark)

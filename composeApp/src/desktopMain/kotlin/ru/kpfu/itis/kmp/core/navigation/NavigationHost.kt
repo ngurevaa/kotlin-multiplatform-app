@@ -1,9 +1,11 @@
 package ru.kpfu.itis.kmp.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.compose.composable
 import ru.kpfu.itis.kmp.feature.auth.LoginScreen
 import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
 import ru.kpfu.itis.kmp.feature.bookdetails.BookDetailsScreen
+import ru.kpfu.itis.kmp.feature.bookmarks.BookmarksScreen
 import ru.kpfu.itis.kmp.feature.home.HomeScreen
 
 @Composable
@@ -29,6 +31,14 @@ actual fun NavigationHost(
         composable<Route.Home> {
             HomeScreen(
                 navigateToBook = { id -> navController.navigate(Route.BookDetails(id)) }
+            )
+        }
+
+        composable<Route.Bookmarks> {
+            BookmarksScreen(
+                navigateToBook = { id ->
+                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                }
             )
         }
 

@@ -47,10 +47,10 @@ private fun buildHttpClient(
     engine: HttpClientEngineFactory<HttpClientEngineConfig>,
     json: Json,
 ) = HttpClient(engine) {
-    install(Logging) {
-        logger = Logger.SIMPLE
-        level = LogLevel.BODY
-    }
+//    install(Logging) {
+//        logger = Logger.SIMPLE
+//        level = LogLevel.BODY
+//    }
     install(ContentNegotiation) {
         json(json)
     }
