@@ -33,7 +33,12 @@ fun BottomBar(navController: NavController) {
     val selectedIcons = listOf(IconPack.HomeFill, IconPack.Search, IconPack.BookmarkFill)
     val unselectedIcons = listOf(IconPack.Home, IconPack.Search, IconPack.Bookmark)
 
-    var selectedItem by remember { mutableIntStateOf(0) }
+    val currentRoute by navController.getCurrentRoute()
+    var selectedItem = remember(currentRoute) {
+        routes.indexOfFirst { route ->
+            currentRoute == route
+        }.takeIf { it >= 0 } ?: 0
+    }
 
     NavigationBar(
         modifier = Modifier

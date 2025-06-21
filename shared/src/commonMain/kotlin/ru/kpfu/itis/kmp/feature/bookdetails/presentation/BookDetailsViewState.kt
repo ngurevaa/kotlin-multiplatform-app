@@ -5,5 +5,6 @@ data class BookDetailsViewState(
     val author: String = "",
     val image: String = "",
     val overview: String = "",
+    val isBookmarked: Boolean = false,
     val isLoading: Boolean = true
 )

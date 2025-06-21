@@ -19,7 +19,8 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.BookmarkFill
 fun BookTopBar(
     navigateBack: () -> Unit,
     isBookmarked: Boolean,
-    saveBookmark: () -> Unit
+    saveBookmark: () -> Unit,
+    deleteBookmark: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {},
@@ -33,7 +34,7 @@ fun BookTopBar(
         },
         actions = {
             IconButton(onClick = {
-                if (!isBookmarked) saveBookmark()
+                if (isBookmarked) deleteBookmark() else saveBookmark()
             }) {
                 Icon(
                     imageVector = if (isBookmarked) IconPack.BookmarkFill else IconPack.Bookmark,

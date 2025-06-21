@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -27,25 +26,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import exampleapp.composeapp.generated.resources.Res
 import exampleapp.composeapp.generated.resources.cat_read_book
+import exampleapp.composeapp.generated.resources.data_saving_error
 import exampleapp.composeapp.generated.resources.internet_connection_error
 import exampleapp.composeapp.generated.resources.overview
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import ru.kpfu.itis.kmp.core.designsystem.component.TopBar
-import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
+import ru.kpfu.itis.kmp.core.designsystem.component.BookTopBar
 import ru.kpfu.itis.kmp.core.ui.showSnackbar
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsAction
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsEvent
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsViewModel
+import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsViewState
 
 @Composable
 fun BookDetailsScreen(
@@ -53,6 +52,7 @@ fun BookDetailsScreen(
     viewModel: BookDetailsViewModel = koinViewModel<BookDetailsViewModel>(),
     navigateBack: () -> Unit
 ) {
+    val state by viewModel.getViewStates().collectAsState()
     val obtainEvent = viewModel::obtainEvent
 
     LaunchedEffect(key1 = id) {
@@ -64,24 +64,31 @@ fun BookDetailsScreen(
 
     Scaffold(
         topBar = {
-            TopBar(
+            BookTopBar(
                 navigateBack = {
                     navigateBack()
                     obtainEvent(BookDetailsEvent.ClearBook)
-                }
+                },
+                isBookmarked = state.isBookmarked,
+                saveBookmark = { obtainEvent(BookDetailsEvent.SaveBookmark) },
+                deleteBookmark = { obtainEvent(BookDetailsEvent.DeleteBookmark) }
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) {
-        BookDetailsScreenContent(viewModel)
+        BookDetailsScreenContent(state)
     }
 
     val internetConnectionError = stringResource(Res.string.internet_connection_error)
+    val dataSavingError = stringResource(Res.string.data_saving_error)
     LaunchedEffect(Unit) {
         viewModel.getActions().collectLatest { action ->
             when(action) {
                 BookDetailsAction.ShowInternetConnectionError -> {
                     showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
+                }
+                BookDetailsAction.ShowBookmarkSavingError -> {
+                    showSnackbar(snackbarHostState, coroutineScope, dataSavingError)
                 }
             }
         }
@@ -90,11 +97,8 @@ fun BookDetailsScreen(
 
 @Composable
 internal fun BookDetailsScreenContent(
-    viewModel: BookDetailsViewModel
+    state: BookDetailsViewState
 ) {
-    val state by viewModel.getViewStates().collectAsState()
-    val obtainEvent = viewModel::obtainEvent
-
     Column(
         modifier = Modifier
             .fillMaxSize()

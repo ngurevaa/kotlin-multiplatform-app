@@ -30,7 +30,9 @@ actual fun NavigationHost(
 
         composable<Route.Home> {
             HomeScreen(
-                navigateToBook = { id -> navController.navigate(Route.BookDetails(id)) }
+                navigateToBook = { id ->
+                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                }
             )
         }
 

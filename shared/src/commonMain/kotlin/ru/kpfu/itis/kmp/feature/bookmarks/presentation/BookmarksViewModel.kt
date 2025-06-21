@@ -34,7 +34,7 @@ class BookmarksViewModel : BaseViewModel<BookmarksViewState, BookmarksAction, Bo
                     viewState = viewState.copy(books = it)
                 }
                 .onFailure {
-
+                    sendAction(BookmarksAction.ShowBookmarksLoadingError)
                 }
         }
     }
