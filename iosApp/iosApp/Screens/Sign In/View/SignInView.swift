@@ -108,9 +108,8 @@ struct SignInView: View {
             }
             .padding()
             .background(Color(hex: Colors.shared.backgroundLight))
-            .ignoresSafeArea(edges: .bottom)
 
-
+//            Алерт (Toast) оповещение
             if viewModel.showToast {
                 VStack {
                     Spacer()
@@ -118,9 +117,6 @@ struct SignInView: View {
                         ToastAlertView(message: viewModel.toastMessage)
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 16)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 }
                 .zIndex(1)

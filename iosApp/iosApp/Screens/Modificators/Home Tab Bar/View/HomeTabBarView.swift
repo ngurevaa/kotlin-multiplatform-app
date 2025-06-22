@@ -9,94 +9,86 @@
 import SwiftUI
 import shared
 
+enum HomeTab {
+    case home, search, favorite
+}
 struct HomeTabBarView: View {
     @State private var selectedTab: HomeTab = .home
 
     var body: some View {
-
-        TabView(selection: $selectedTab) {
-            HomeScreenView()
-                .tabItem {
-                    Image(systemName: "house.fill")
+        ZStack(alignment: .bottom) {
+            Group {
+                switch selectedTab {
+                case .home:
+                    NavigationStack {
+                        HomeScreenView()
+                    }
+                case .search:
+                    NavigationStack {
+                        SearchView()
+                    }
+                case .favorite:
+                    NavigationStack {
+                        FavoriteView()
+                    }
                 }
-                .tag(HomeTab.home)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
 
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                }
-                .tag(HomeTab.search)
+            HStack () {
+                Spacer()
+                tabBarItem(tab: .home)
+                Spacer()
+                Spacer()
+                tabBarItem(tab: .search)
+                Spacer()
+                Spacer()
+                tabBarItem(tab: .favorite)
+                Spacer()
+            }
+            .padding()
 
-            FavoriteView()
-                .tabItem {
-                    Image(systemName: "bookmark.fill")
-                }
-                .tag(HomeTab.favorite)
+            .background(
+                Capsule()
+                    .fill(Color(hex: Colors.shared.backgroundLight))
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 70)
+                    .shadow(radius: 10)
+            )
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
-        .tint(Color(hex: Colors.shared.primaryLight))
     }
-//        .overlay(
-//            VStack {
-//                Spacer()
-//                RoundedRectangle(cornerRadius: 25)
-//                    .foregroundColor(Color(hex: Colors.shared.backgroundLight))
-//                    .frame(height: 80)
-//                    .shadow(radius: 5)
-//                    .padding(.horizontal)
-//                    .padding(.bottom, 10)
-//            }
-//        )
-//    }
+
+    @ViewBuilder
+    private func tabBarItem(tab: HomeTab) -> some View {
+        Button(action: {
+            selectedTab = tab
+        }) {
+            tabIcon(for: tab)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .foregroundColor(
+                    selectedTab == tab ? Color(hex: Colors.shared.primaryLight) : .gray
+                )
+        }
+    }
+
+    @ViewBuilder
+    private func tabIcon(for tab: HomeTab) -> some View {
+        switch tab {
+        case .home:
+            HomeFillIconShape()
+        case .search:
+            SearchIconShape()
+        case .favorite:
+            BookmarkIconShape()
+        }
+    }
+
 }
 
 
 #Preview {
     HomeTabBarView()
 }
-
-//struct HomeTabBarView: View {
-//    @State var selectedTab: HomeTab = .home
-//
-//    var body: some View {
-//
-//        HStack {
-//            Spacer()
-//            HomeScreenView()
-//                .tabItem {
-//                    Image(systemName: "house.fill")
-//                        .foregroundColor(selectedTab == .home ? Color(hex: Colors.shared.primaryLight) : .gray)
-//                        .onTapGesture {
-//                            selectedTab = .home
-//                        }
-//                }
-//            Spacer()
-//            SignInView()
-//                .tabItem {
-//                    Image(systemName: "magnifyingglass")
-//                        .foregroundColor(selectedTab == .search ? Color(hex: Colors.shared.primaryLight) : .gray)
-//                        .onTapGesture {
-//                            selectedTab = .search
-//                        }
-//                }
-//            Spacer()
-//            Image(systemName: "bookmark")
-//                .foregroundColor(selectedTab == .favorite ? Color(hex: Colors.shared.primaryLight) : .gray)
-//                .onTapGesture {
-//                    selectedTab = .favorite
-//                }
-//            Spacer()
-//        }
-//        .padding()
-//        .background(
-//            RoundedRectangle(cornerRadius: 25)
-//                .foregroundColor(Color(hex: Colors.shared.backgroundLight))
-//                .shadow(radius: 5)
-//        )
-//        .padding(.horizontal)
-//    }
-//}
-//
-//
-//#Preview {
-//    HomeTabBarView(selectedTab: .home)
-//}

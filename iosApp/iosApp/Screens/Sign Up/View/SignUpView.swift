@@ -6,7 +6,6 @@
 //  Copyright © 2025 orgName. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 import shared
 
@@ -118,8 +117,8 @@ struct SignUpView: View {
             }
             .padding()
             .background(Color(hex: Colors.shared.backgroundLight))
-            .ignoresSafeArea(edges: .bottom)
 
+//            Алерт (Toast) оповещение
             if viewModel.showToast {
                 VStack {
                     Spacer()
@@ -127,16 +126,11 @@ struct SignUpView: View {
                         ToastAlertView(message: viewModel.toastMessage)
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 16)
-//              .frame(maxWidth: .infinity, alignment: .leading)
-
                 }
                 .zIndex(1)
             }
         }
         .animation(.easeInOut, value: viewModel.showToast)
-
     }
 
 }
