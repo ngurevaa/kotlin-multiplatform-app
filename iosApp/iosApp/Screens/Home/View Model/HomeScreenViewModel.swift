@@ -10,10 +10,6 @@ import Foundation
 import shared
 import Combine
 
-enum HomeTab {
-    case home, search, favorite
-}
-
 class HomeScreenViewModel: ObservableObject {
 
     var homeCommonViewModel: HomeViewModel
@@ -21,12 +17,13 @@ class HomeScreenViewModel: ObservableObject {
     var commonStateFlow: CommonStateFlow<HomeViewState>
     @Published var homeState: HomeViewState?
 
-//    var commonActionFlow: CommonFlow<HomeAction>
-//    @Published var homeActions: HomeAction?
+    var commonActionFlow: CommonFlow<HomeAction>
+    @Published var homeAction: HomeAction?
 
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var selectedTab: HomeTab = .home
+    @Published var showToast: Bool = false
+    var toastMessage: String = ""
 
     @Published var selectedGenre: Genre? {
         didSet {
@@ -34,16 +31,16 @@ class HomeScreenViewModel: ObservableObject {
         }
     }
 
-    var selectedBooks: [Book_] = []
+    var selectedBooks: [Book__] = []
 
     init(homeCommonViewModel: HomeViewModel) {
         self.homeCommonViewModel = homeCommonViewModel
 
         commonStateFlow = homeCommonViewModel.getViewStates()
-//        commonActionFlow = homeCommonViewModel.getActions()
+        commonActionFlow = homeCommonViewModel.getActions()
 
         publishHomeStateFlow()
-//        publishHomeActionFlow()
+        publishHomeActionFlow()
     }
 
     func publishHomeStateFlow() {
@@ -57,10 +54,14 @@ class HomeScreenViewModel: ObservableObject {
                 if !newState.books.isEmpty {
                     self?.setNewSelectedBooks()
                 }
-
-//                print("@@@@@@@Новое состояние HomeState genres: \(newState.genres)")
-//                print("&&&&&&&Новое состояние HomeState books: \(newState.books)")
-
+            }
+            .store(in: &cancellables)
+    }
+    func publishHomeActionFlow() {
+        commonPublisherFlow(commonActionFlow)
+            .sink { [weak self] newAction in
+                self?.homeAction = newAction
+                self?.doActionOption(action: newAction)
             }
             .store(in: &cancellables)
     }
@@ -68,8 +69,19 @@ class HomeScreenViewModel: ObservableObject {
     func setNewSelectedBooks() {
         guard let selectedGenre = selectedGenre else { return }
 
-        if let genreKey = homeState?.books.keys.first(where: { $0.id == selectedGenre.id }) {
-            selectedBooks = (homeState?.books[genreKey])!
+        if let genreKey = homeState?.books.keys.first(where: { $0.id == selectedGenre.id }), let books = homeState?.books[genreKey] {
+            selectedBooks = books
+        }
+    }
+
+    func doActionOption(action: HomeAction) {
+        if (action.isEqual(HomeAction.ShowInternetConnectionError())) {
+            toastMessage = AlertMessage.internetConnectionError
+            showToast = true
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
+            }
         }
     }
 

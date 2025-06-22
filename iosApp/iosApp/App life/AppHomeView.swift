@@ -14,23 +14,10 @@ struct AppHomeView: View {
 //    Пользователь регистрируется, показать экран регистрации
     @AppStorage("isRegistering") var isRegistering = false
 
-//    var body: some View {
-//        if isLoggedIn {
-//            NavigationStack {
-//                HomeTabBarView()
-//            }
-//        } else if isRegistering {
-//            NavigationStack {
-//                SignUpView()
-//            }
-//        } else {
-//            NavigationStack {
-//                SignInView()
-//            }
-//        }
-//    }
     var body: some View {
-        if isRegistering {
+        if isLoggedIn {
+            HomeTabBarView()
+        } else if isRegistering {
             NavigationStack {
                 SignUpView()
             }
@@ -40,6 +27,17 @@ struct AppHomeView: View {
             }
         }
     }
+//    var body: some View {
+//        if isRegistering {
+//            NavigationStack {
+//                SignUpView()
+//            }
+//        } else {
+//            NavigationStack {
+//                SignInView()
+//            }
+//        }
+//    }
 
 }
 

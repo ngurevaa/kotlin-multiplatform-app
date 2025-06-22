@@ -99,7 +99,7 @@ class SignUpViewModel: ObservableObject {
             }
         }
 
-        if (action.isEqual(RegistrationAction.ShowRegistrationError())) {
+        if (action.isEqual(RegistrationAction.ShowInternetConnectionError())) {
             toastMessage = AlertMessage.internetConnectionError
             showToast = true
 
