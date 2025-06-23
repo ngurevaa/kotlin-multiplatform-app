@@ -22,13 +22,14 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Home
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.HomeFill
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Search
 import ru.kpfu.itis.kmp.core.navigation.NavController
+import ru.kpfu.itis.kmp.core.navigation.NavOptions
 import ru.kpfu.itis.kmp.core.navigation.Route
 import ru.kpfu.itis.kmp.core.ui.ClearRippleTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomBar(navController: NavController) {
-    val routes = listOf(Route.Home, Route.Login, Route.Bookmarks)
+    val routes = listOf(Route.Home, Route.Search, Route.Bookmarks)
 
     val selectedIcons = listOf(IconPack.HomeFill, IconPack.Search, IconPack.BookmarkFill)
     val unselectedIcons = listOf(IconPack.Home, IconPack.Search, IconPack.Bookmark)
@@ -63,7 +64,7 @@ fun BottomBar(navController: NavController) {
                     selected = false,
                     onClick = {
                         selectedItem = index
-                        navController.navigate(route)
+                        navController.navigate(route, NavOptions(popUpToIndex = 0))
                     },
                 )
             }

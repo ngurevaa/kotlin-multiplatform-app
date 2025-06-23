@@ -16,6 +16,9 @@ sealed interface Route {
     data object Bookmarks : Route
 
     @Serializable
+    data object Search : Route
+
+    @Serializable
     data class BookDetails(val id: String) : Route
 }
 
@@ -25,6 +28,7 @@ fun fromStringToRoute(route: String): Route {
         route.endsWith(".Registration") -> Route.Registration
         route.endsWith(".Home") -> Route.Home
         route.endsWith(".Bookmarks") -> Route.Bookmarks
+        route.endsWith(".Search") -> Route.Search
         route.endsWith(".BookDetails/{id}") -> Route.BookDetails("")
         else -> Route.Home
     }
