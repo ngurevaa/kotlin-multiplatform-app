@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -21,8 +22,10 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     trailingIcon: @Composable () -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     BasicTextField(
         value = value,
@@ -45,10 +48,12 @@ fun CustomTextField(
             }
         },
         keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
         textStyle = LocalTextStyle.current.copy(
             color = MaterialTheme.colorScheme.onSurface
         ),
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+        modifier = modifier
     )
 }

@@ -7,6 +7,7 @@ import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
 import ru.kpfu.itis.kmp.feature.bookdetails.BookDetailsScreen
 import ru.kpfu.itis.kmp.feature.bookmarks.BookmarksScreen
 import ru.kpfu.itis.kmp.feature.home.HomeScreen
+import ru.kpfu.itis.kmp.feature.search.SearchScreen
 
 @Composable
 actual fun NavigationHost(
@@ -38,6 +39,14 @@ actual fun NavigationHost(
 
         composable<Route.Bookmarks> {
             BookmarksScreen(
+                navigateToBook = { id ->
+                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                }
+            )
+        }
+
+        composable<Route.Search> {
+            SearchScreen(
                 navigateToBook = { id ->
                     navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
                 }

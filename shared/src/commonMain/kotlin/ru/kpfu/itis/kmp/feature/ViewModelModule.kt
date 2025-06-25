@@ -8,6 +8,7 @@ import ru.kpfu.itis.kmp.feature.auth.presentation.registration.RegistrationViewM
 import ru.kpfu.itis.kmp.feature.bookdetails.presentation.BookDetailsViewModel
 import ru.kpfu.itis.kmp.feature.bookmarks.presentation.BookmarksViewModel
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
+import ru.kpfu.itis.kmp.feature.search.presentation.SearchViewModel
 
 val viewModelModule = module {
     viewModel { RegistrationViewModel() }
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { BookDetailsViewModel() }
     viewModel { ThemeViewModel() }
     viewModel { BookmarksViewModel() }
+    viewModel { SearchViewModel() }
 }

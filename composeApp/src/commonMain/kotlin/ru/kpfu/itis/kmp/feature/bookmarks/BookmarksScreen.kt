@@ -92,7 +92,7 @@ internal fun BookmarksHeader(
     Column(modifier = modifier) {
         Text(
             text = stringResource(Res.string.bookmarks),
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineSmall
         )
     }
 }

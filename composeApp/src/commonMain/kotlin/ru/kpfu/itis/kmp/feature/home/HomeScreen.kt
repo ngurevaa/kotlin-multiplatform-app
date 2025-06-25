@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import ru.kpfu.itis.kmp.LocalThemeViewModel
+import ru.kpfu.itis.kmp.core.designsystem.LocalThemeViewModel
 import ru.kpfu.itis.kmp.core.designsystem.ThemeEvent
 import ru.kpfu.itis.kmp.core.designsystem.ThemeViewModel
 import ru.kpfu.itis.kmp.core.designsystem.component.BookCard
