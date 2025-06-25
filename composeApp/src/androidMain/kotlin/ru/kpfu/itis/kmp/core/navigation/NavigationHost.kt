@@ -55,7 +55,11 @@ actual fun NavigationHost(
         }
 
         composable<Route.Search> {
-            SearchScreen()
+            SearchScreen(
+                navigateToBook = { id ->
+                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                }
+            )
         }
 
         composable<Route.BookDetails> { backStackEntry ->

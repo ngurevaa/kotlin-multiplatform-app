@@ -19,5 +19,7 @@
     <string name="overview">Overview</string>
     <string name="data_loading_error">Data loading failed. Please try again later.</string>
     <string name="bookmarks">Bookmarks</string>
-    <string name="data_saving_error">Data saving failed. Please try again later/</string>
+    <string name="data_saving_error">Data saving failed. Please try again later./</string>
+    <string name="search_by">Search by</string>
+    <string name="empty_search_query_error">The search query cannot be empty.</string>
 </resources>
