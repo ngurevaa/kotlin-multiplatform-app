@@ -7,6 +7,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class HomeViewState(
     val genres: List<Genre> = listOf(),
+    val currentGenre: Genre = Genre(0, ""),
     val books: Map<Genre, List<Book>> = mapOf(),
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false
 )

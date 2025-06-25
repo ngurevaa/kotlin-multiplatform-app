@@ -178,7 +178,7 @@ internal fun Filter(
     Column(modifier = modifier) {
         Text(
             text = stringResource(Res.string.search_by),
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.fillMaxWidth()
         )
 
