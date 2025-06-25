@@ -16,4 +16,6 @@ actual class AuthService {
     }
 
     actual fun isUserLoggedIn() = auth.currentUser != null
+
+    actual fun logout() = auth.signOut()
 }

@@ -33,7 +33,8 @@ actual fun NavigationHost(
             HomeScreen(
                 navigateToBook = { id ->
                     navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
-                }
+                },
+                navigateToLogin = { navController.navigate(Route.Login, NavOptions(popUpToIndex = 0)) }
             )
         }
 

@@ -4,11 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -16,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -51,6 +54,7 @@ import ru.kpfu.itis.kmp.core.designsystem.component.TopSnackbar
 import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.DarkMode
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.LightMode
+import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Logout
 import ru.kpfu.itis.kmp.core.ui.noRippleClickable
 import ru.kpfu.itis.kmp.core.ui.showSnackbar
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
@@ -58,12 +62,14 @@ import ru.kpfu.itis.kmp.feature.home.presentation.HomeAction
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeEvent
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewState
+import kotlin.math.log
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
-    navigateToBook: (String) -> Unit
+    navigateToBook: (String) -> Unit,
+    navigateToLogin: () -> Unit
 ) {
     val themeViewModel = LocalThemeViewModel.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -81,9 +87,8 @@ fun HomeScreen(
                 is HomeAction.ShowInternetConnectionError -> {
                     showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
                 }
-                is HomeAction.NavigateToBook -> {
-                    navigateToBook(action.id)
-                }
+                is HomeAction.NavigateToBook -> navigateToBook(action.id)
+                is HomeAction.NavigateToLogin -> navigateToLogin()
             }
         }
     }
@@ -112,7 +117,8 @@ internal fun HomeScreenContent(
             HelloHeader(
                 modifier = Modifier.widthIn(max = 600.dp).padding(24.dp),
                 isDarkTheme = themeState.isDarkTheme,
-                changeAppTheme = { themeObtainEvent(ThemeEvent.ChangeTheme(it)) }
+                changeAppTheme = { themeObtainEvent(ThemeEvent.ChangeTheme(it)) },
+                logout = { homeObtainEvent(HomeEvent.Logout) }
             )
             Genres(
                 pagerState = pagerState,
@@ -193,7 +199,8 @@ internal fun BookList(
 internal fun HelloHeader(
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean,
-    changeAppTheme: (Boolean) -> Unit
+    changeAppTheme: (Boolean) -> Unit,
+    logout: () -> Unit
 ) {
     Box(modifier = modifier) {
         Column {
@@ -207,13 +214,23 @@ internal fun HelloHeader(
                 style = MaterialTheme.typography.headlineMedium,
             )
         }
-        Icon(
-            imageVector = if (isDarkTheme) IconPack.LightMode else IconPack.DarkMode,
-            contentDescription = null,
-            modifier = Modifier.noRippleClickable {
-                changeAppTheme(!isDarkTheme)
-            }.align(Alignment.TopEnd)
-        )
+        Row(modifier = Modifier.align(Alignment.TopEnd)) {
+            Icon(
+                imageVector = if (isDarkTheme) IconPack.LightMode else IconPack.DarkMode,
+                contentDescription = null,
+                modifier = Modifier.noRippleClickable {
+                    changeAppTheme(!isDarkTheme)
+                }
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(
+                imageVector = IconPack.Logout,
+                contentDescription = null,
+                modifier = Modifier.noRippleClickable {
+                    logout()
+                }
+            )
+        }
     }
 }
 

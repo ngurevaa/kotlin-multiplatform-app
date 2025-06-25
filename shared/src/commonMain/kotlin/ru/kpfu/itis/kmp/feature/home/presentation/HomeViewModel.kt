@@ -12,12 +12,14 @@ import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetBooksByGenreUseCase
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetGenresUseCase
+import ru.kpfu.itis.kmp.feature.home.domain.usecase.LogoutUseCase
 
 class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     initState = HomeViewState()
 ), KoinComponent {
     private val getGenresUseCase: GetGenresUseCase by inject()
     private val getBooksByGenreUseCase: GetBooksByGenreUseCase by inject()
+    private val logoutUseCase: LogoutUseCase by inject()
 
     init {
         viewModelScope.launch {
@@ -42,7 +44,15 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     }
 
     private fun logout() {
-
+        viewModelScope.launch {
+            runCatching { logoutUseCase() }
+                .onSuccess {
+                    sendAction(HomeAction.NavigateToLogin)
+                }
+                .onFailure {
+                    sendAction(HomeAction.ShowInternetConnectionError)
+                }
+        }
     }
 
     private fun updateCurrentGenre(genre: Genre) {
