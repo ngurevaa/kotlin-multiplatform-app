@@ -150,27 +150,40 @@ internal fun BooksByGenre(
                 CircularProgressIndicator()
             }
             else {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(minSize = 150.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 116.dp)
-                ) {
-                    val genre = state.genres[page]
-                    val books = state.books[genre] ?: listOf()
-                    items(books) { book ->
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            BookCard(
-                                name = book.name,
-                                author = book.author,
-                                image = book.image,
-                                modifier = Modifier.noRippleClickable {
-                                    clickToBook(book.id)
-                                }
-                            )
-                        }
+                BookList(
+                    state = state,
+                    page = page,
+                    clickToBook = clickToBook
+                )
+            }
+        }
+    }
+}
+
+@Composable
+internal fun BookList(
+    state: HomeViewState,
+    page: Int,
+    clickToBook: (String) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 150.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 116.dp)
+    ) {
+        val genre = state.genres[page]
+        val books = state.books[genre] ?: listOf()
+        items(books) { book ->
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                BookCard(
+                    name = book.name,
+                    author = book.author,
+                    image = book.image,
+                    modifier = Modifier.noRippleClickable {
+                        clickToBook(book.id)
                     }
-                }
+                )
             }
         }
     }

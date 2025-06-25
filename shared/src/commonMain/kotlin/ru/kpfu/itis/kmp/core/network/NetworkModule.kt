@@ -16,6 +16,7 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import kotlin.math.sin
 
@@ -31,13 +32,25 @@ val networkModule = module {
         }
     }
 
-    single {
+    single(named(WITH_API_KEY_HTTP_CLIENT)) {
         buildHttpClient(
             engine = get<HttpEngineFactory>().createEngine(),
-            json = get()
+            json = get(),
+            withApiKey = true
+        )
+    }
+
+    single(named(WITHOUT_API_KEY_HTTP_CLIENT)) {
+        buildHttpClient(
+            engine = get<HttpEngineFactory>().createEngine(),
+            json = get(),
+            withApiKey = false
         )
     }
 }
+
+const val WITH_API_KEY_HTTP_CLIENT = "withApiKey"
+const val WITHOUT_API_KEY_HTTP_CLIENT = "withoutApiKey"
 
 const val BASE_HOST = "www.googleapis.com"
 const val BASE_PATH = "books/v1/volumes/"
@@ -46,7 +59,11 @@ const val BASE_PATH = "books/v1/volumes/"
 private fun buildHttpClient(
     engine: HttpClientEngineFactory<HttpClientEngineConfig>,
     json: Json,
+    withApiKey: Boolean
 ) = HttpClient(engine) {
+    if (withApiKey) {
+        install(ApiKeyPlugin)
+    }
     install(Logging) {
         logger = Logger.SIMPLE
         level = LogLevel.BODY

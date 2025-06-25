@@ -1,6 +1,6 @@
 package ru.kpfu.itis.kmp.feature.home.domain.model
 
 data class Genre(
-    val id: Int,
+    val id: Long,
     val name: String
 )

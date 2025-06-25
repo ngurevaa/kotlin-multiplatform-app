@@ -1,13 +1,13 @@
 package ru.kpfu.itis.kmp.feature.home.data.usecase
 
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
-import ru.kpfu.itis.kmp.feature.home.domain.repository.HomeRepository
+import ru.kpfu.itis.kmp.feature.home.domain.repository.GenreRepository
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetGenresUseCase
 
 internal class GetGenresUseCaseImpl(
-    private val homeRepository: HomeRepository
+    private val genreRepository: GenreRepository
 ) : GetGenresUseCase {
     override suspend operator fun invoke(): List<Genre> {
-        return homeRepository.getGenres()
+        return genreRepository.getGenres()
     }
 }

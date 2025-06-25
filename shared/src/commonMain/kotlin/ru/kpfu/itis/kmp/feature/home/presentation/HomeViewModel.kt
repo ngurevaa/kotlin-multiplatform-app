@@ -27,6 +27,7 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
                         genres = genres,
                         currentGenre = genres[0]
                     )
+
                     loadBooksByCurrentGenre()
                 }
         }
@@ -36,14 +37,21 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
         when(event) {
             is HomeEvent.ClickToBook -> clickToBook(event.id)
             is HomeEvent.UpdateCurrentGenre -> updateCurrentGenre(event.genre)
+            is HomeEvent.Logout -> logout()
         }
+    }
+
+    private fun logout() {
+
     }
 
     private fun updateCurrentGenre(genre: Genre) {
         viewState = viewState.copy(currentGenre = genre)
 
-        viewModelScope.launch {
-            loadBooksByCurrentGenre()
+        if (viewState.books[viewState.currentGenre].isNullOrEmpty()) {
+            viewModelScope.launch {
+                loadBooksByCurrentGenre()
+            }
         }
     }
 
@@ -52,14 +60,15 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     }
 
     private suspend fun loadBooksByCurrentGenre() {
+        val currentGenre = viewState.currentGenre
         runCatching {
             viewState = viewState.copy(isLoading = true)
-            getBooksByGenreUseCase(viewState.currentGenre)
+            getBooksByGenreUseCase(currentGenre)
         }
             .onSuccess { books ->
                 viewState = viewState.copy(
                     isLoading = false,
-                    books = viewState.books.toMutableMap().apply { put(viewState.currentGenre, books) }
+                    books = viewState.books.toMutableMap().apply { put(currentGenre, books) }
                 )
             }
             .onFailure {
