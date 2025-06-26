@@ -35,6 +35,8 @@
 		2852F8082E0C6B2E001997A3 /* ThemeToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */; };
 		2852F80A2E0D232C001997A3 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8092E0D232C001997A3 /* AppColors.swift */; };
 		2852F80C2E0D2601001997A3 /* ThemeViewModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F80B2E0D2601001997A3 /* ThemeViewModelService.swift */; };
+		2852F80E2E0D6442001997A3 /* SearchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F80D2E0D6442001997A3 /* SearchScreenViewModel.swift */; };
+		2852F8132E0D79DB001997A3 /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8122E0D79DA001997A3 /* RadioButtonView.swift */; };
 		286859B22E08407800FA1AFB /* HomeIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B12E08407800FA1AFB /* HomeIconShape.swift */; };
 		286859B82E0864F900FA1AFB /* BookmarkIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B72E0864F900FA1AFB /* BookmarkIconShape.swift */; };
 		286859BA2E08697100FA1AFB /* BookmarkFillIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B92E08697100FA1AFB /* BookmarkFillIconShape.swift */; };
@@ -45,7 +47,7 @@
 		28C958BE2E05596E0072A7AE /* ToastAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958BD2E05596E0072A7AE /* ToastAlertView.swift */; };
 		28C958C22E05626A0072A7AE /* HomeTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958C12E05626A0072A7AE /* HomeTabBarView.swift */; };
 		28C958CA2E056CED0072A7AE /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958C92E056CED0072A7AE /* FavoriteView.swift */; };
-		28C958CC2E056CFE0072A7AE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958CB2E056CFE0072A7AE /* SearchView.swift */; };
+		28C958CC2E056CFE0072A7AE /* SearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958CB2E056CFE0072A7AE /* SearchScreenView.swift */; };
 		28C958CF2E057CBF0072A7AE /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958CE2E057CBF0072A7AE /* AlertMessage.swift */; };
 		28E2A6BE2DDCC87F00D17E84 /* FlowPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */; };
 		7555FF83242A565900829871 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* SignInView.swift */; };
@@ -82,6 +84,8 @@
 		2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeToggleButtonView.swift; sourceTree = "<group>"; };
 		2852F8092E0D232C001997A3 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2852F80B2E0D2601001997A3 /* ThemeViewModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModelService.swift; sourceTree = "<group>"; };
+		2852F80D2E0D6442001997A3 /* SearchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenViewModel.swift; sourceTree = "<group>"; };
+		2852F8122E0D79DA001997A3 /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		286859B12E08407800FA1AFB /* HomeIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIconShape.swift; sourceTree = "<group>"; };
 		286859B72E0864F900FA1AFB /* BookmarkIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkIconShape.swift; sourceTree = "<group>"; };
 		286859B92E08697100FA1AFB /* BookmarkFillIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFillIconShape.swift; sourceTree = "<group>"; };
@@ -92,7 +96,7 @@
 		28C958BD2E05596E0072A7AE /* ToastAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertView.swift; sourceTree = "<group>"; };
 		28C958C12E05626A0072A7AE /* HomeTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarView.swift; sourceTree = "<group>"; };
 		28C958C92E056CED0072A7AE /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
-		28C958CB2E056CFE0072A7AE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		28C958CB2E056CFE0072A7AE /* SearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenView.swift; sourceTree = "<group>"; };
 		28C958CE2E057CBF0072A7AE /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowPublisher.swift; sourceTree = "<group>"; };
 		495CD30E0D0C57F4D693418F /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -344,6 +348,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2852F80F2E0D7949001997A3 /* Search Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8112E0D79BE001997A3 /* View */,
+			);
+			path = "Search Screen";
+			sourceTree = "<group>";
+		};
+		2852F8112E0D79BE001997A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8122E0D79DA001997A3 /* RadioButtonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		286859B02E08406100FA1AFB /* Icon Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +397,7 @@
 		28C958BC2E0559530072A7AE /* Modificators */ = {
 			isa = PBXGroup;
 			children = (
+				2852F80F2E0D7949001997A3 /* Search Screen */,
 				2852F7FF2E0C217E001997A3 /* Navigation Item */,
 				2852F7F92E0AD9D1001997A3 /* Book Screen */,
 				286859B52E085B5300FA1AFB /* Alert */,
@@ -439,6 +460,7 @@
 		28C958C72E056CC20072A7AE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				2852F80D2E0D6442001997A3 /* SearchScreenViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -446,7 +468,7 @@
 		28C958C82E056CD00072A7AE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				28C958CB2E056CFE0072A7AE /* SearchView.swift */,
+				28C958CB2E056CFE0072A7AE /* SearchScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -667,13 +689,15 @@
 				286859C22E086B3600FA1AFB /* SearchIconShape.swift in Sources */,
 				2852F8022E0C21A4001997A3 /* BackButtonView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2852F80E2E0D6442001997A3 /* SearchScreenViewModel.swift in Sources */,
 				281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */,
+				2852F8132E0D79DB001997A3 /* RadioButtonView.swift in Sources */,
 				2852F7FD2E0B086B001997A3 /* HomeTabBarVisibility.swift in Sources */,
 				281A16492DFB2DCF00CE70F5 /* AppFont.swift in Sources */,
 				281A16462DFB2BC600CE70F5 /* AppTheme.swift in Sources */,
 				7555FF83242A565900829871 /* SignInView.swift in Sources */,
 				28C958C22E05626A0072A7AE /* HomeTabBarView.swift in Sources */,
-				28C958CC2E056CFE0072A7AE /* SearchView.swift in Sources */,
+				28C958CC2E056CFE0072A7AE /* SearchScreenView.swift in Sources */,
 				280B78E02DF9BE7700CF8CB7 /* SignInViewModel.swift in Sources */,
 				281A16542DFB4F2200CE70F5 /* AppHomeView.swift in Sources */,
 				2852F7FB2E0AD9F4001997A3 /* BookGridCard.swift in Sources */,

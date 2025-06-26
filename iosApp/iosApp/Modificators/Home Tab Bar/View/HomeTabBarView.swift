@@ -28,7 +28,7 @@ struct HomeTabBarView: View {
                     .tint(AppColors.primary(colorScheme))
                 case .search:
                     NavigationStack {
-                        SearchView()
+                        SearchScreenView()
                     }
                     .tint(AppColors.primary(colorScheme))
                 case .favorite:
