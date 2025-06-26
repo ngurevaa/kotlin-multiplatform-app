@@ -13,4 +13,6 @@ class AlertMessage {
     static let loginInvalidError = "Invalid email or password."
     static let passwordIncorrectError = "The password is incorrect. It must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters."
     static let internetConnectionError = "An unexpected error has occurred. Check your internet connection."
+    static let dataSavingError = "Data saving failed. Please try again later."
+    static let dataLoadingError = "Data loading failed. Please try again later."
 }

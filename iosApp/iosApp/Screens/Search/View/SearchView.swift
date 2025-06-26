@@ -9,8 +9,15 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack {
+                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            }
+        }
+        .background(AppColors.background(colorScheme))
     }
 }
 

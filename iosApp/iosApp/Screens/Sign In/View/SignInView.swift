@@ -4,6 +4,8 @@ import shared
 struct SignInView: View {
     @StateObject var viewModel: SignInViewModel = SignInViewModel(loginCommonViewModel: LoginViewModel())
 
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack {
             VStack {
@@ -11,11 +13,11 @@ struct SignInView: View {
                 VStack(spacing: 8) {
                     Text("Sign In")
                         .font(AppFont.medium(size: 28))
-                        .foregroundColor(.black)
+                        .foregroundColor(AppColors.text(colorScheme))
 
                     Text("Enter into your account")
                         .font(AppFont.medium(size: 22))
-                        .foregroundColor(.black)
+                        .foregroundColor(AppColors.text(colorScheme))
                 }
                 .padding(.top, 110)
 
@@ -27,14 +29,14 @@ struct SignInView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Email")
                             .font(AppFont.regular(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(AppColors.text(colorScheme))
 
                         TextField("", text: $viewModel.email)
-                            .foregroundColor(.black)
+                            .foregroundColor(AppColors.text(colorScheme))
                             .textInputAutocapitalization(.never)
                             .padding()
                             .frame(height: 38)
-                            .background(Color.dataTextfieldColor)
+                            .background(AppColors.textfield(colorScheme))
                             .cornerRadius(10)
                             .onChange(of: viewModel.email) { newEmail in
                                 viewModel.doUpdateEmailEvent()
@@ -45,7 +47,7 @@ struct SignInView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Password")
                             .font(AppFont.regular(size: 14))
-                            .foregroundColor(.black)
+                            .foregroundColor(AppColors.text(colorScheme))
 
                         HStack {
                             if viewModel.isSecure {
@@ -58,14 +60,14 @@ struct SignInView: View {
                                 viewModel.isSecure.toggle()
                             }) {
                                 Image(systemName: viewModel.isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(AppColors.text(colorScheme))
                             }
                         }
                         .textInputAutocapitalization(.never)
-                        .foregroundColor(.black)
+                        .foregroundColor(AppColors.text(colorScheme))
                         .padding()
                         .frame(height: 38)
-                        .background(Color.dataTextfieldColor)
+                        .background(AppColors.textfield(colorScheme))
                         .cornerRadius(10)
                         .onChange(of: viewModel.password) { newPassword in
                             viewModel.doUpdatePasswordEvent()
@@ -82,17 +84,18 @@ struct SignInView: View {
                     }) {
                         Text("Sign In")
                             .font(AppFont.medium(size: 20))
-                            .foregroundColor(.white)
+                            .foregroundColor(AppColors.background(colorScheme))
                             .padding()
                             .frame(maxWidth: .infinity)
                             .frame(height: 38)
-                            .background(Color(hex: Colors.shared.primaryLight))
+                            .background(AppColors.primary(colorScheme))
                             .cornerRadius(10)
                     }
 
                     HStack {
                         Text("Do not have an account?")
                             .font(AppFont.regular(size: 14))
+                            .foregroundStyle(AppColors.text(colorScheme))
 
                         Button(action: {
                             viewModel.openSignUpScreen()
@@ -100,6 +103,7 @@ struct SignInView: View {
                             Text("Register")
                                 .underline()
                                 .font(AppFont.regular(size: 14))
+                                .foregroundStyle(AppColors.text(colorScheme))
                         }
                     }
                     .foregroundColor(.black)
@@ -107,7 +111,7 @@ struct SignInView: View {
                 .padding(.bottom, 20)
             }
             .padding()
-            .background(Color(hex: Colors.shared.backgroundLight))
+            .background(AppColors.background(colorScheme))
 
 //            Алерт (Toast) оповещение
             if viewModel.showToast {

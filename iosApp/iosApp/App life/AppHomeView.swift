@@ -9,34 +9,44 @@
 import SwiftUI
 
 struct AppHomeView: View {
+    @StateObject var homeTabBarVisibility = HomeTabBarVisibility()
 //    Произведена авторизация, показать домашний экран приложения
     @AppStorage("isLoggedIn") var isLoggedIn = false
 //    Пользователь регистрируется, показать экран регистрации
     @AppStorage("isRegistering") var isRegistering = false
 
+    @AppStorage("appTheme") var appThemeRaw: String = AppTheme.system.rawValue
+
     var body: some View {
-        if isLoggedIn {
-            HomeTabBarView()
-        } else if isRegistering {
-            NavigationStack {
-                SignUpView()
-            }
-        } else {
-            NavigationStack {
-                SignInView()
+        Group {
+            if isLoggedIn {
+                HomeTabBarView()
+                    .environmentObject(homeTabBarVisibility)
+            } else if isRegistering {
+                NavigationStack {
+                    SignUpView()
+                }
+            } else {
+                NavigationStack {
+                    SignInView()
+                }
             }
         }
+        .preferredColorScheme(AppTheme(rawValue: appThemeRaw)?.colorScheme)
     }
 //    var body: some View {
-//        if isRegistering {
-//            NavigationStack {
-//                SignUpView()
-//            }
-//        } else {
-//            NavigationStack {
-//                SignInView()
+//        Group {
+//            if isRegistering {
+//                NavigationStack {
+//                    SignUpView()
+//                }
+//            } else {
+//                NavigationStack {
+//                    SignInView()
+//                }
 //            }
 //        }
+//        .preferredColorScheme(AppTheme(rawValue: appThemeRaw)?.colorScheme)
 //    }
 
 }

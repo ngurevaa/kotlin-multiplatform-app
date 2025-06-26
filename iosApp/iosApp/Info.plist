@@ -27,6 +27,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Required for database storage</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>wix_made_for_text_semi_bold.ttf</string>

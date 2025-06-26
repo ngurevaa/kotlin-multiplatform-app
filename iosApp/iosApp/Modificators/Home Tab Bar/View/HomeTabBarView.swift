@@ -14,6 +14,8 @@ enum HomeTab {
 }
 struct HomeTabBarView: View {
     @State private var selectedTab: HomeTab = .home
+    @EnvironmentObject var homeTabBarVisibility: HomeTabBarVisibility
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -23,40 +25,46 @@ struct HomeTabBarView: View {
                     NavigationStack {
                         HomeScreenView()
                     }
+                    .tint(AppColors.primary(colorScheme))
                 case .search:
                     NavigationStack {
                         SearchView()
                     }
+                    .tint(AppColors.primary(colorScheme))
                 case .favorite:
                     NavigationStack {
                         FavoriteView()
                     }
+                    .tint(AppColors.primary(colorScheme))
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
 
-            HStack () {
-                Spacer()
-                tabBarItem(tab: .home)
-                Spacer()
-                Spacer()
-                tabBarItem(tab: .search)
-                Spacer()
-                Spacer()
-                tabBarItem(tab: .favorite)
-                Spacer()
-            }
-            .padding()
+            if homeTabBarVisibility.isVisible {
+                HStack () {
+                    Spacer()
+                    tabBarItem(tab: .home)
+                    Spacer()
+                    Spacer()
+                    tabBarItem(tab: .search)
+                    Spacer()
+                    Spacer()
+                    tabBarItem(tab: .favorite)
+                    Spacer()
+                }
 
-            .background(
-                Capsule()
-                    .fill(Color(hex: Colors.shared.backgroundLight))
-                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 70)
-                    .shadow(radius: 10)
-            )
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+                .padding()
+
+                .background(
+                    Capsule()
+                        .fill(AppColors.background(colorScheme))
+                        .frame(maxWidth: 600, minHeight: 70)
+                        .shadow(radius: 10)
+                )
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            }
         }
     }
 
@@ -69,7 +77,7 @@ struct HomeTabBarView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 20, height: 20)
                 .foregroundColor(
-                    selectedTab == tab ? Color(hex: Colors.shared.primaryLight) : .gray
+                    selectedTab == tab ? AppColors.primary(colorScheme) : AppColors.subtitle(colorScheme)
                 )
         }
     }
@@ -78,12 +86,21 @@ struct HomeTabBarView: View {
     private func tabIcon(for tab: HomeTab) -> some View {
         switch tab {
         case .home:
-            HomeFillIconShape()
+            if selectedTab == tab {
+                HomeFillIconShape()
+            } else {
+                HomeIconShape()
+            }
         case .search:
             SearchIconShape()
         case .favorite:
-            BookmarkIconShape()
+            if selectedTab == tab {
+                BookmarkFillIconShape()
+            } else {
+                BookmarkIconShape()
+            }
         }
+        
     }
 
 }
@@ -91,4 +108,5 @@ struct HomeTabBarView: View {
 
 #Preview {
     HomeTabBarView()
+        .environmentObject(HomeTabBarVisibility())
 }

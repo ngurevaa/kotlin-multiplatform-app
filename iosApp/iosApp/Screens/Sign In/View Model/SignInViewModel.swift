@@ -86,12 +86,17 @@ class SignInViewModel: ObservableObject {
             openHomeScreen()
         }
         if (action.isEqual(LoginAction.ShowLoginError())) {
-            toastMessage = AlertMessage.loginInvalidError
-            showToast = true
+            showToastForSeconds(message: AlertMessage.loginInvalidError, seconds: 2)
+        }
+    }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
+    func showToastForSeconds(message: String, seconds: Int) {
+        toastMessage = message
+        showToast = true
+
+        Task {
+            try? await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
+            showToast = false
         }
     }
 
