@@ -15,4 +15,5 @@ class AlertMessage {
     static let internetConnectionError = "An unexpected error has occurred. Check your internet connection."
     static let dataSavingError = "Data saving failed. Please try again later."
     static let dataLoadingError = "Data loading failed. Please try again later."
+    static let emptySearchError = "The search query cannot be empty."
 }
