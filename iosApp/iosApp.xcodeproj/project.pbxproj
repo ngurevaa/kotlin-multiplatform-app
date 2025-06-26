@@ -24,6 +24,17 @@
 		282411592E01646000317A84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 282411582E01646000317A84 /* GoogleService-Info.plist */; };
 		2824115E2E01766700317A84 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2824115D2E01766700317A84 /* HomeScreenView.swift */; };
 		282411602E01767E00317A84 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2824115F2E01767E00317A84 /* HomeScreenViewModel.swift */; };
+		2852F7F02E0A976D001997A3 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F7EF2E0A976D001997A3 /* FavoriteViewModel.swift */; };
+		2852F7F62E0AA1F5001997A3 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F7F52E0AA1F5001997A3 /* BookDetailView.swift */; };
+		2852F7F82E0AA206001997A3 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F7F72E0AA206001997A3 /* BookDetailViewModel.swift */; };
+		2852F7FB2E0AD9F4001997A3 /* BookGridCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F7FA2E0AD9F4001997A3 /* BookGridCard.swift */; };
+		2852F7FD2E0B086B001997A3 /* HomeTabBarVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F7FC2E0B086B001997A3 /* HomeTabBarVisibility.swift */; };
+		2852F8022E0C21A4001997A3 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8012E0C21A4001997A3 /* BackButtonView.swift */; };
+		2852F8042E0C27A8001997A3 /* BookmarkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */; };
+		2852F8062E0C4EF0001997A3 /* NavigationScreenTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */; };
+		2852F8082E0C6B2E001997A3 /* ThemeToggleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */; };
+		2852F80A2E0D232C001997A3 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F8092E0D232C001997A3 /* AppColors.swift */; };
+		2852F80C2E0D2601001997A3 /* ThemeViewModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2852F80B2E0D2601001997A3 /* ThemeViewModelService.swift */; };
 		286859B22E08407800FA1AFB /* HomeIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B12E08407800FA1AFB /* HomeIconShape.swift */; };
 		286859B82E0864F900FA1AFB /* BookmarkIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B72E0864F900FA1AFB /* BookmarkIconShape.swift */; };
 		286859BA2E08697100FA1AFB /* BookmarkFillIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859B92E08697100FA1AFB /* BookmarkFillIconShape.swift */; };
@@ -60,6 +71,17 @@
 		282411582E01646000317A84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2824115D2E01766700317A84 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		2824115F2E01767E00317A84 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		2852F7EF2E0A976D001997A3 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		2852F7F52E0AA1F5001997A3 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		2852F7F72E0AA206001997A3 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
+		2852F7FA2E0AD9F4001997A3 /* BookGridCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGridCard.swift; sourceTree = "<group>"; };
+		2852F7FC2E0B086B001997A3 /* HomeTabBarVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarVisibility.swift; sourceTree = "<group>"; };
+		2852F8012E0C21A4001997A3 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkButtonView.swift; sourceTree = "<group>"; };
+		2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationScreenTitleView.swift; sourceTree = "<group>"; };
+		2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeToggleButtonView.swift; sourceTree = "<group>"; };
+		2852F8092E0D232C001997A3 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		2852F80B2E0D2601001997A3 /* ThemeViewModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModelService.swift; sourceTree = "<group>"; };
 		286859B12E08407800FA1AFB /* HomeIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIconShape.swift; sourceTree = "<group>"; };
 		286859B72E0864F900FA1AFB /* BookmarkIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkIconShape.swift; sourceTree = "<group>"; };
 		286859B92E08697100FA1AFB /* BookmarkFillIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkFillIconShape.swift; sourceTree = "<group>"; };
@@ -113,7 +135,7 @@
 		280B78D42DF9BC2600CF8CB7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				28C958BC2E0559530072A7AE /* Modificators */,
+				2852F7F22E0AA1CA001997A3 /* Book Detail */,
 				28C958C42E056CB40072A7AE /* Search */,
 				28C958C32E056CA30072A7AE /* Favorite */,
 				2824115A2E01764300317A84 /* Home */,
@@ -126,6 +148,7 @@
 		280B78D52DF9BC2E00CF8CB7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2852F80B2E0D2601001997A3 /* ThemeViewModelService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				281A16452DFB2BC600CE70F5 /* AppTheme.swift */,
+				2852F8092E0D232C001997A3 /* AppColors.swift */,
 			);
 			path = "Color Config";
 			sourceTree = "<group>";
@@ -260,6 +284,66 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		2852F7F22E0AA1CA001997A3 /* Book Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7F32E0AA1D2001997A3 /* View */,
+				2852F7F42E0AA1D6001997A3 /* View Model */,
+			);
+			path = "Book Detail";
+			sourceTree = "<group>";
+		};
+		2852F7F32E0AA1D2001997A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7F52E0AA1F5001997A3 /* BookDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2852F7F42E0AA1D6001997A3 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7F72E0AA206001997A3 /* BookDetailViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		2852F7F92E0AD9D1001997A3 /* Book Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7FA2E0AD9F4001997A3 /* BookGridCard.swift */,
+			);
+			path = "Book Screen";
+			sourceTree = "<group>";
+		};
+		2852F7FE2E0B086F001997A3 /* Modificator */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7FC2E0B086B001997A3 /* HomeTabBarVisibility.swift */,
+			);
+			path = Modificator;
+			sourceTree = "<group>";
+		};
+		2852F7FF2E0C217E001997A3 /* Navigation Item */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8002E0C2194001997A3 /* View */,
+			);
+			path = "Navigation Item";
+			sourceTree = "<group>";
+		};
+		2852F8002E0C2194001997A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8012E0C21A4001997A3 /* BackButtonView.swift */,
+				2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */,
+				2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */,
+				2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		286859B02E08406100FA1AFB /* Icon Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +377,8 @@
 		28C958BC2E0559530072A7AE /* Modificators */ = {
 			isa = PBXGroup;
 			children = (
+				2852F7FF2E0C217E001997A3 /* Navigation Item */,
+				2852F7F92E0AD9D1001997A3 /* Book Screen */,
 				286859B52E085B5300FA1AFB /* Alert */,
 				28C958BF2E05624B0072A7AE /* Home Tab Bar */,
 			);
@@ -302,6 +388,7 @@
 		28C958BF2E05624B0072A7AE /* Home Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
+				2852F7FE2E0B086F001997A3 /* Modificator */,
 				28C958C02E05625E0072A7AE /* View */,
 			);
 			path = "Home Tab Bar";
@@ -344,6 +431,7 @@
 		28C958C62E056CBC0072A7AE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				2852F7EF2E0A976D001997A3 /* FavoriteViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -401,6 +489,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				28C958BC2E0559530072A7AE /* Modificators */,
 				282411582E01646000317A84 /* GoogleService-Info.plist */,
 				281A16362DFB1B3500CE70F5 /* Source */,
 				280B78D72DF9BC3A00CF8CB7 /* Extensions */,
@@ -574,9 +663,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2852F8042E0C27A8001997A3 /* BookmarkButtonView.swift in Sources */,
 				286859C22E086B3600FA1AFB /* SearchIconShape.swift in Sources */,
+				2852F8022E0C21A4001997A3 /* BackButtonView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */,
+				2852F7FD2E0B086B001997A3 /* HomeTabBarVisibility.swift in Sources */,
 				281A16492DFB2DCF00CE70F5 /* AppFont.swift in Sources */,
 				281A16462DFB2BC600CE70F5 /* AppTheme.swift in Sources */,
 				7555FF83242A565900829871 /* SignInView.swift in Sources */,
@@ -584,20 +676,28 @@
 				28C958CC2E056CFE0072A7AE /* SearchView.swift in Sources */,
 				280B78E02DF9BE7700CF8CB7 /* SignInViewModel.swift in Sources */,
 				281A16542DFB4F2200CE70F5 /* AppHomeView.swift in Sources */,
+				2852F7FB2E0AD9F4001997A3 /* BookGridCard.swift in Sources */,
 				28C958CA2E056CED0072A7AE /* FavoriteView.swift in Sources */,
 				286859BA2E08697100FA1AFB /* BookmarkFillIconShape.swift in Sources */,
+				2852F7F02E0A976D001997A3 /* FavoriteViewModel.swift in Sources */,
 				286859C02E086ACA00FA1AFB /* LightModeIconShape.swift in Sources */,
+				2852F80A2E0D232C001997A3 /* AppColors.swift in Sources */,
+				2852F7F82E0AA206001997A3 /* BookDetailViewModel.swift in Sources */,
 				286859B22E08407800FA1AFB /* HomeIconShape.swift in Sources */,
 				28C958CF2E057CBF0072A7AE /* AlertMessage.swift in Sources */,
+				2852F80C2E0D2601001997A3 /* ThemeViewModelService.swift in Sources */,
 				280B78B32DF99FE800CF8CB7 /* IOSFirebaseCrashlyticsBindings.swift in Sources */,
 				28C958BE2E05596E0072A7AE /* ToastAlertView.swift in Sources */,
 				286859BE2E086A9400FA1AFB /* HomeFillIconShape.swift in Sources */,
+				2852F8062E0C4EF0001997A3 /* NavigationScreenTitleView.swift in Sources */,
 				280B78E42DF9D07900CF8CB7 /* SignUpView.swift in Sources */,
 				282411602E01767E00317A84 /* HomeScreenViewModel.swift in Sources */,
 				2824115E2E01766700317A84 /* HomeScreenView.swift in Sources */,
+				2852F7F62E0AA1F5001997A3 /* BookDetailView.swift in Sources */,
 				286859BC2E0869EC00FA1AFB /* DarkModeIconShape.swift in Sources */,
 				28E2A6BE2DDCC87F00D17E84 /* FlowPublisher.swift in Sources */,
 				280B78E22DF9CF4C00CF8CB7 /* SignUpViewModel.swift in Sources */,
+				2852F8082E0C6B2E001997A3 /* ThemeToggleButtonView.swift in Sources */,
 				286859B82E0864F900FA1AFB /* BookmarkIconShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -745,6 +845,40 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAppCheckInterop\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"RecaptchaInterop\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}${TEAM_ID}";
 				PRODUCT_NAME = "${APP_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -772,6 +906,40 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FirebaseAppCheckInterop\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreInternal\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"RecaptchaInterop\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"shared\"",
+					"-lsqlite3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}${TEAM_ID}";
 				PRODUCT_NAME = "${APP_NAME}";

@@ -82,35 +82,30 @@ class SignUpViewModel: ObservableObject {
 
     func doActionOption(action: RegistrationAction) {
         if (action.isEqual(RegistrationAction.ShowEmailError())) {
-            toastMessage = AlertMessage.emailIncorrectError
-            showToast = true
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
+            showToastForSeconds(message: AlertMessage.emailIncorrectError, seconds: 2)
         }
-
+        
         if (action.isEqual(RegistrationAction.ShowPasswordError())) {
-            toastMessage = AlertMessage.passwordIncorrectError
-            showToast = true
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
+            showToastForSeconds(message: AlertMessage.passwordIncorrectError, seconds: 2)
         }
 
         if (action.isEqual(RegistrationAction.ShowInternetConnectionError())) {
-            toastMessage = AlertMessage.internetConnectionError
-            showToast = true
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
+            showToastForSeconds(message: AlertMessage.internetConnectionError, seconds: 2)
         }
+
         if (action.isEqual(RegistrationAction.NavigateToHome())) {
             openHomeScreen()
         }
+    }
 
+    func showToastForSeconds(message: String, seconds: Int) {
+        toastMessage = message
+        showToast = true
+
+        Task {
+            try? await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
+            showToast = false
+        }
     }
 
     deinit {

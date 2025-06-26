@@ -35,8 +35,8 @@ struct LightModeIconShape: Shape {
 
         // Внешний круг (больший)
         path.move(to: s(480, 680))
-        path.addQuadCurve(to: s(338.5, 521.5), control: s(386, 680))
-        path.addQuadCurve(to: s(280, 480), control: s(280, 500))
+        path.addQuadCurve(to: s(338.5, 650), control: s(400, 680))
+        path.addQuadCurve(to: s(280, 480), control: s(280, 600))
         path.addQuadCurve(to: s(280, 397), control: s(280, 438))
         path.addQuadCurve(to: s(338.5, 338.5), control: s(300, 340))
         path.addQuadCurve(to: s(480, 280), control: s(400, 300))

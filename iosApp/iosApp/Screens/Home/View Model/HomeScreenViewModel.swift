@@ -6,10 +6,11 @@
 //  Copyright © 2025 orgName. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import shared
 import Combine
 
+@MainActor
 class HomeScreenViewModel: ObservableObject {
 
     var homeCommonViewModel: HomeViewModel
@@ -32,6 +33,9 @@ class HomeScreenViewModel: ObservableObject {
     }
 
     var selectedBooks: [Book__] = []
+
+    @Published var detailScreenSelectedBookId: String?
+    @Published var showBookDetailScreen: Bool = false
 
     init(homeCommonViewModel: HomeViewModel) {
         self.homeCommonViewModel = homeCommonViewModel
@@ -57,6 +61,7 @@ class HomeScreenViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+
     func publishHomeActionFlow() {
         commonPublisherFlow(commonActionFlow)
             .sink { [weak self] newAction in
@@ -76,13 +81,28 @@ class HomeScreenViewModel: ObservableObject {
 
     func doActionOption(action: HomeAction) {
         if (action.isEqual(HomeAction.ShowInternetConnectionError())) {
-            toastMessage = AlertMessage.internetConnectionError
-            showToast = true
+            showToastForSeconds(message: AlertMessage.internetConnectionError, seconds: 2)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
         }
+    }
+
+    func showToastForSeconds(message: String, seconds: Int) {
+        toastMessage = message
+        showToast = true
+
+        Task {
+            try? await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
+            showToast = false
+        }
+    }
+
+    func doClickToBookEvent(id: String) {
+        let homeEvent = HomeEvent.ClickToBook(id: id)
+        homeCommonViewModel.obtainEvent(event: homeEvent)
+    }
+
+    func changeAppTheme() {
+        ThemeViewModelService.shared.doChangeThemeEvent()
     }
 
     deinit {

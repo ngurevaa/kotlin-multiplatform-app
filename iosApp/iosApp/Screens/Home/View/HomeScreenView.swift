@@ -15,6 +15,8 @@ struct HomeScreenView: View {
 
     @Namespace private var animationNamespace
 
+    @Environment(\.colorScheme) var colorScheme
+
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -25,15 +27,20 @@ struct HomeScreenView: View {
             VStack(alignment: .leading) {
                 // Тексты сверху
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Hello!")
-                        .font(AppFont.medium(size: 22))
-                        .foregroundColor(.black)
+                    HStack {
+                        Text("Hello!")
+                            .font(AppFont.medium(size: 22))
+                            .foregroundColor(AppColors.text(colorScheme))
+
+                        Spacer()
+
+                        ThemeToggleButtonView(viewModel: viewModel, color: AppColors.text(colorScheme))
+                    }
                     Text("What do you want to read today?")
                         .font(AppFont.medium(size: 26))
-                        .foregroundColor(.black)
+                        .foregroundColor(AppColors.text(colorScheme))
 
                 }
-                //            .padding(.top, 20)
                 .padding(.horizontal)
                 .padding(.bottom, 20)
 
@@ -43,14 +50,14 @@ struct HomeScreenView: View {
                         ForEach(viewModel.homeState?.genres ?? [], id: \.id) { genre in
                             VStack(spacing: 10) {
                                 Text(genre.name)
-                                    .foregroundColor(viewModel.selectedGenre == genre ? .black : .gray)
+                                    .foregroundColor(viewModel.selectedGenre == genre ? AppColors.text(colorScheme) : AppColors.subtitle(colorScheme))
                                     .font(AppFont.regular(size: 14))
                                     .padding(.horizontal)
 
                                 if viewModel.selectedGenre == genre {
                                     Capsule()
                                         .frame(height: 3)
-                                        .foregroundColor(Color(hex: Colors.shared.primaryLight))
+                                        .foregroundColor(AppColors.primary(colorScheme))
                                         .matchedGeometryEffect(id: "genreUnderline", in: animationNamespace)
                                 } else {
                                     Color.clear.frame(height: 3)
@@ -66,53 +73,54 @@ struct HomeScreenView: View {
                     }
                 }
 
+                if viewModel.homeState?.isLoading == true {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(2)
+                            .tint(AppColors.primary(colorScheme))
+                        Spacer()
+                    }
+                    .padding(.vertical, 16)
+                }
+
                 // Книги в 2 колонки
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(viewModel.selectedBooks, id: \.self) { book in
-                            VStack(spacing: 4) {
-                                AsyncImage(url: URL(string: book.image)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                } placeholder: {
-                                    Image("cat-placeholder")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .opacity(0.8)
-                                }
-                                .frame(width: 150, height: 240)
-                                .cornerRadius(20)
-                                .clipped()
+                        ForEach(viewModel.selectedBooks, id: \.id) { book in
+                            Button {
+                                viewModel.detailScreenSelectedBookId = book.id
+                                viewModel.showBookDetailScreen = true
+                            } label: {
+                                BookGridCard(bookImage: book.image, bookName: book.name, bookAuthor: book.author)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(book.name)
-                                        .font(AppFont.medium(size: 18))
-                                        .foregroundColor(.black)
-                                        .lineLimit(3)
-                                        .minimumScaleFactor(0.8)
-
-                                    Text(book.author)
-                                        .font(AppFont.medium(size: 14))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(2)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
+                            .buttonStyle(.plain)
                             .frame(width: 150, height: 350, alignment: .top)
                         }
                     }
                     .padding(.horizontal, 4)
                     .padding(.top, 6)
                 }
+                .navigationDestination(isPresented: $viewModel.showBookDetailScreen) {
+                    if let bookId = viewModel.detailScreenSelectedBookId {
+                        BookDetailView(
+                            viewModel: BookDetailViewModel(
+                                bookDetailCommonViewModel: BookDetailsViewModel(),
+                                bookId: bookId
+                            )
+                        )
+                    }
+                }
 
             }
             .safeAreaInset(edge: .bottom) {
                 Color.clear.frame(height: 80)
             }
-            .background(Color(hex: Colors.shared.backgroundLight))
-
-//            Алерт (Toast) оповещение
+            
+            //            Алерт (Toast) оповещение
             if viewModel.showToast {
                 VStack {
                     HStack {
@@ -125,6 +133,7 @@ struct HomeScreenView: View {
             }
         }
         .animation(.easeInOut, value: viewModel.showToast)
+        .background(AppColors.background(colorScheme))
     }
 }
 #Preview {
