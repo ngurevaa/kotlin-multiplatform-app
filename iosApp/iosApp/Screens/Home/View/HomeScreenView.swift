@@ -44,7 +44,7 @@ struct HomeScreenView: View {
                     Text("What do you want to read today?")
                         .font(AppFont.medium(size: 26))
                         .foregroundColor(AppColors.text(colorScheme))
-
+                        .padding(.trailing, 30)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 20)
@@ -80,15 +80,6 @@ struct HomeScreenView: View {
 
                 if viewModel.homeState?.isLoading == true {
                     RoundLoadingIndicatorView()
-//                    HStack {
-//                        Spacer()
-//                        ProgressView()
-//                            .progressViewStyle(CircularProgressViewStyle())
-//                            .scaleEffect(2)
-//                            .tint(AppColors.primary(colorScheme))
-//                        Spacer()
-//                    }
-//                    .padding(.vertical, 16)
                 }
 
                 // Книги в 2 колонки
