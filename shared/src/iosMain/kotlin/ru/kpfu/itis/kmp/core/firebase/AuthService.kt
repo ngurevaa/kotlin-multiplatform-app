@@ -40,4 +40,8 @@ actual class AuthService {
     actual fun isUserLoggedIn(): Boolean {
         return auth?.currentUser != null
     }
+
+    actual fun logout() {
+        auth?.signOut()
+    }
 }

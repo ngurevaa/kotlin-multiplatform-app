@@ -4,7 +4,7 @@ import ru.kpfu.itis.kmp.feature.search.domain.model.Book
 import ru.kpfu.itis.kmp.feature.search.domain.repository.BookRepository
 import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByAuthorUseCase
 
-class SearchBooksByAuthorUseCaseImpl(
+internal class SearchBooksByAuthorUseCaseImpl(
     private val bookRepository: BookRepository
 ) : SearchBooksByAuthorUseCase {
     override suspend operator fun invoke(query: String): List<Book> {

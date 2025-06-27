@@ -1,0 +1,16 @@
+CREATE TABLE genreDB (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+INSERT INTO genreDB VALUES
+    (1, "Fantasy"),
+    (2, "Science"),
+    (3, "Romance"),
+    (4, "Fiction"),
+    (5, "Psychology"),
+    (6, "Horror"),
+    (7, "History");
+
+getAll:
+SELECT * FROM genreDB;

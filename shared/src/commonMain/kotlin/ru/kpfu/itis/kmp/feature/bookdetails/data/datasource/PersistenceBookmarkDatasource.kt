@@ -1,12 +1,12 @@
 package ru.kpfu.itis.kmp.feature.bookdetails.data.datasource
 
-import ru.kpfu.itis.kmp.Bookmark
+import ru.kpfu.itis.kmp.BookmarkDB
 import ru.kpfu.itis.kmp.Database
 
 internal class PersistenceBookmarkDatasource(
     private val database: Database
 ) {
-    fun getBookmarkByBookId(bookId: String): Bookmark? {
+    fun getBookmarkByBookId(bookId: String): BookmarkDB? {
         return database.bookmarkQueries.getByBookId(bookId).executeAsOneOrNull()
     }
 

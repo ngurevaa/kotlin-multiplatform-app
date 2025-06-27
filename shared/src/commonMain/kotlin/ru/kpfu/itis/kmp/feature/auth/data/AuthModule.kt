@@ -11,5 +11,6 @@ import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignUpUseCase
 val authModule = module {
     factory<SignUpUseCase> { SignUpUseCaseImpl(get()) }
     factory<SignInUseCase> { SignInUseCaseImpl(get()) }
+
     factory<FirebaseAuthRepository> { FirebaseAuthRepositoryImpl(get()) }
 }

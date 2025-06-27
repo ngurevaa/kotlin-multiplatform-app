@@ -1,7 +1,6 @@
 package ru.kpfu.itis.kmp.core.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.composable
 import ru.kpfu.itis.kmp.feature.auth.LoginScreen
 import ru.kpfu.itis.kmp.feature.auth.RegistrationScreen
 import ru.kpfu.itis.kmp.feature.bookdetails.BookDetailsScreen
@@ -32,15 +31,16 @@ actual fun NavigationHost(
         composable<Route.Home> {
             HomeScreen(
                 navigateToBook = { id ->
-                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
-                }
+                    navController.navigate(Route.BookDetails(id))
+                },
+                navigateToLogin = { navController.navigate(Route.Login) }
             )
         }
 
         composable<Route.Bookmarks> {
             BookmarksScreen(
                 navigateToBook = { id ->
-                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                    navController.navigate(Route.BookDetails(id))
                 }
             )
         }
@@ -48,7 +48,7 @@ actual fun NavigationHost(
         composable<Route.Search> {
             SearchScreen(
                 navigateToBook = { id ->
-                    navController.navigate(Route.BookDetails(id), NavOptions().copy(launchSingleTop = true))
+                    navController.navigate(Route.BookDetails(id))
                 }
             )
         }

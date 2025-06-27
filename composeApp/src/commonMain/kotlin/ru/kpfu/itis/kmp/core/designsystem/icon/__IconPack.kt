@@ -7,6 +7,7 @@ import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.DarkMode
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Home
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.HomeFill
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.LightMode
+import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Logout
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Search
 import kotlin.collections.List as ____KtList
 
@@ -19,6 +20,6 @@ public val IconPack.AllIcons: ____KtList<ImageVector>
     if (__AllIcons != null) {
       return __AllIcons!!
     }
-    __AllIcons= listOf(Home, HomeFill, Bookmark, BookmarkFill, Search, DarkMode, LightMode)
+    __AllIcons= listOf(Home, HomeFill, Bookmark, BookmarkFill, Search, DarkMode, LightMode, Logout)
     return __AllIcons!!
   }

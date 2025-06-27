@@ -27,6 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -149,7 +150,8 @@ internal fun BookName(
         text = name,
         style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
         modifier = modifier,
-        color = MaterialTheme.colorScheme.scrim
+        color = MaterialTheme.colorScheme.scrim,
+        textAlign = TextAlign.Center
     )
 }
 
@@ -162,7 +164,8 @@ internal fun BookAuthor(
         text = author,
         style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
         color = MaterialTheme.colorScheme.secondary,
-        modifier = modifier
+        modifier = modifier,
+        textAlign = TextAlign.Center
     )
 }
 

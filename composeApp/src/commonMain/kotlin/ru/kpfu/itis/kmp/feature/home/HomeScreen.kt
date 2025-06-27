@@ -4,10 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -50,6 +53,7 @@ import ru.kpfu.itis.kmp.core.designsystem.component.TopSnackbar
 import ru.kpfu.itis.kmp.core.designsystem.icon.IconPack
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.DarkMode
 import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.LightMode
+import ru.kpfu.itis.kmp.core.designsystem.icon.myiconpack.Logout
 import ru.kpfu.itis.kmp.core.ui.noRippleClickable
 import ru.kpfu.itis.kmp.core.ui.showSnackbar
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
@@ -62,7 +66,8 @@ import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewState
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
-    navigateToBook: (String) -> Unit
+    navigateToBook: (String) -> Unit,
+    navigateToLogin: () -> Unit
 ) {
     val themeViewModel = LocalThemeViewModel.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -80,9 +85,8 @@ fun HomeScreen(
                 is HomeAction.ShowInternetConnectionError -> {
                     showSnackbar(snackbarHostState, coroutineScope, internetConnectionError)
                 }
-                is HomeAction.NavigateToBook -> {
-                    navigateToBook(action.id)
-                }
+                is HomeAction.NavigateToBook -> navigateToBook(action.id)
+                is HomeAction.NavigateToLogin -> navigateToLogin()
             }
         }
     }
@@ -111,26 +115,22 @@ internal fun HomeScreenContent(
             HelloHeader(
                 modifier = Modifier.widthIn(max = 600.dp).padding(24.dp),
                 isDarkTheme = themeState.isDarkTheme,
-                changeAppTheme = { themeObtainEvent(ThemeEvent.ChangeTheme(it)) }
+                changeAppTheme = { themeObtainEvent(ThemeEvent.ChangeTheme(it)) },
+                logout = { homeObtainEvent(HomeEvent.Logout) }
             )
             Genres(
                 pagerState = pagerState,
                 genres = homeState.genres,
-                modifier = Modifier.widthIn(max = 600.dp)
+                modifier = Modifier.widthIn(max = 600.dp),
+                updateCurrentGenre = { homeObtainEvent(HomeEvent.UpdateCurrentGenre(it)) }
             )
             Spacer(modifier = Modifier.height(16.dp))
-
-            if (homeState.isLoading) {
-                CircularProgressIndicator()
-            }
-            else {
-                BooksByGenre(
-                    pagerState = pagerState,
-                    state = homeState,
-                    clickToBook = { homeObtainEvent(HomeEvent.ClickToBook(it)) },
-                    modifier = Modifier.padding(horizontal = 8.dp)
-                )
-            }
+            BooksByGenre(
+                pagerState = pagerState,
+                state = homeState,
+                clickToBook = { homeObtainEvent(HomeEvent.ClickToBook(it)) },
+                modifier = Modifier.padding(horizontal = 8.dp)
+            )
         }
     }
 }
@@ -146,27 +146,48 @@ internal fun BooksByGenre(
         state = pagerState,
         modifier = modifier
     ) { page ->
-        Column {
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(minSize = 150.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(bottom = 116.dp)
-            ) {
-                val genre = state.genres[page]
-                val books = state.books[genre] ?: listOf()
-                items(books) { book ->
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        BookCard(
-                            name = book.name,
-                            author = book.author,
-                            image = book.image,
-                            modifier = Modifier.noRippleClickable {
-                                clickToBook(book.id)
-                            }
-                        )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (state.isLoading) {
+                CircularProgressIndicator()
+            }
+            else {
+                BookList(
+                    state = state,
+                    page = page,
+                    clickToBook = clickToBook
+                )
+            }
+        }
+    }
+}
+
+@Composable
+internal fun BookList(
+    state: HomeViewState,
+    page: Int,
+    clickToBook: (String) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 150.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 116.dp)
+    ) {
+        val genre = state.genres[page]
+        val books = state.books[genre] ?: listOf()
+        items(books) { book ->
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                BookCard(
+                    name = book.name,
+                    author = book.author,
+                    image = book.image,
+                    modifier = Modifier.noRippleClickable {
+                        clickToBook(book.id)
                     }
-                }
+                )
             }
         }
     }
@@ -176,7 +197,8 @@ internal fun BooksByGenre(
 internal fun HelloHeader(
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean,
-    changeAppTheme: (Boolean) -> Unit
+    changeAppTheme: (Boolean) -> Unit,
+    logout: () -> Unit
 ) {
     Box(modifier = modifier) {
         Column {
@@ -190,13 +212,23 @@ internal fun HelloHeader(
                 style = MaterialTheme.typography.headlineMedium,
             )
         }
-        Icon(
-            imageVector = if (isDarkTheme) IconPack.LightMode else IconPack.DarkMode,
-            contentDescription = null,
-            modifier = Modifier.noRippleClickable {
-                changeAppTheme(!isDarkTheme)
-            }.align(Alignment.TopEnd)
-        )
+        Row(modifier = Modifier.align(Alignment.TopEnd)) {
+            Icon(
+                imageVector = if (isDarkTheme) IconPack.LightMode else IconPack.DarkMode,
+                contentDescription = null,
+                modifier = Modifier.noRippleClickable {
+                    changeAppTheme(!isDarkTheme)
+                }
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(
+                imageVector = IconPack.Logout,
+                contentDescription = null,
+                modifier = Modifier.noRippleClickable {
+                    logout()
+                }
+            )
+        }
     }
 }
 
@@ -205,7 +237,8 @@ internal fun HelloHeader(
 internal fun Genres(
     pagerState: PagerState,
     genres: List<Genre> = listOf(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    updateCurrentGenre: (Genre) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -218,7 +251,10 @@ internal fun Genres(
         genres.forEachIndexed { index, genre ->
             Tab(
                 selected = pagerState.currentPage == index,
-                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
+                onClick = {
+                    updateCurrentGenre(genre)
+                    coroutineScope.launch { pagerState.animateScrollToPage(index) }
+                },
                 text = {
                     Text(
                         text = genre.name,

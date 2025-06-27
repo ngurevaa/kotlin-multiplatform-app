@@ -8,12 +8,12 @@ import ru.kpfu.itis.kmp.feature.bookmarks.data.mapper.mapToBookList
 import ru.kpfu.itis.kmp.feature.bookmarks.domain.model.Book
 import ru.kpfu.itis.kmp.feature.bookmarks.domain.repository.BookmarkRepository
 
-class BookmarkRepositoryImpl(
-    private val persistenceBookmarksDatasource: PersistenceBookmarkDatasource
+internal class BookmarkRepositoryImpl(
+    private val persistenceBookmarkDatasource: PersistenceBookmarkDatasource
 ) : BookmarkRepository {
     override suspend fun getBookmarks(): List<Book> {
         return withContext(Dispatchers.IO) {
-            persistenceBookmarksDatasource.getAll().mapToBookList()
+            persistenceBookmarkDatasource.getAll().mapToBookList()
         }
     }
 }
