@@ -52,7 +52,6 @@ class SignUpViewModel: ObservableObject {
             .sink { [weak self] newAction in
                 self?.registrationActions = newAction
                 self?.doActionOption(action: newAction)
-                print("Новое action: \(newAction)")
             }
             .store(in: &cancellables)
     }
@@ -71,7 +70,12 @@ class SignUpViewModel: ObservableObject {
         let signUpEvent = RegistrationEvent.SignUp()
         registrationCommonViewModel.obtainEvent(event: signUpEvent)
     }
-    
+
+    func doOpenScreenEvent() {
+        let signUpEvent = RegistrationEvent.OpenScreen()
+        registrationCommonViewModel.obtainEvent(event: signUpEvent)
+    }
+
     func openSignInScreen() {
         UserDefaults.standard.set(false, forKey: "isRegistering")
     }

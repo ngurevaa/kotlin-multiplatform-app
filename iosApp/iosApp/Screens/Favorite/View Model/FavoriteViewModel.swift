@@ -10,6 +10,7 @@ import Foundation
 import shared
 import Combine
 
+// MARK: Bookmarks (favorite books) screen view model
 @MainActor
 class FavoriteViewModel: ObservableObject {
     var favoriteCommonViewModel: BookmarksViewModel
@@ -46,7 +47,6 @@ class FavoriteViewModel: ObservableObject {
             .sink { [weak self] newState in
                 self?.bookmarksState = newState
                 self?.loadedBooks = newState.books
-                print("bookmark books: ", newState.books)
             }
             .store(in: &cancellables)
     }
@@ -67,6 +67,11 @@ class FavoriteViewModel: ObservableObject {
 
     func doLoadBooksEvent() {
         let bookmarksEvent = BookmarksEvent.LoadBooks()
+        favoriteCommonViewModel.obtainEvent(event: bookmarksEvent)
+    }
+
+    func doOpenScreenEvent() {
+        let bookmarksEvent = BookmarksEvent.OpenScreen()
         favoriteCommonViewModel.obtainEvent(event: bookmarksEvent)
     }
 

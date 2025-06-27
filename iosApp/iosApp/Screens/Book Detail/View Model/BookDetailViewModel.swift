@@ -97,6 +97,11 @@ class BookDetailViewModel: ObservableObject {
         bookDetailCommonViewModel.obtainEvent(event: bookDetailEvent)
     }
 
+    func doOpenScreenEvent() {
+        let bookDetailEvent = BookDetailsEvent.OpenScreen()
+        bookDetailCommonViewModel.obtainEvent(event: bookDetailEvent)
+    }
+
     deinit {
         bookDetailCommonViewModel.onCleared()
     }

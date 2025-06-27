@@ -82,6 +82,7 @@ struct FavoriteView: View {
         }
         .onAppear {
             viewModel.doLoadBooksEvent()
+            viewModel.doOpenScreenEvent()
         }
 
     }

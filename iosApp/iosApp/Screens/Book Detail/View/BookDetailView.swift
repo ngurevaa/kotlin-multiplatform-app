@@ -22,16 +22,7 @@ struct BookDetailView: View {
             VStack {
                 //            Индикатор загрузки
                 if viewModel.bookDetailState?.isLoading == true {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .scaleEffect(2)
-                            .tint(AppColors.primary(colorScheme))
-                        Spacer()
-                    }
-                    .padding(.vertical, 16)
-
+                    RoundLoadingIndicatorView()
                 } else {
                     ScrollView {
                         VStack(spacing: 36) {
@@ -88,7 +79,11 @@ struct BookDetailView: View {
                     BackButtonView(color: AppColors.text(colorScheme))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    BookmarkButtonView(viewModel: viewModel, color: AppColors.text(colorScheme))
+                    BookmarkButtonView(
+                        isBookmarked: viewModel.bookDetailState?.isBookmarked == true,
+                        onSave: { viewModel.doSaveBookmarkEvent() },
+                        onDelete: { viewModel.doDeleteBookmarkEvent() }
+                    )
                 }
             }
 
@@ -111,6 +106,7 @@ struct BookDetailView: View {
         //        Скрытие таббара
         .onAppear {
             homeTabBarVisibility.isVisible = false
+            viewModel.doOpenScreenEvent()
         }
         .onDisappear {
             homeTabBarVisibility.isVisible = true

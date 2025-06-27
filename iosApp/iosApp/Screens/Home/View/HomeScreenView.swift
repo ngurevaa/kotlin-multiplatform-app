@@ -34,14 +34,17 @@ struct HomeScreenView: View {
 
                         Spacer()
 
-                        ThemeToggleButtonView(viewModel: viewModel, color: AppColors.text(colorScheme))
+                        ThemeToggleButtonView() {
+                            viewModel.changeAppTheme()
+                        }
+                        
                         LogoutButtonView(action: viewModel.doLogoutEvent)
 
                     }
                     Text("What do you want to read today?")
                         .font(AppFont.medium(size: 26))
                         .foregroundColor(AppColors.text(colorScheme))
-
+                        .padding(.trailing, 30)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 20)
@@ -76,15 +79,7 @@ struct HomeScreenView: View {
                 }
 
                 if viewModel.homeState?.isLoading == true {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .scaleEffect(2)
-                            .tint(AppColors.primary(colorScheme))
-                        Spacer()
-                    }
-                    .padding(.vertical, 16)
+                    RoundLoadingIndicatorView()
                 }
 
                 // Книги в 2 колонки
@@ -136,6 +131,9 @@ struct HomeScreenView: View {
         }
         .animation(.easeInOut, value: viewModel.showToast)
         .background(AppColors.background(colorScheme))
+        .onAppear {
+            viewModel.doOpenScreenEvent()
+        }
     }
 }
 #Preview {

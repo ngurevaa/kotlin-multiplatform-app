@@ -3,117 +3,29 @@ import shared
 
 struct SignInView: View {
     @StateObject var viewModel: SignInViewModel = SignInViewModel(loginCommonViewModel: LoginViewModel())
-
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.verticalSizeClass) var verticalSizeClass
 
     var body: some View {
         ZStack {
-            VStack {
-
-                VStack(spacing: 8) {
-                    Text("Sign In")
-                        .font(AppFont.medium(size: 28))
-                        .foregroundColor(AppColors.text(colorScheme))
-
-                    Text("Enter into your account")
-                        .font(AppFont.medium(size: 22))
-                        .foregroundColor(AppColors.text(colorScheme))
-                }
-                .padding(.top, 110)
-
-                Spacer()
-
-                VStack(alignment: .leading, spacing: 46) {
-
-                    // Email
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Email")
-                            .font(AppFont.regular(size: 14))
-                            .foregroundColor(AppColors.text(colorScheme))
-
-                        TextField("", text: $viewModel.email)
-                            .foregroundColor(AppColors.text(colorScheme))
-                            .textInputAutocapitalization(.never)
+            Group {
+                if verticalSizeClass == .compact {
+//                    Горизонтальный экран
+                    ScrollView {
+                        content
                             .padding()
-                            .frame(height: 38)
-                            .background(AppColors.textfield(colorScheme))
-                            .cornerRadius(10)
-                            .onChange(of: viewModel.email) { newEmail in
-                                viewModel.doUpdateEmailEvent()
-                            }
                     }
-
-                    // Password
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Password")
-                            .font(AppFont.regular(size: 14))
-                            .foregroundColor(AppColors.text(colorScheme))
-
-                        HStack {
-                            if viewModel.isSecure {
-                                SecureField("", text: $viewModel.password)
-                            } else {
-                                TextField("", text: $viewModel.password)
-                            }
-
-                            Button(action: {
-                                viewModel.isSecure.toggle()
-                            }) {
-                                Image(systemName: viewModel.isSecure ? "eye.slash" : "eye")
-                                    .foregroundColor(AppColors.text(colorScheme))
-                            }
-                        }
-                        .textInputAutocapitalization(.never)
-                        .foregroundColor(AppColors.text(colorScheme))
+                } else {
+//                    Вертикальный экран
+                    content
                         .padding()
-                        .frame(height: 38)
-                        .background(AppColors.textfield(colorScheme))
-                        .cornerRadius(10)
-                        .onChange(of: viewModel.password) { newPassword in
-                            viewModel.doUpdatePasswordEvent()
-                        }
-                    }
-
                 }
-
-                Spacer()
-
-                VStack(spacing: 20) {
-                    Button(action: {
-                        viewModel.doSignInEvent()
-                    }) {
-                        Text("Sign In")
-                            .font(AppFont.medium(size: 20))
-                            .foregroundColor(AppColors.background(colorScheme))
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 38)
-                            .background(AppColors.primary(colorScheme))
-                            .cornerRadius(10)
-                    }
-
-                    HStack {
-                        Text("Do not have an account?")
-                            .font(AppFont.regular(size: 14))
-                            .foregroundStyle(AppColors.text(colorScheme))
-
-                        Button(action: {
-                            viewModel.openSignUpScreen()
-                        }) {
-                            Text("Register")
-                                .underline()
-                                .font(AppFont.regular(size: 14))
-                                .foregroundStyle(AppColors.text(colorScheme))
-                        }
-                    }
-                    .foregroundColor(.black)
-                }
-                .padding(.bottom, 20)
             }
-            .padding()
             .background(AppColors.background(colorScheme))
+            .onAppear {
+                viewModel.doOpenScreenEvent()
+            }
 
-//            Алерт (Toast) оповещение
             if viewModel.showToast {
                 VStack {
                     Spacer()
@@ -121,16 +33,73 @@ struct SignInView: View {
                         ToastAlertView(message: viewModel.toastMessage)
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-
                 }
                 .zIndex(1)
             }
         }
         .animation(.easeInOut, value: viewModel.showToast)
-
     }
 
+    var content: some View {
+        VStack {
+            VStack(spacing: 8) {
+                Text("Sign In")
+                    .font(AppFont.medium(size: 28))
+                    .foregroundColor(AppColors.text(colorScheme))
+
+                Text("Enter into your account")
+                    .font(AppFont.medium(size: 22))
+                    .foregroundColor(AppColors.text(colorScheme))
+            }
+            .padding(.top, 110)
+
+            Spacer()
+
+            VStack(alignment: .leading, spacing: 46) {
+
+                // Email
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Email")
+                        .font(AppFont.regular(size: 14))
+                        .foregroundColor(AppColors.text(colorScheme))
+
+                    MainTextfieldView(text: $viewModel.email) {
+                        viewModel.doUpdateEmailEvent()
+                    }
+                }
+
+                // Password
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Password")
+                        .font(AppFont.regular(size: 14))
+                        .foregroundColor(AppColors.text(colorScheme))
+
+                    SecurityMainTextFieldView(text: $viewModel.password, isSecure: $viewModel.isSecure) {
+                        viewModel.doUpdatePasswordEvent()
+                    }
+                }
+            }
+            .padding(.vertical, 64)
+
+            Spacer()
+
+            VStack(spacing: 20) {
+                PrimaryButtonView(title: "Sign In") {
+                    viewModel.doSignInEvent()
+                }
+
+                AuthSwitchLinkView(
+                    message: "Do not have an account?",
+                    linkText: "Register"
+                ) {
+                    viewModel.openSignUpScreen()
+                }
+            }
+            .padding(.bottom, 20)
+        }
+    }
 }
+
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {

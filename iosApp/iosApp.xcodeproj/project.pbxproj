@@ -51,6 +51,11 @@
 		28C958CA2E056CED0072A7AE /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958C92E056CED0072A7AE /* FavoriteView.swift */; };
 		28C958CC2E056CFE0072A7AE /* SearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958CB2E056CFE0072A7AE /* SearchScreenView.swift */; };
 		28C958CF2E057CBF0072A7AE /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958CE2E057CBF0072A7AE /* AlertMessage.swift */; };
+		28DF927B2E0F3E2100DF79FF /* RoundLoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF927A2E0F3E2100DF79FF /* RoundLoadingIndicatorView.swift */; };
+		28DF927E2E0F3F3700DF79FF /* MainTextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF927D2E0F3F3700DF79FF /* MainTextfieldView.swift */; };
+		28DF92832E0F42AE00DF79FF /* SecurityMainTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF92822E0F42AE00DF79FF /* SecurityMainTextFieldView.swift */; };
+		28DF92852E0F439600DF79FF /* PrimaryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF92842E0F439600DF79FF /* PrimaryButtonView.swift */; };
+		28DF92872E0F444F00DF79FF /* AuthSwitchLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DF92862E0F444F00DF79FF /* AuthSwitchLinkView.swift */; };
 		28E2A6BE2DDCC87F00D17E84 /* FlowPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */; };
 		7555FF83242A565900829871 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* SignInView.swift */; };
 		E9DF959EFF7178F7445E158D /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119D91297E23472B7BA97F87 /* Pods_iosApp.framework */; };
@@ -102,6 +107,11 @@
 		28C958C92E056CED0072A7AE /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		28C958CB2E056CFE0072A7AE /* SearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenView.swift; sourceTree = "<group>"; };
 		28C958CE2E057CBF0072A7AE /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
+		28DF927A2E0F3E2100DF79FF /* RoundLoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundLoadingIndicatorView.swift; sourceTree = "<group>"; };
+		28DF927D2E0F3F3700DF79FF /* MainTextfieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextfieldView.swift; sourceTree = "<group>"; };
+		28DF92822E0F42AE00DF79FF /* SecurityMainTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMainTextFieldView.swift; sourceTree = "<group>"; };
+		28DF92842E0F439600DF79FF /* PrimaryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonView.swift; sourceTree = "<group>"; };
+		28DF92862E0F444F00DF79FF /* AuthSwitchLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSwitchLinkView.swift; sourceTree = "<group>"; };
 		28E2A6BD2DDCC87F00D17E84 /* FlowPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowPublisher.swift; sourceTree = "<group>"; };
 		495CD30E0D0C57F4D693418F /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* ExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,54 +327,46 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
-		2852F7F92E0AD9D1001997A3 /* Book Screen */ = {
+		2852F7F92E0AD9D1001997A3 /* Book Item */ = {
 			isa = PBXGroup;
 			children = (
-				2852F7FA2E0AD9F4001997A3 /* BookGridCard.swift */,
+				2852F8112E0D79BE001997A3 /* View */,
 			);
-			path = "Book Screen";
+			path = "Book Item";
 			sourceTree = "<group>";
 		};
-		2852F7FE2E0B086F001997A3 /* Modificator */ = {
+		2852F7FE2E0B086F001997A3 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				2852F7FC2E0B086B001997A3 /* HomeTabBarVisibility.swift */,
 			);
-			path = Modificator;
+			path = Config;
 			sourceTree = "<group>";
 		};
-		2852F7FF2E0C217E001997A3 /* Navigation Item */ = {
+		2852F7FF2E0C217E001997A3 /* Common Item */ = {
 			isa = PBXGroup;
 			children = (
 				2852F8002E0C2194001997A3 /* View */,
 			);
-			path = "Navigation Item";
+			path = "Common Item";
 			sourceTree = "<group>";
 		};
 		2852F8002E0C2194001997A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2852F8012E0C21A4001997A3 /* BackButtonView.swift */,
-				2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */,
-				2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */,
-				2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */,
-				28B966952E0EC4F700803610 /* LogoutButtonView.swift */,
+				28DF927C2E0F3F1600DF79FF /* TextField */,
+				28DF92792E0F3DEA00DF79FF /* ProgressView */,
+				28DF92782E0F3D3800DF79FF /* Text */,
+				28DF92772E0F3D2700DF79FF /* Button */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2852F80F2E0D7949001997A3 /* Search Screen */ = {
-			isa = PBXGroup;
-			children = (
-				2852F8112E0D79BE001997A3 /* View */,
-			);
-			path = "Search Screen";
 			sourceTree = "<group>";
 		};
 		2852F8112E0D79BE001997A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2852F8122E0D79DA001997A3 /* RadioButtonView.swift */,
+				28DF92762E0F3D1C00DF79FF /* Grid */,
+				28DF92752E0F3D1400DF79FF /* Button */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -403,9 +405,9 @@
 		28C958BC2E0559530072A7AE /* Modificators */ = {
 			isa = PBXGroup;
 			children = (
-				2852F80F2E0D7949001997A3 /* Search Screen */,
-				2852F7FF2E0C217E001997A3 /* Navigation Item */,
-				2852F7F92E0AD9D1001997A3 /* Book Screen */,
+				28DF92882E0F488300DF79FF /* Auth Item */,
+				2852F7FF2E0C217E001997A3 /* Common Item */,
+				2852F7F92E0AD9D1001997A3 /* Book Item */,
 				286859B52E085B5300FA1AFB /* Alert */,
 				28C958BF2E05624B0072A7AE /* Home Tab Bar */,
 			);
@@ -415,7 +417,7 @@
 		28C958BF2E05624B0072A7AE /* Home Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
-				2852F7FE2E0B086F001997A3 /* Modificator */,
+				2852F7FE2E0B086F001997A3 /* Config */,
 				28C958C02E05625E0072A7AE /* View */,
 			);
 			path = "Home Tab Bar";
@@ -485,6 +487,83 @@
 				28C958CE2E057CBF0072A7AE /* AlertMessage.swift */,
 			);
 			path = "Alert Config";
+			sourceTree = "<group>";
+		};
+		28DF92752E0F3D1400DF79FF /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */,
+				2852F8122E0D79DA001997A3 /* RadioButtonView.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		28DF92762E0F3D1C00DF79FF /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				2852F7FA2E0AD9F4001997A3 /* BookGridCard.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		28DF92772E0F3D2700DF79FF /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */,
+				2852F8012E0C21A4001997A3 /* BackButtonView.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		28DF92782E0F3D3800DF79FF /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		28DF92792E0F3DEA00DF79FF /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				28DF927A2E0F3E2100DF79FF /* RoundLoadingIndicatorView.swift */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		28DF927C2E0F3F1600DF79FF /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				28DF927D2E0F3F3700DF79FF /* MainTextfieldView.swift */,
+				28DF92822E0F42AE00DF79FF /* SecurityMainTextFieldView.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		28DF92882E0F488300DF79FF /* Auth Item */ = {
+			isa = PBXGroup;
+			children = (
+				28DF92892E0F488C00DF79FF /* View */,
+			);
+			path = "Auth Item";
+			sourceTree = "<group>";
+		};
+		28DF92892E0F488C00DF79FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28DF928A2E0F489000DF79FF /* Button */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28DF928A2E0F489000DF79FF /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				28B966952E0EC4F700803610 /* LogoutButtonView.swift */,
+				28DF92842E0F439600DF79FF /* PrimaryButtonView.swift */,
+				28DF92862E0F444F00DF79FF /* AuthSwitchLinkView.swift */,
+			);
+			path = Button;
 			sourceTree = "<group>";
 		};
 		42799AB246E5F90AF97AA0EF /* Frameworks */ = {
@@ -691,10 +770,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28DF92832E0F42AE00DF79FF /* SecurityMainTextFieldView.swift in Sources */,
 				2852F8042E0C27A8001997A3 /* BookmarkButtonView.swift in Sources */,
 				286859C22E086B3600FA1AFB /* SearchIconShape.swift in Sources */,
 				2852F8022E0C21A4001997A3 /* BackButtonView.swift in Sources */,
 				28B966942E0EB23400803610 /* LogoutIconShape.swift in Sources */,
+				28DF92852E0F439600DF79FF /* PrimaryButtonView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				2852F80E2E0D6442001997A3 /* SearchScreenViewModel.swift in Sources */,
 				281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */,
@@ -710,10 +791,12 @@
 				2852F7FB2E0AD9F4001997A3 /* BookGridCard.swift in Sources */,
 				28C958CA2E056CED0072A7AE /* FavoriteView.swift in Sources */,
 				286859BA2E08697100FA1AFB /* BookmarkFillIconShape.swift in Sources */,
+				28DF927E2E0F3F3700DF79FF /* MainTextfieldView.swift in Sources */,
 				2852F7F02E0A976D001997A3 /* FavoriteViewModel.swift in Sources */,
 				286859C02E086ACA00FA1AFB /* LightModeIconShape.swift in Sources */,
 				2852F80A2E0D232C001997A3 /* AppColors.swift in Sources */,
 				2852F7F82E0AA206001997A3 /* BookDetailViewModel.swift in Sources */,
+				28DF927B2E0F3E2100DF79FF /* RoundLoadingIndicatorView.swift in Sources */,
 				286859B22E08407800FA1AFB /* HomeIconShape.swift in Sources */,
 				28C958CF2E057CBF0072A7AE /* AlertMessage.swift in Sources */,
 				2852F80C2E0D2601001997A3 /* ThemeViewModelService.swift in Sources */,
@@ -722,6 +805,7 @@
 				28C958BE2E05596E0072A7AE /* ToastAlertView.swift in Sources */,
 				286859BE2E086A9400FA1AFB /* HomeFillIconShape.swift in Sources */,
 				2852F8062E0C4EF0001997A3 /* NavigationScreenTitleView.swift in Sources */,
+				28DF92872E0F444F00DF79FF /* AuthSwitchLinkView.swift in Sources */,
 				280B78E42DF9D07900CF8CB7 /* SignUpView.swift in Sources */,
 				282411602E01767E00317A84 /* HomeScreenViewModel.swift in Sources */,
 				2824115E2E01766700317A84 /* HomeScreenView.swift in Sources */,
