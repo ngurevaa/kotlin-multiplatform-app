@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 import Combine
 
-//MARK: - общий сервис для определения темы приложения
+//MARK: - сервис для определения темы приложения (для iOS)
 class ThemeViewModelService {
 
     static let shared = ThemeViewModelService()
@@ -57,7 +57,7 @@ class ThemeViewModelService {
 
     func changeAppTheme(state: ThemeViewState) {
         let isDark = state.isDarkTheme
-// тема сбрасывается при новом запуске приложения т.к. имеется подвязка с Kotlin, откуда всегда первый State приходит с isDarkTheme = false
+// тема сбрасывается при новом запуске приложения, т.к. имеется подвязка с Kotlin, откуда всегда первый State приходит с isDarkTheme = false (но можно сохранять в User Defaults конкретно для iOS (что тут тоже реализовано), тогда тема будет персонализованной и после перезапуска приложения)
         if isDark {
             appThemeRaw = AppTheme.dark.rawValue
         } else {

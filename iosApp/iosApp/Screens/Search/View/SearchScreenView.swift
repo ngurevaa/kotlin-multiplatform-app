@@ -39,16 +39,9 @@ struct SearchScreenView: View {
                     }
                     .padding(.horizontal, 30)
                     HStack(spacing: 20) {
-                        TextField("", text: $viewModel.searchText)
-                            .foregroundColor(AppColors.text(colorScheme))
-                            .textInputAutocapitalization(.never)
-                            .padding()
-                            .frame(height: 38)
-                            .background(AppColors.textfield(colorScheme))
-                            .cornerRadius(10)
-                            .onChange(of: viewModel.searchText) { _ in
-                                viewModel.doUpdateSearchEvent()
-                            }
+
+                        MainTextfieldView(text: $viewModel.searchText) { viewModel.doUpdateSearchEvent()
+                        }
 
                         Button(action: {
                             viewModel.doSearchEvent()
@@ -63,15 +56,7 @@ struct SearchScreenView: View {
                 }
 
                 if viewModel.searchState?.isLoading == true {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .scaleEffect(2)
-                            .tint(AppColors.primary(colorScheme))
-                        Spacer()
-                    }
-                    .padding(.vertical, 16)
+                    RoundLoadingIndicatorView()
                 }
 
                 // Книги в 2 колонки
@@ -122,6 +107,9 @@ struct SearchScreenView: View {
         }
         .animation(.easeInOut, value: viewModel.showToast)
         .background(AppColors.background(colorScheme))
+        .onAppear {
+            viewModel.doOpenScreenEvent()
+        }
     }
 }
 

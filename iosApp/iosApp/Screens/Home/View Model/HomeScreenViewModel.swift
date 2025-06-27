@@ -108,6 +108,11 @@ class HomeScreenViewModel: ObservableObject {
 
     }
 
+    func doOpenScreenEvent() {
+        let homeEvent = HomeEvent.OpenScreen()
+        homeCommonViewModel.obtainEvent(event: homeEvent)
+    }
+
     func changeAppTheme() {
         ThemeViewModelService.shared.doChangeThemeEvent()
     }

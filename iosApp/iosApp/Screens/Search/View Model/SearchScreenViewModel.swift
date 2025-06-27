@@ -86,6 +86,11 @@ class SearchScreenViewModel: ObservableObject {
         searchCommonViewModel.obtainEvent(event: searchEvent)
     }
 
+    func doOpenScreenEvent() {
+        let searchEvent = SearchEvent.OpenScreen()
+        searchCommonViewModel.obtainEvent(event: searchEvent)
+    }
+
     func doActionOption(action: SearchAction) {
         if (action.isEqual(SearchAction.ShowInternetConnectionError())) {
             showToastForSeconds(message: AlertMessage.internetConnectionError, seconds: 2)

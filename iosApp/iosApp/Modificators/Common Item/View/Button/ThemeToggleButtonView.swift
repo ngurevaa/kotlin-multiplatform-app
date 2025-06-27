@@ -9,13 +9,12 @@
 import SwiftUI
 import shared
 struct ThemeToggleButtonView: View {
-    
-    @ObservedObject var viewModel: HomeScreenViewModel
-    var color: Color = .black
+    @Environment(\.colorScheme) var colorScheme
+    var onToggle: () -> Void
 
     var body: some View {
         Button {
-            viewModel.changeAppTheme()
+            onToggle()
         } label: {
             Group {
                 if ThemeViewModelService.shared.isDarkThemeAppStorage() {
@@ -26,11 +25,11 @@ struct ThemeToggleButtonView: View {
             }
             .aspectRatio(contentMode: .fit)
             .frame(width: 25, height: 25)
-            .foregroundColor(color)
+            .foregroundColor(AppColors.text(colorScheme))
         }
     }
 }
 
 #Preview {
-    ThemeToggleButtonView(viewModel: HomeScreenViewModel(homeCommonViewModel: HomeViewModel()))
+    ThemeToggleButtonView(onToggle: {})
 }

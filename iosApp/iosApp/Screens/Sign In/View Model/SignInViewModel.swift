@@ -53,7 +53,6 @@ class SignInViewModel: ObservableObject {
             .sink { [weak self] newAction in
                 self?.loginActions = newAction
                 self?.doActionOption(action: newAction)
-                print("Новое action: \(newAction)")
             }
             .store(in: &cancellables)
     }
@@ -73,9 +72,15 @@ class SignInViewModel: ObservableObject {
         loginCommonViewModel.obtainEvent(event: signInEvent)
     }
 
+    func doOpenScreenEvent() {
+        let signInEvent = LoginEvent.OpenScreen()
+        loginCommonViewModel.obtainEvent(event: signInEvent)
+    }
+
     func openSignUpScreen() {
         UserDefaults.standard.set(true, forKey: "isRegistering")
     }
+
 
     func openHomeScreen() {
         UserDefaults.standard.set(true, forKey: "isLoggedIn")
