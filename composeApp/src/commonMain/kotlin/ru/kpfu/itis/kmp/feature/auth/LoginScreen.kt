@@ -61,6 +61,8 @@ fun LoginScreen(
 
     val loginError = stringResource(Res.string.login_error)
     LaunchedEffect(Unit) {
+        viewModel.obtainEvent(LoginEvent.OpenScreen)
+
         viewModel.getActions().collectLatest { action ->
             when (action) {
                 LoginAction.NavigateToRegistration -> navigateToRegistration()

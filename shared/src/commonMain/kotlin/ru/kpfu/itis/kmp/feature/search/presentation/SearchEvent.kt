@@ -5,4 +5,5 @@ sealed class SearchEvent {
     data object Search : SearchEvent()
     data class SelectFilter(val filter: Filter) : SearchEvent()
     data class ClickToBook(val id: String) : SearchEvent()
+    data object OpenScreen : SearchEvent()
 }

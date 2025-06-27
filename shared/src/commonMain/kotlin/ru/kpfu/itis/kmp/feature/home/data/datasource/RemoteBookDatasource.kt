@@ -14,8 +14,8 @@ internal class RemoteBookDatasource(
     suspend fun getBooksByGenre(genre: Genre): BookResponse {
         return httpClient.get {
             parameter(Params.Q, "${Params.Q_SUBJECT}${genre.name}")
-            parameter(Params.ORDER_BY, "relevance")
-            parameter(Params.MAX_RESULTS, "16")
+            parameter(Params.ORDER_BY, Params.DEFAULT_ORDER_BY)
+            parameter(Params.MAX_RESULTS, Params.DEFAULT_MAX_RESULTS)
         }.body<BookResponse>()
     }
 }

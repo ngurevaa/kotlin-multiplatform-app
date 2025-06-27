@@ -1,8 +1,7 @@
-package ru.kpfu.itis.kmp.feature.home.domain.repository
+package ru.kpfu.itis.kmp.feature.bookdetails.domain.repository
 
 import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
 
 interface FirebaseRepository {
-    fun logout()
     suspend fun logEvent(event: FirebaseEvent)
 }

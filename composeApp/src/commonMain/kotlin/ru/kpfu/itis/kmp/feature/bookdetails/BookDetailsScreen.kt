@@ -57,6 +57,7 @@ fun BookDetailsScreen(
     val obtainEvent = viewModel::obtainEvent
 
     LaunchedEffect(key1 = id) {
+        obtainEvent(BookDetailsEvent.OpenScreen)
         obtainEvent(BookDetailsEvent.LoadBook(id))
     }
 

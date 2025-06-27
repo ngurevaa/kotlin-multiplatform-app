@@ -8,13 +8,16 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.bookmarks.domain.usecase.GetBookmarksUseCase
+import ru.kpfu.itis.kmp.feature.bookmarks.domain.usecase.SendFirebaseEventUseCase
 
 class BookmarksViewModel : BaseViewModel<BookmarksViewState, BookmarksAction, BookmarksEvent>(
     initState = BookmarksViewState()
 ), KoinComponent {
     private val getBookmarksUseCase: GetBookmarksUseCase by inject()
+    private val sendFirebaseEventUseCase: SendFirebaseEventUseCase by inject()
 
     init {
         loadBooks()
@@ -24,6 +27,18 @@ class BookmarksViewModel : BaseViewModel<BookmarksViewState, BookmarksAction, Bo
         when(event) {
             is BookmarksEvent.ClickToBook -> clickToBook(event.id)
             is BookmarksEvent.LoadBooks -> loadBooks()
+            is BookmarksEvent.OpenScreen -> openScreen()
+        }
+    }
+
+    private fun openScreen() {
+        viewModelScope.launch {
+            sendFirebaseEventUseCase(
+                FirebaseEvent(
+                    name = FirebaseEvent.NAME_OPEN_SCREEN,
+                    params = mapOf(FirebaseEvent.PARAM_SCREEN_NAME to SCREEN_NAME)
+                )
+            )
         }
     }
 
@@ -45,4 +60,8 @@ class BookmarksViewModel : BaseViewModel<BookmarksViewState, BookmarksAction, Bo
 
     fun getViewStates(): CommonStateFlow<BookmarksViewState> = viewStates.asCommonStateFlow()
     fun getActions(): CommonFlow<BookmarksAction> = actions.asCommonFlow()
+
+    companion object {
+        private const val SCREEN_NAME = "bookmarks"
+    }
 }

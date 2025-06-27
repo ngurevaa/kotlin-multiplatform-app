@@ -8,15 +8,17 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
 import ru.kpfu.itis.kmp.core.util.FieldValidator
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
+import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SendFirebaseEventUseCase
 import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignUpUseCase
-import kotlin.getValue
 
 class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationAction, RegistrationEvent>(
     initState = RegistrationViewState()
 ), KoinComponent {
     private val signUpUseCase: SignUpUseCase by inject()
+    private val sendFirebaseEventUseCase: SendFirebaseEventUseCase by inject()
 
     override fun obtainEvent(event: RegistrationEvent) {
         when (event) {
@@ -24,6 +26,18 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
             is RegistrationEvent.UpdateEmail -> updateEmail(event.email)
             is RegistrationEvent.UpdatePassword -> updatePassword(event.password)
             is RegistrationEvent.ClickLoginReference -> clickLoginReference()
+            is RegistrationEvent.OpenScreen -> openScreen()
+        }
+    }
+
+    private fun openScreen() {
+        viewModelScope.launch {
+            sendFirebaseEventUseCase(
+                FirebaseEvent(
+                    name = FirebaseEvent.NAME_OPEN_SCREEN,
+                    params = mapOf(FirebaseEvent.PARAM_SCREEN_NAME to SCREEN_NAME)
+                )
+            )
         }
     }
 
@@ -64,4 +78,8 @@ class RegistrationViewModel : BaseViewModel<RegistrationViewState, RegistrationA
 
     fun getViewStates(): CommonStateFlow<RegistrationViewState> = viewStates.asCommonStateFlow()
     fun getActions(): CommonFlow<RegistrationAction> = actions.asCommonFlow()
+
+    companion object {
+        private const val SCREEN_NAME = "registration"
+    }
 }
