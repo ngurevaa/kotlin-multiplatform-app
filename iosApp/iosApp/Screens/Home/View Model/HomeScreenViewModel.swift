@@ -25,13 +25,7 @@ class HomeScreenViewModel: ObservableObject {
 
     @Published var showToast: Bool = false
     var toastMessage: String = ""
-
-    @Published var selectedGenre: Genre? {
-        didSet {
-            setNewSelectedBooks()
-        }
-    }
-
+    
     var selectedBooks: [Book__] = []
 
     @Published var detailScreenSelectedBookId: String?
@@ -52,12 +46,7 @@ class HomeScreenViewModel: ObservableObject {
             .sink { [weak self] newState in
                 self?.homeState = newState
 
-                if self?.selectedGenre == nil, let firstGenre = newState.genres.first {
-                    self?.selectedGenre = firstGenre
-                }
-                if !newState.books.isEmpty {
-                    self?.setNewSelectedBooks()
-                }
+                self?.setNewSelectedBooks(state: newState)
             }
             .store(in: &cancellables)
     }
@@ -71,10 +60,9 @@ class HomeScreenViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func setNewSelectedBooks() {
-        guard let selectedGenre = selectedGenre else { return }
+    func setNewSelectedBooks(state: HomeViewState) {
 
-        if let genreKey = homeState?.books.keys.first(where: { $0.id == selectedGenre.id }), let books = homeState?.books[genreKey] {
+        if let genreKey = state.books.keys.first(where: { $0.id == state.currentGenre.id }), let books = state.books[genreKey] {
             selectedBooks = books
         }
     }
@@ -83,6 +71,14 @@ class HomeScreenViewModel: ObservableObject {
         if (action.isEqual(HomeAction.ShowInternetConnectionError())) {
             showToastForSeconds(message: AlertMessage.internetConnectionError, seconds: 2)
 
+        }
+        if let bookId = detailScreenSelectedBookId {
+            if (action.isEqual(HomeAction.NavigateToBook(id: bookId))) {
+                showBookDetailScreen = true
+            }
+        }
+        if (action.isEqual(HomeAction.NavigateToLogin())) {
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
         }
     }
 
@@ -99,6 +95,17 @@ class HomeScreenViewModel: ObservableObject {
     func doClickToBookEvent(id: String) {
         let homeEvent = HomeEvent.ClickToBook(id: id)
         homeCommonViewModel.obtainEvent(event: homeEvent)
+    }
+
+    func doUpdateCurrentGenreEvent(genre: Genre) {
+        let homeEvent = HomeEvent.UpdateCurrentGenre(genre: genre)
+        homeCommonViewModel.obtainEvent(event: homeEvent)
+    }
+
+    func doLogoutEvent() {
+        let homeEvent = HomeEvent.Logout()
+        homeCommonViewModel.obtainEvent(event: homeEvent)
+
     }
 
     func changeAppTheme() {

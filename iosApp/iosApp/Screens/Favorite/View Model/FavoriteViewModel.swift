@@ -74,6 +74,11 @@ class FavoriteViewModel: ObservableObject {
         if (action.isEqual(BookmarksAction.ShowBookmarksLoadingError())) {
             showToastForSeconds(message: AlertMessage.dataLoadingError, seconds: 2)
         }
+        if let bookId = detailScreenSelectedBookId {
+            if (action.isEqual(BookmarksAction.NavigateToBook(id: bookId))) {
+                showBookDetailScreen = true
+            }
+        }
     }
 
     func showToastForSeconds(message: String, seconds: Int) {

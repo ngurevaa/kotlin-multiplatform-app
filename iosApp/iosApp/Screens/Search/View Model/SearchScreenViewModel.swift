@@ -93,6 +93,11 @@ class SearchScreenViewModel: ObservableObject {
         if (action.isEqual(SearchAction.ShowEmptySearchError())) {
             showToastForSeconds(message: AlertMessage.emptySearchError, seconds: 2)
         }
+        if let bookId = detailScreenSelectedBookId {
+            if (action.isEqual(SearchAction.NavigateToBook(id: bookId))) {
+                showBookDetailScreen = true
+            }
+        }
     }
 
     func showToastForSeconds(message: String, seconds: Int) {

@@ -44,6 +44,8 @@
 		286859BE2E086A9400FA1AFB /* HomeFillIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859BD2E086A9400FA1AFB /* HomeFillIconShape.swift */; };
 		286859C02E086ACA00FA1AFB /* LightModeIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859BF2E086ACA00FA1AFB /* LightModeIconShape.swift */; };
 		286859C22E086B3600FA1AFB /* SearchIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286859C12E086B3600FA1AFB /* SearchIconShape.swift */; };
+		28B966942E0EB23400803610 /* LogoutIconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B966932E0EB23400803610 /* LogoutIconShape.swift */; };
+		28B966962E0EC4F700803610 /* LogoutButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B966952E0EC4F700803610 /* LogoutButtonView.swift */; };
 		28C958BE2E05596E0072A7AE /* ToastAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958BD2E05596E0072A7AE /* ToastAlertView.swift */; };
 		28C958C22E05626A0072A7AE /* HomeTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958C12E05626A0072A7AE /* HomeTabBarView.swift */; };
 		28C958CA2E056CED0072A7AE /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C958C92E056CED0072A7AE /* FavoriteView.swift */; };
@@ -93,6 +95,8 @@
 		286859BD2E086A9400FA1AFB /* HomeFillIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFillIconShape.swift; sourceTree = "<group>"; };
 		286859BF2E086ACA00FA1AFB /* LightModeIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightModeIconShape.swift; sourceTree = "<group>"; };
 		286859C12E086B3600FA1AFB /* SearchIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIconShape.swift; sourceTree = "<group>"; };
+		28B966932E0EB23400803610 /* LogoutIconShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutIconShape.swift; sourceTree = "<group>"; };
+		28B966952E0EC4F700803610 /* LogoutButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButtonView.swift; sourceTree = "<group>"; };
 		28C958BD2E05596E0072A7AE /* ToastAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlertView.swift; sourceTree = "<group>"; };
 		28C958C12E05626A0072A7AE /* HomeTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarView.swift; sourceTree = "<group>"; };
 		28C958C92E056CED0072A7AE /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				2852F8032E0C27A8001997A3 /* BookmarkButtonView.swift */,
 				2852F8052E0C4EF0001997A3 /* NavigationScreenTitleView.swift */,
 				2852F8072E0C6B2E001997A3 /* ThemeToggleButtonView.swift */,
+				28B966952E0EC4F700803610 /* LogoutButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				286859BD2E086A9400FA1AFB /* HomeFillIconShape.swift */,
 				286859BF2E086ACA00FA1AFB /* LightModeIconShape.swift */,
 				286859C12E086B3600FA1AFB /* SearchIconShape.swift */,
+				28B966932E0EB23400803610 /* LogoutIconShape.swift */,
 			);
 			path = "Icon Config";
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				2852F8042E0C27A8001997A3 /* BookmarkButtonView.swift in Sources */,
 				286859C22E086B3600FA1AFB /* SearchIconShape.swift in Sources */,
 				2852F8022E0C21A4001997A3 /* BackButtonView.swift in Sources */,
+				28B966942E0EB23400803610 /* LogoutIconShape.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				2852F80E2E0D6442001997A3 /* SearchScreenViewModel.swift in Sources */,
 				281A16442DFB2AC500CE70F5 /* Color+.swift in Sources */,
@@ -710,6 +717,7 @@
 				286859B22E08407800FA1AFB /* HomeIconShape.swift in Sources */,
 				28C958CF2E057CBF0072A7AE /* AlertMessage.swift in Sources */,
 				2852F80C2E0D2601001997A3 /* ThemeViewModelService.swift in Sources */,
+				28B966962E0EC4F700803610 /* LogoutButtonView.swift in Sources */,
 				280B78B32DF99FE800CF8CB7 /* IOSFirebaseCrashlyticsBindings.swift in Sources */,
 				28C958BE2E05596E0072A7AE /* ToastAlertView.swift in Sources */,
 				286859BE2E086A9400FA1AFB /* HomeFillIconShape.swift in Sources */,

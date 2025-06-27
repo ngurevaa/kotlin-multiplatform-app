@@ -42,6 +42,6 @@ actual class AuthService {
     }
 
     actual fun logout() {
-        auth?.signOut()
+        auth?.signOut(null)
     }
 }
