@@ -1,4 +1,4 @@
-package ru.kpfu.itis.kmp.feature.home.data.usecase
+package ru.kpfu.itis.kmp.feature.home.data.repository
 
 import ru.kpfu.itis.kmp.core.firebase.AuthService
 import ru.kpfu.itis.kmp.feature.home.domain.repository.FirebaseRepository

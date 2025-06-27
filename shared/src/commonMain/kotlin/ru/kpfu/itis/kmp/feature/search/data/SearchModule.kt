@@ -1,7 +1,8 @@
 package ru.kpfu.itis.kmp.feature.search.data
 
-import org.koin.core.module.dsl.factoryOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.kpfu.itis.kmp.core.network.WITH_API_KEY_HTTP_CLIENT
 import ru.kpfu.itis.kmp.feature.search.data.datasource.RemoteBookDatasource
 import ru.kpfu.itis.kmp.feature.search.data.repository.BookRepositoryImpl
 import ru.kpfu.itis.kmp.feature.search.data.usecase.SearchBooksByAuthorUseCaseImpl
@@ -13,7 +14,7 @@ import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByGenreUseCase
 import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByTitleUseCase
 
 val searchModule = module {
-    factoryOf(::RemoteBookDatasource)
+    factory { RemoteBookDatasource(get(named(WITH_API_KEY_HTTP_CLIENT))) }
 
     factory<SearchBooksByTitleUseCase> { SearchBooksByTitleUseCaseImpl(get()) }
     factory<SearchBooksByAuthorUseCase> { SearchBooksByAuthorUseCaseImpl(get()) }

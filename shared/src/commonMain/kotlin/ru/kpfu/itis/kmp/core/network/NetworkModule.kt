@@ -10,15 +10,12 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
 import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import kotlin.math.sin
 
 val networkModule = module {
     single {

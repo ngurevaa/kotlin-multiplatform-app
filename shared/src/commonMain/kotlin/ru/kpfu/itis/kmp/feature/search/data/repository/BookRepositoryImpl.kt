@@ -9,7 +9,7 @@ import ru.kpfu.itis.kmp.feature.search.data.mapper.mapToBookList
 import ru.kpfu.itis.kmp.feature.search.domain.model.Book
 import ru.kpfu.itis.kmp.feature.search.domain.repository.BookRepository
 
-class BookRepositoryImpl(
+internal class BookRepositoryImpl(
     private val remoteBookDatasource: RemoteBookDatasource
 ) : BookRepository {
 

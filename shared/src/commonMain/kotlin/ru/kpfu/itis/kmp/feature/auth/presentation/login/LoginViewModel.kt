@@ -8,8 +8,6 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.kpfu.itis.kmp.core.firebase.AuthService
-import ru.kpfu.itis.kmp.core.util.FieldValidator
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.auth.domain.usecase.SignInUseCase
 

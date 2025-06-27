@@ -78,6 +78,7 @@ class BookDetailsViewModel() : BaseViewModel<BookDetailsViewState, BookDetailsAc
                     )
                 }
                 .onFailure {
+                    viewState = viewState.copy(isLoading = false)
                     sendAction(BookDetailsAction.ShowInternetConnectionError)
                 }
         }

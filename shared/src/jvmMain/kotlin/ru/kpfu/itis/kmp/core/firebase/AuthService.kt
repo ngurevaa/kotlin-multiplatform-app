@@ -17,7 +17,7 @@ import java.util.prefs.Preferences
 
 actual class AuthService : KoinComponent {
     private val httpClient: HttpClient by inject(named(WITH_API_KEY_HTTP_CLIENT))
-    private val preferences = Preferences.userRoot().node("/ru/kpfu/itis/book")
+    private val preferences = Preferences.userRoot().node(PREFERENCES_NODE)
 
     actual suspend fun signUpWithEmail(email: String, password: String) {
         val response = httpClient.post(SIGN_UP_URL) {
@@ -52,6 +52,7 @@ actual class AuthService : KoinComponent {
     }
 
     companion object {
+        private const val PREFERENCES_NODE = "/ru/kpfu/itis/book"
         private const val AUTH_TOKEN = "authToken"
         private const val SIGN_UP_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp"
         private const val SIGN_IN_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"

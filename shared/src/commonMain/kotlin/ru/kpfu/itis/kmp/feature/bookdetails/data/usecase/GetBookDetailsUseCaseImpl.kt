@@ -9,7 +9,6 @@ internal class GetBookDetailsUseCaseImpl(
     private val bookRepository: BookRepository,
     private val bookmarkRepository: BookmarkRepository
 ) : GetBookDetailsUseCase {
-
     override suspend operator fun invoke(id: String): Book {
         var book = bookRepository.getBookDetails(id)
         book = book.copy(isBookmarked = bookmarkRepository.isBookmark(id))

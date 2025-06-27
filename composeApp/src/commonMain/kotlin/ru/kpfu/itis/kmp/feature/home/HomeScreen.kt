@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -62,7 +61,6 @@ import ru.kpfu.itis.kmp.feature.home.presentation.HomeAction
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeEvent
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewState
-import kotlin.math.log
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

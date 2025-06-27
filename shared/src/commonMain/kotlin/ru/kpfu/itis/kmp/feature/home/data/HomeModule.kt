@@ -8,7 +8,7 @@ import ru.kpfu.itis.kmp.feature.home.data.datasource.PersistenceGenreDatasource
 import ru.kpfu.itis.kmp.feature.home.data.datasource.RemoteBookDatasource
 import ru.kpfu.itis.kmp.feature.home.data.repository.BookRepositoryImpl
 import ru.kpfu.itis.kmp.feature.home.data.repository.GenreRepositoryImpl
-import ru.kpfu.itis.kmp.feature.home.data.usecase.FirebaseRepositoryImpl
+import ru.kpfu.itis.kmp.feature.home.data.repository.FirebaseRepositoryImpl
 import ru.kpfu.itis.kmp.feature.home.data.usecase.GetBooksByGenreUseCaseImpl
 import ru.kpfu.itis.kmp.feature.home.data.usecase.GetGenresUseCaseImpl
 import ru.kpfu.itis.kmp.feature.home.data.usecase.LogoutUseCaseImpl
