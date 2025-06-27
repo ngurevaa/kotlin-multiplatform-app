@@ -45,18 +45,6 @@ kotlin {
         pod("FirebaseAuth") {
             version = "~> 10.0"
         }
-//        pod("Firebase/Core") {
-//            version = "10.16.0"
-//        }
-//        pod("Firebase/Firestore") {
-//            version = "10.16.0"
-//        }
-//        pod("Firebase/Analytics") {
-//            version = "10.16.0"
-//        }
-//        pod("Firebase/Crashlytics") {
-//            version = "~> 10.16.0"
-//        }
 //        framework {
 //            baseName = "CommonKmp"
 //            transitiveExport = true
