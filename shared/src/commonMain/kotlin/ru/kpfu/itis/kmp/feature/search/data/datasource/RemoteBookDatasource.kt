@@ -13,24 +13,24 @@ internal class RemoteBookDatasource(
     suspend fun searchByTitle(query: String): BookResponse {
         return httpClient.get {
             parameter(Params.Q, "${Params.Q_IN_TITLE}$query")
-            parameter(Params.ORDER_BY, "relevance")
-            parameter(Params.MAX_RESULTS, "16")
+            parameter(Params.ORDER_BY, Params.DEFAULT_ORDER_BY)
+            parameter(Params.MAX_RESULTS, Params.DEFAULT_MAX_RESULTS)
         }.body<BookResponse>()
     }
 
     suspend fun searchByAuthor(query: String): BookResponse {
         return httpClient.get {
             parameter(Params.Q, "${Params.Q_IN_AUTHOR}$query")
-            parameter(Params.ORDER_BY, "relevance")
-            parameter(Params.MAX_RESULTS, "16")
+            parameter(Params.ORDER_BY, Params.DEFAULT_ORDER_BY)
+            parameter(Params.MAX_RESULTS, Params.DEFAULT_MAX_RESULTS)
         }.body<BookResponse>()
     }
 
     suspend fun searchByGenre(query: String): BookResponse {
         return httpClient.get {
             parameter(Params.Q, "${Params.Q_SUBJECT}$query")
-            parameter(Params.ORDER_BY, "relevance")
-            parameter(Params.MAX_RESULTS, "16")
+            parameter(Params.ORDER_BY, Params.DEFAULT_ORDER_BY)
+            parameter(Params.MAX_RESULTS, Params.DEFAULT_MAX_RESULTS)
         }.body<BookResponse>()
     }
 }

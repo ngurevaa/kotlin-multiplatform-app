@@ -8,10 +8,13 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
+import ru.kpfu.itis.kmp.feature.home.presentation.HomeViewModel
 import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByAuthorUseCase
 import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByGenreUseCase
 import ru.kpfu.itis.kmp.feature.search.domain.usecase.SearchBooksByTitleUseCase
+import ru.kpfu.itis.kmp.feature.search.domain.usecase.SendFirebaseEventUseCase
 
 class SearchViewModel : BaseViewModel<SearchViewState, SearchAction, SearchEvent>(
     initState = SearchViewState()
@@ -19,6 +22,7 @@ class SearchViewModel : BaseViewModel<SearchViewState, SearchAction, SearchEvent
     private val searchBooksByTitleUseCase: SearchBooksByTitleUseCase by inject()
     private val searchBooksByAuthorUseCase: SearchBooksByAuthorUseCase by inject()
     private val searchBooksByGenreUseCase: SearchBooksByGenreUseCase by inject()
+    private val sendFirebaseEventUseCase: SendFirebaseEventUseCase by inject()
 
     override fun obtainEvent(event: SearchEvent) {
         when(event) {
@@ -26,6 +30,18 @@ class SearchViewModel : BaseViewModel<SearchViewState, SearchAction, SearchEvent
             is SearchEvent.Search -> search()
             is SearchEvent.SelectFilter -> selectFilter(event.filter)
             is SearchEvent.ClickToBook -> clickToBook(event.id)
+            is SearchEvent.OpenScreen -> openScreen()
+        }
+    }
+
+    private fun openScreen() {
+        viewModelScope.launch {
+            sendFirebaseEventUseCase(
+                FirebaseEvent(
+                    name = FirebaseEvent.NAME_OPEN_SCREEN,
+                    params = mapOf(FirebaseEvent.PARAM_SCREEN_NAME to SCREEN_NAME)
+                )
+            )
         }
     }
 
@@ -68,4 +84,8 @@ class SearchViewModel : BaseViewModel<SearchViewState, SearchAction, SearchEvent
 
     fun getViewStates(): CommonStateFlow<SearchViewState> = viewStates.asCommonStateFlow()
     fun getActions(): CommonFlow<SearchAction> = actions.asCommonFlow()
+
+    companion object {
+        private const val SCREEN_NAME = "search"
+    }
 }

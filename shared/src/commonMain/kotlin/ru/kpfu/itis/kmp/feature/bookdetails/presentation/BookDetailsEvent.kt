@@ -5,4 +5,5 @@ sealed class BookDetailsEvent {
     data object ClearBook : BookDetailsEvent()
     data object SaveBookmark : BookDetailsEvent()
     data object DeleteBookmark : BookDetailsEvent()
+    data object OpenScreen : BookDetailsEvent()
 }

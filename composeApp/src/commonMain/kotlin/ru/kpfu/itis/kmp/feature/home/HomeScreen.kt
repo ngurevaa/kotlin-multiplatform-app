@@ -80,6 +80,8 @@ fun HomeScreen(
 
     val internetConnectionError = stringResource(Res.string.internet_connection_error)
     LaunchedEffect(Unit) {
+        viewModel.obtainEvent(HomeEvent.OpenScreen)
+
         viewModel.getActions().collectLatest { action ->
             when (action) {
                 is HomeAction.ShowInternetConnectionError -> {

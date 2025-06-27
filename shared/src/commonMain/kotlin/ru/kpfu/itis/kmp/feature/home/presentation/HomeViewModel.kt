@@ -8,11 +8,13 @@ import asCommonStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
 import ru.kpfu.itis.kmp.core.viewmodel.BaseViewModel
 import ru.kpfu.itis.kmp.feature.home.domain.model.Genre
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetBooksByGenreUseCase
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.GetGenresUseCase
 import ru.kpfu.itis.kmp.feature.home.domain.usecase.LogoutUseCase
+import ru.kpfu.itis.kmp.feature.home.domain.usecase.SendFirebaseEventUseCase
 
 class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     initState = HomeViewState()
@@ -20,6 +22,7 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
     private val getGenresUseCase: GetGenresUseCase by inject()
     private val getBooksByGenreUseCase: GetBooksByGenreUseCase by inject()
     private val logoutUseCase: LogoutUseCase by inject()
+    private val sendFirebaseEventUseCase: SendFirebaseEventUseCase by inject()
 
     init {
         viewModelScope.launch {
@@ -40,6 +43,18 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
             is HomeEvent.ClickToBook -> clickToBook(event.id)
             is HomeEvent.UpdateCurrentGenre -> updateCurrentGenre(event.genre)
             is HomeEvent.Logout -> logout()
+            is HomeEvent.OpenScreen -> openScreen()
+        }
+    }
+
+    private fun openScreen() {
+        viewModelScope.launch {
+            sendFirebaseEventUseCase(
+                FirebaseEvent(
+                    name = FirebaseEvent.NAME_OPEN_SCREEN,
+                    params = mapOf(FirebaseEvent.PARAM_SCREEN_NAME to SCREEN_NAME)
+                )
+            )
         }
     }
 
@@ -89,4 +104,8 @@ class HomeViewModel : BaseViewModel<HomeViewState, HomeAction, HomeEvent>(
 
     fun getViewStates(): CommonStateFlow<HomeViewState> = viewStates.asCommonStateFlow()
     fun getActions(): CommonFlow<HomeAction> = actions.asCommonFlow()
+
+    companion object {
+        private const val SCREEN_NAME = "home"
+    }
 }

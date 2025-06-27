@@ -53,6 +53,7 @@ fun BookmarksScreen(
 
     val dataLoadingError = stringResource(Res.string.data_loading_error)
     LaunchedEffect(Unit) {
+        viewModel.obtainEvent(BookmarksEvent.OpenScreen)
         viewModel.obtainEvent(BookmarksEvent.LoadBooks)
 
         viewModel.getActions().collectLatest { action ->

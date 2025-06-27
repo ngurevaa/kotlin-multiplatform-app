@@ -5,4 +5,5 @@ sealed class RegistrationEvent {
     data class UpdatePassword(val password: String): RegistrationEvent()
     data object SignUp : RegistrationEvent()
     data object ClickLoginReference: RegistrationEvent()
+    data object OpenScreen : RegistrationEvent()
 }

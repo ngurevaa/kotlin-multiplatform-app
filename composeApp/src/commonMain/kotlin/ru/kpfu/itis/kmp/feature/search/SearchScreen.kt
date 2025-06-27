@@ -76,6 +76,8 @@ fun SearchScreen(
     val internetConnectionError = stringResource(Res.string.internet_connection_error)
     val emptySearchQueryError = stringResource(Res.string.empty_search_query_error)
     LaunchedEffect(Unit) {
+        viewModel.obtainEvent(SearchEvent.OpenScreen)
+
         viewModel.getActions().collectLatest { action ->
             when(action) {
                 is SearchAction.NavigateToBook -> navigateToBook(action.id)

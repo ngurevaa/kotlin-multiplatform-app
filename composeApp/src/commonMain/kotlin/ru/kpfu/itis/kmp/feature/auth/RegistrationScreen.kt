@@ -85,6 +85,8 @@ fun RegistrationScreen(
     val emailError = stringResource(Res.string.email_error)
     val passwordError = stringResource(Res.string.password_error)
     LaunchedEffect(Unit) {
+        viewModel.obtainEvent(RegistrationEvent.OpenScreen)
+
         viewModel.getActions().collectLatest { action ->
             when (action) {
                 RegistrationAction.NavigateToLogin -> navigateToLogin()

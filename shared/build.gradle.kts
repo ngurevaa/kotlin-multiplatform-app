@@ -117,6 +117,7 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.auth)
+            implementation(libs.firebase.analytics)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.ios)

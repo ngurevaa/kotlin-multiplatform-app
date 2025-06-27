@@ -1,21 +1,15 @@
-package ru.kpfu.itis.kmp.feature.home.data.repository
+package ru.kpfu.itis.kmp.feature.bookmarks.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 import ru.kpfu.itis.kmp.core.firebase.AnalyticsService
-import ru.kpfu.itis.kmp.core.firebase.AuthService
 import ru.kpfu.itis.kmp.core.firebase.FirebaseEvent
-import ru.kpfu.itis.kmp.feature.home.domain.repository.FirebaseRepository
+import ru.kpfu.itis.kmp.feature.bookmarks.domain.repository.FirebaseRepository
 
 internal class FirebaseRepositoryImpl(
-    private val authService: AuthService,
     private val analyticsService: AnalyticsService
 ) : FirebaseRepository {
-    override fun logout() {
-        authService.logout()
-    }
-
     override suspend fun logEvent(event: FirebaseEvent) {
         withContext(Dispatchers.IO) {
             analyticsService.logFirebaseEvent(event)
