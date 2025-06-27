@@ -1,5 +1,6 @@
 package ru.kpfu.itis.kmp.core.designsystem.component
 
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +42,7 @@ fun BottomBar(navController: NavController) {
 
     NavigationBar(
         modifier = Modifier
+            .navigationBarsPadding()
             .padding(16.dp)
             .shadow(
                 shape = RoundedCornerShape(64.dp),
