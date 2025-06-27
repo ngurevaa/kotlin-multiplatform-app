@@ -35,6 +35,8 @@ struct HomeScreenView: View {
                         Spacer()
 
                         ThemeToggleButtonView(viewModel: viewModel, color: AppColors.text(colorScheme))
+                        LogoutButtonView(action: viewModel.doLogoutEvent)
+
                     }
                     Text("What do you want to read today?")
                         .font(AppFont.medium(size: 26))
@@ -50,11 +52,11 @@ struct HomeScreenView: View {
                         ForEach(viewModel.homeState?.genres ?? [], id: \.id) { genre in
                             VStack(spacing: 10) {
                                 Text(genre.name)
-                                    .foregroundColor(viewModel.selectedGenre == genre ? AppColors.text(colorScheme) : AppColors.subtitle(colorScheme))
+                                    .foregroundColor(viewModel.homeState?.currentGenre == genre ? AppColors.text(colorScheme) : AppColors.subtitle(colorScheme))
                                     .font(AppFont.regular(size: 14))
                                     .padding(.horizontal)
 
-                                if viewModel.selectedGenre == genre {
+                                if viewModel.homeState?.currentGenre == genre {
                                     Capsule()
                                         .frame(height: 3)
                                         .foregroundColor(AppColors.primary(colorScheme))
@@ -66,7 +68,7 @@ struct HomeScreenView: View {
                             }
                             .onTapGesture {
                                 withAnimation(.easeInOut) {
-                                    viewModel.selectedGenre = genre
+                                    viewModel.doUpdateCurrentGenreEvent(genre: genre) 
                                 }
                             }
                         }
@@ -91,7 +93,7 @@ struct HomeScreenView: View {
                         ForEach(viewModel.selectedBooks, id: \.id) { book in
                             Button {
                                 viewModel.detailScreenSelectedBookId = book.id
-                                viewModel.showBookDetailScreen = true
+                                viewModel.doClickToBookEvent(id: book.id)
                             } label: {
                                 BookGridCard(bookImage: book.image, bookName: book.name, bookAuthor: book.author)
                                     .frame(maxWidth: .infinity, alignment: .leading)

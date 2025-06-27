@@ -34,21 +34,6 @@ struct AppHomeView: View {
         }
         .preferredColorScheme(AppTheme(rawValue: appThemeRaw)?.colorScheme)
     }
-//    var body: some View {
-//        Group {
-//            if isRegistering {
-//                NavigationStack {
-//                    SignUpView()
-//                }
-//            } else {
-//                NavigationStack {
-//                    SignInView()
-//                }
-//            }
-//        }
-//        .preferredColorScheme(AppTheme(rawValue: appThemeRaw)?.colorScheme)
-//    }
-
 }
 
 #Preview {

@@ -80,7 +80,7 @@ struct SearchScreenView: View {
                         ForEach(viewModel.loadedBooks, id: \.id) { book in
                             Button {
                                 viewModel.detailScreenSelectedBookId = book.id
-                                viewModel.showBookDetailScreen = true
+                                viewModel.doClickToBookEvent(id: book.id)
                             } label: {
                                 BookGridCard(bookImage: book.image, bookName: book.name, bookAuthor: book.author)
                                     .frame(maxWidth: .infinity, alignment: .leading)
