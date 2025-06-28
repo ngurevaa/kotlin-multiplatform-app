@@ -1,5 +1,9 @@
 ## Book Reviews App :notebook:
-Application for discovering books using Google Books API.
+Multiplatform application for discovering books using Google Books API.
+Available on:
+* Android
+* IOS
+* Desktop
 
 ### Features:
 * Browse collections of the best books in various genres
