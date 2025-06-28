@@ -15,6 +15,11 @@ Available on:
 
 Bye! :black_cat:
 
+### Screencasts:
+* [Android](https://drive.google.com/file/d/1pL6lPJJKA5XsSbmD2o1KOIHa1fJ6Vc_y/view?usp=sharing)
+* [IOS](https://drive.google.com/file/d/1IHZqiEQgLdrBwXwUxcvkU3YWUF-ZpzJR/view?usp=drivesdk)
+* [Desktop](https://drive.google.com/file/d/15ZW0L429Q1CdcHWs7n2adysT5Zuk1pem/view?usp=sharing)
+
 ### Screenshots:
 <p>
   <img src="https://github.com/user-attachments/assets/f63f12f9-1df8-492a-9bbc-55524f649198" width="27%"/>
@@ -31,4 +36,3 @@ Bye! :black_cat:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/64c610f9-2ac0-4192-850b-53b21a9d957a" width="27%"/> 
 </p>
-
