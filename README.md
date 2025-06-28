@@ -1,17 +1,34 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+## Book Reviews App :notebook:
+Multiplatform application for discovering books using Google Books API.
+Available on:
+* Android
+* IOS
+* Desktop
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+### Features:
+* Browse collections of the best books in various genres
+* Search books by title, author or genre
+* View detailed book information
+* Save books to bookmarks
+* Supports light/dark theme
+* Firebase Authentication
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Bye! :black_cat:
 
-* `/shared` is for the code that will be shared between all targets in the project.
-  The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
+### Screenshots:
+<p>
+  <img src="https://github.com/user-attachments/assets/f63f12f9-1df8-492a-9bbc-55524f649198" width="27%"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/b1030aa5-b158-4889-8610-fa72d84a3a3a" width="27%"/> 
+</p>
+<p>
+  <img src="https://github.com/user-attachments/assets/5769e717-6af7-4cd1-886f-4d5007a4a190" width="27%"/> 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/6fb20798-0e12-4f7f-8ca2-98a317eb4f34" width="27%"/> 
+</p>  
+<p>
+  <img src="https://github.com/user-attachments/assets/f723dbc7-ef92-4461-bbf3-bd2fc15de66f" width="27%"/> 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/64c610f9-2ac0-4192-850b-53b21a9d957a" width="27%"/> 
+</p>
 
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
