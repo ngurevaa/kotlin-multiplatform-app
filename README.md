@@ -36,3 +36,22 @@ Bye! :black_cat:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/64c610f9-2ac0-4192-850b-53b21a9d957a" width="27%"/> 
 </p>
+
+### Инструкция для запуска iosApp:
+
+В корневом каталоге проекта в терминале:
+
+chmod +x ./gradlew
+./gradlew :shared:generateDummyFramework
+cd iosApp
+pod install
+
+Рекомендуется:
+
+удалить папку DerivedData (Xcode создаст заново)
+расположение:
+~/Library/Developer/Xcode/DerivedData
+
+открыть Xcode:
+нажать комбинацию клавиш:
+ctrl + cmd + k
